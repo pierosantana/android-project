@@ -1,3 +1,54 @@
+# Sistema operativo: Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Sistema operativo: macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX
+
+# Archivos generados por Android Studio
+.idea/
+.gradle/
+build/
+captures/
+*.iml
+
+# Archivos de configuración específicos
+local.properties
+
+# Archivos de compilación y temporales
+*.apk
+*.dex
+*.class
+*.log
+*.keystore
+*.hprof
+
+# Archivos de dependencias y empaquetado
+generated/
+app/build/
+
+# Archivos de sistema
+*.orig
+*.swp
+
+# Archivos de usuario
+*.tmp
+*.bak
+*.swp
+*.swo
+*.db
+*.sqlite
+
+
 # Gradle files
 .gradle/
 build/

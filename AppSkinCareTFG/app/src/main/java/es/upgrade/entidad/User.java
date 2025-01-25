@@ -6,8 +6,12 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private SkinType skynType;
+    private SkinType skinType;
     private List<Routine> routineList;
+
+    public User() {}
+
+   
 
     public String getName() {
         return name;
@@ -34,11 +38,11 @@ public class User {
     }
 
     public SkinType getSkynType() {
-        return skynType;
+        return skinType;
     }
 
     public void setSkynType(SkinType skynType) {
-        this.skynType = skynType;
+        this.skinType = skynType;
     }
 
     public List<Routine> getRoutineList() {

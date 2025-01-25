@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services") version "4.4.2"
 }
 
 android {
@@ -41,6 +41,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //Lottie Animations
+    implementation("com.airbnb.android:lottie:6.6.0")
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
 

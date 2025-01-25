@@ -18,6 +18,8 @@ import es.upgrade.R;
 
 public class Launcher extends AppCompatActivity {
 
+    //FirebaseAuth permite la autenticación y verificación de usuarios
+    //a través de Firebase.
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -36,9 +38,14 @@ public class Launcher extends AppCompatActivity {
         // Simulamos el tiempo de carga, pero la lógica de verificación se ejecuta de inmediato
         int TimeLoading = 5000; // 
 
+        //Programa una tarea para que se ejecute después del retraso especificado en 'TimeLoading'
         new Handler().postDelayed(this::verifyUser, TimeLoading);
     }
 
+    /**
+     * El método `verifyUser` verifica si un usuario está autenticado con Firebase y lo redirecciona a
+     * la actividad adecuada según su estado de autenticación.
+     */
     private void verifyUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         Log.d("PantallaCarga", "Usuario autenticado: " + (firebaseUser != null));

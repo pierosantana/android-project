@@ -54,6 +54,7 @@ public class UserLogin extends AppCompatActivity {
         // Agregar logs para verificar que los datos se están recibiendo
         Log.d("UserLogin", "Received Email: " + receivedEmail);
         Log.d("UserLogin", "Received Password: " + receivedPassword);
+
         // Completar los campos automáticamente si los datos existen
         if (receivedEmail != null) {
             etMail.setText(receivedEmail);
@@ -66,7 +67,10 @@ public class UserLogin extends AppCompatActivity {
         registerText.setOnClickListener(v -> startActivity(new Intent(UserLogin.this,UserRegistration.class)));
 
     }
-
+    /**
+     * El método `validateAndLogin` verifica si el correo electrónico es válido y
+     * si la contraseña no está vacía. Si ambas se cumple, se inicia sesión como usuario.
+     */
     private void validateAndLogin() {
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
@@ -79,7 +83,16 @@ public class UserLogin extends AppCompatActivity {
             loginUser(mail, password);
         }
     }
-
+    /**
+     * El método `loginUser` intenta autenticar a un usuario con el correo electrónico y
+     * la contraseña proporcionados, mostrando un mensaje de bienvenida y
+     * navegando al menú de usuario tras iniciar sesión exitosamente.
+     *
+     * @param mail representa la dirección de correo electrónico del usuario que intenta
+     * iniciar sesión.
+     * @param password representa la contraseña ingresada por el usuario cuando intenta
+     * iniciar sesión.
+     */
     private void loginUser(String mail, String password) {
         authenticatorManager.login(mail,password,task -> {
             if(task.isSuccessful()){
@@ -92,7 +105,12 @@ public class UserLogin extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * El método `showToast` muestra un mensaje de notificación de corta duración en una
+     * aplicación de Android.
+     *
+     * @param message representa el mensaje de texto que desea mostrar.
+     */
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

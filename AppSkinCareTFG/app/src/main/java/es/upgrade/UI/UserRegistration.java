@@ -31,6 +31,7 @@ public class UserRegistration extends AppCompatActivity {
 
     private final AuthenticatorManager authenticatorManager = new AuthenticatorManager();
     private final UserDao userDao = new UserDao();
+    //Se utiliza para mostrar una indicación visual al usuario de que alguna operación está en progreso,
     private AlertDialog progressDialog;
 
     @Override
@@ -63,29 +64,40 @@ public class UserRegistration extends AppCompatActivity {
         alreadyAccount.setOnClickListener(v -> startActivity(new Intent(UserRegistration.this, UserLogin.class)));
     }
 
+    /**
+     * El método `dataValidator` valida la entrada del usuario para los campos de nombre,
+     * correo electrónico, contraseña y confirmación de contraseña antes de crear una cuenta.
+     */
     private void dataValidator() {
         String name = etName.getText().toString().trim();
         String mail = etMail.getText().toString().trim();
         String password = etPassword.getText().toString();
         String confirmPassword = etConfirmPassword.getText().toString();
-
-        if (TextUtils.isEmpty(name)) {
+        //Condiciones
+        if (TextUtils.isEmpty(name)) {//Si el nombre está vacio
             showMessage("Add name");
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {//Si el email no sigue el patrón de un email
             showMessage("Enter a valid email");
-        } else if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password)) {//Si la contraseña está vacía
             showMessage("Add password");
-        } else if (password.length() < 6) {
+        } else if (password.length() < 6) {//Si la contraseña tiene menos de 6 letras
             showMessage("Password must be at least 6 characters long");
-        } else if (TextUtils.isEmpty(confirmPassword)) {
+        } else if (TextUtils.isEmpty(confirmPassword)) {//Si la contraseña está vacía
             showMessage("Confirm your password");
-        } else if (!password.equals(confirmPassword)) {
+        } else if (!password.equals(confirmPassword)) {// Si las contrseñas no coinciden
             showMessage("Password must be matched");
         } else {
             createAccount(mail, password, name);
         }
     }
-
+    /**
+     * El método `createAccount` registra una cuenta de usuario con el correo electrónico,
+     * la contraseña y el nombre proporcionados,manejando las excepciones.
+     *
+     * @param mail la dirección de correo electrónico que se usará para crear la cuenta.
+     * @param password la contraseña elegida por el usuario para su cuenta.
+     * @param name el nombre real del usuario para quien se está creando la cuenta.
+     */
     private void createAccount(String mail, String password, String name) {
         progressDialog.show();
         authenticatorManager.register(mail, password, authResult -> {
@@ -102,6 +114,14 @@ public class UserRegistration extends AppCompatActivity {
         });
     }
 
+    /**
+     * El método `saveInformation` guarda la información del usuario mediante el hash de la contraseña,
+     * creando un nuevo objeto Usuario y guardándolo en la base de datos.
+     *
+     * @param mail la dirección de correo electrónico del usuario.
+     * @param password la contraseña del usuario que ingresó durante el proceso de registro.
+     * @param name el nombre del usuario cuya información se está guardando.
+     */
     private void saveInformation(String mail, String password, String name) {
         progressDialog.setMessage("Saving information...");
 
@@ -115,7 +135,7 @@ public class UserRegistration extends AppCompatActivity {
         User user = new User();
         user.setName(name);
         user.setEmail(mail);
-        user.setPassword(passwordHash); // Almacena el hash en tu base de datos, si es necesario
+        user.setPassword(passwordHash);
 
         // Guardar usuario en la base de datos
         userDao.saveUser(user, task -> {
@@ -128,7 +148,14 @@ public class UserRegistration extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * El método `startSession` registra los valores de correo electrónico y contraseña,
+     * los envía a la activity UserMenu, y redirecciona a esta.
+     *
+     * @param mail la dirección de correo electrónico ingresada por el usuario durante
+     * el proceso de registro.
+     * @param password la contraseña del usuario que ingresó durante el proceso de registro.
+     */
     private void startSession(String mail, String password) {
         // Mostrar los valores de correo y contraseña antes de enviar
         Log.d("UserRegistration", "Email: " + mail);
@@ -141,7 +168,12 @@ public class UserRegistration extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+    /**
+     * El método `showToast` muestra un mensaje de notificación de corta duración en una
+     * aplicación de Android.
+     *
+     * @param message representa el mensaje de texto que desea mostrar.
+     */
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

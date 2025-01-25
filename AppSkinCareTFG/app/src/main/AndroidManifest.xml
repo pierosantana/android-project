@@ -13,24 +13,6 @@
         android:theme="@style/Theme.AppSkinCareTFG"
         tools:targetApi="31">
         <activity
-            android:name=".SkinDescriptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ReviewAndEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BudgetActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SkinCareTypeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HourActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SkinTypeActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

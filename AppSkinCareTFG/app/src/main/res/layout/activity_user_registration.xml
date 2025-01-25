@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.UserRegistration">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/AccountCreationTxt"
+            android:layout_gravity="center"
+            android:textSize="25sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_imageAssetsFolder="assets"
+            app:lottie_fileName="registration.json"
+            android:layout_gravity="center"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:layout_marginTop="10dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EtName"
+                android:hint="@string/EtName"
+                android:inputType="textPersonName|textCapWords"
+                android:padding="20dp"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EtMail"
+                android:hint="@string/EtMail"
+                android:inputType="textEmailAddress"
+                android:padding="20dp"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EtPassword"
+                android:hint="@string/EtPassword"
+                android:inputType="textPassword"
+                android:padding="20dp"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EtConfirmPassword"
+                android:hint="@string/EtConfirmPassword"
+                android:inputType="textPassword"
+                android:padding="20dp"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/BtnRegisterUser"
+            android:layout_marginTop="15dp"
+            android:textSize="10sp"
+            android:text="@string/RegisterUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/AlreadyAccount"
+            android:text="@string/AlreadyAccount"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

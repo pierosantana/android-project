@@ -13,4 +13,6 @@
     <string name="EtConfirmPassword">Confirmar Password</string>
     <string name="RegisterUser">Registrar</string>
     <string name="AlreadyAccount">Tengo una cuenta</string>
+
+
 </resources>

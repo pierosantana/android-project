@@ -3,6 +3,7 @@ package es.upgrade.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,17 +130,16 @@ public class UserRegistration extends AppCompatActivity {
     }
 
     private void startSession(String mail, String password) {
-        authenticatorManager.login(mail, password, authResult -> {
-            if (authResult.isSuccessful()) {  // Comprobar si fue exitoso
-                Intent intent = new Intent(UserRegistration.this, UserLogin.class);
-                intent.putExtra("email", mail);
-                intent.putExtra("password", password);
-                startActivity(intent);
-                finish();
-            }else {
-                showMessage("Error to initialize session: " + authResult.getException().getMessage());
-            }
-        });
+        // Mostrar los valores de correo y contraseña antes de enviar
+        Log.d("UserRegistration", "Email: " + mail);
+        Log.d("UserRegistration", "Password: " + password);
+
+        Intent intent = new Intent(UserRegistration.this, UserLogin.class);
+        intent.putExtra("email", mail);
+        intent.putExtra("password", password);
+        Log.d("UserRegistration", "Redirecting to UserLogin...");
+        startActivity(intent);
+        finish();
     }
 
     private void showMessage(String message) {

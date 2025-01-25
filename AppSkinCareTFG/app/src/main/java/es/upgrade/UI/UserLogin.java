@@ -3,6 +3,7 @@ package es.upgrade.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,22 @@ public class UserLogin extends AppCompatActivity {
         etPassword = findViewById(R.id.PassLogin);
         btnLogin = findViewById(R.id.Btn_Log);
         registerText = findViewById(R.id.NewUserTxt);
+
+        // Recibir email y password desde el registro
+        Intent intent = getIntent();
+        String receivedEmail = intent.getStringExtra("email");
+        String receivedPassword = intent.getStringExtra("password");
+
+        // Agregar logs para verificar que los datos se están recibiendo
+        Log.d("UserLogin", "Received Email: " + receivedEmail);
+        Log.d("UserLogin", "Received Password: " + receivedPassword);
+        // Completar los campos automáticamente si los datos existen
+        if (receivedEmail != null) {
+            etMail.setText(receivedEmail);
+        }
+        if (receivedPassword != null) {
+            etPassword.setText(receivedPassword);
+        }
 
         btnLogin.setOnClickListener(v -> validateAndLogin());
         registerText.setOnClickListener(v -> startActivity(new Intent(UserLogin.this,UserRegistration.class)));

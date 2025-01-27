@@ -3,7 +3,7 @@
 
     <!--MAIN ACTIVITY-->
     <string name="BtnLogin">Login</string>
-        <string name="BtnRegister">Registration</string>
+    <string name="BtnRegister">Registration</string>
 
     <!--REGISTRATION ACTIVITY-->
     <string name="AccountCreationTxt">Create new account</string>

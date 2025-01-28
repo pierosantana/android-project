@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import es.upgrade.entidad.User;
 
+
 public class UserDao {
     private final DatabaseReference userReference;
 
@@ -31,5 +32,6 @@ public class UserDao {
         String userId = user.getEmail().replace(".","_");// Reemplazar '.' porque Firebase no los permite
         userReference.child(userId).setValue(user).addOnCompleteListener(onCompleteListener);
     }
+
 }
 

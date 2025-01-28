@@ -26,7 +26,6 @@
             android:layout_height="256dp"
             android:contentDescription="Descripción de la imagen"
             android:scaleType="centerCrop"
-            android:src=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.551"

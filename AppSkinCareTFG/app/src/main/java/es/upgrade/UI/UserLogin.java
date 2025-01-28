@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import es.upgrade.R;
 import es.upgrade.manager.AuthenticatorManager;
@@ -97,7 +98,7 @@ public class UserLogin extends AppCompatActivity {
         authenticatorManager.login(mail,password,task -> {
             if(task.isSuccessful()){
                 FirebaseUser user = authenticatorManager.getCurrentUser();
-                showToast("Welcome " + user.getEmail());
+                showToast("Welcome " + user.getEmail() + "name " + user.getDisplayName());
                 startActivity(new Intent(UserLogin.this,UserMenu.class));
                 finish();
             }else{

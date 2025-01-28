@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import es.upgrade.R;
+import es.upgrade.SkinTypeActivity;
 
 public class MainActivity extends AppCompatActivity {
 

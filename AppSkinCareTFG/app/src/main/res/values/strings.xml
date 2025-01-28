@@ -26,7 +26,8 @@
     <string name="ValidationPasswordsMatch">Passwords do not match</string>
 
     <!--USER MENU-->
-    <string name="CloseSession">Exit</string>
+    <string name="CloseSession">Log Out</string>
+    <string name="NewRoutine">New Routine</string>
 
     <!--LOGIN ACTIVITY-->
     <string name="Login">Login</string>

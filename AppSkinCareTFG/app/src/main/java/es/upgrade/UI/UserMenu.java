@@ -40,7 +40,11 @@ public class UserMenu extends AppCompatActivity {
 
         btnLogOut.setOnClickListener(v -> logOut()) ;
         btnNewRoutine.setOnClickListener(v -> startActivity(new Intent(UserMenu.this, SkinTypeActivity.class)));
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> carlos
     }
     /**
      * El método `logOut` cierra la sesión del usuario en Firebase, lo redirecciona a la

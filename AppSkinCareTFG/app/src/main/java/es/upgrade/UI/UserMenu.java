@@ -20,8 +20,8 @@ import es.upgrade.SkinTypeActivity;
 import es.upgrade.manager.AuthenticatorManager;
 
 public class UserMenu extends AppCompatActivity {
-    private Button btnLogOut;
-    private Button btnNewRoutine;
+
+    private Button btnLogOut,btnNewRoutine;
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
     
     @Override
@@ -36,6 +36,7 @@ public class UserMenu extends AppCompatActivity {
         });
         btnLogOut = findViewById(R.id.Btn_LogOut);
         btnNewRoutine = findViewById(R.id.Btn_NewRoutine);
+
 
         btnLogOut.setOnClickListener(v -> logOut()) ;
         btnNewRoutine.setOnClickListener(v -> startActivity(new Intent(UserMenu.this, SkinTypeActivity.class)));

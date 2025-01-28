@@ -29,6 +29,7 @@
     <string name="CloseSession">Log Out</string>
     <string name="NewRoutine">New Routine</string>
 
+
     <!--LOGIN ACTIVITY-->
     <string name="Login">Login</string>
     <string name="MailLogin">Email</string>

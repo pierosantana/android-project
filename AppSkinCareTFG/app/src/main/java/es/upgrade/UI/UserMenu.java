@@ -2,6 +2,7 @@ package es.upgrade.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,6 +36,7 @@ public class UserMenu extends AppCompatActivity {
         btnNewRoutine = findViewById(R.id.Btn_NewRoutine);
         btnLogOut.setOnClickListener(v -> logOut()) ;
         btnNewRoutine.setOnClickListener(v -> startActivity(new Intent(UserMenu.this, SkinTypeActivity.class)));
+       
     }
     /**
      * El método `logOut` cierra la sesión del usuario en Firebase, lo redirecciona a la

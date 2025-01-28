@@ -27,6 +27,7 @@
 
     <!--USER MENU-->
     <string name="CloseSession">Exit</string>
+    <string name="NewRoutine">New routine</string>
 
     <!--LOGIN ACTIVITY-->
     <string name="Login">Login</string>

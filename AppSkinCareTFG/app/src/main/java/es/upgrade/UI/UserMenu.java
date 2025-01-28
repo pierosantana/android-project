@@ -14,10 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 
 import es.upgrade.R;
+import es.upgrade.SkinTypeActivity;
 import es.upgrade.manager.AuthenticatorManager;
 
 public class UserMenu extends AppCompatActivity {
-    private Button btnLogOut;
+    private Button btnLogOut,btnNewRoutine;
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
     
     @Override
@@ -31,7 +32,9 @@ public class UserMenu extends AppCompatActivity {
             return insets;
         });
         btnLogOut = findViewById(R.id.Btn_LogOut);
+        btnNewRoutine = findViewById(R.id.Btn_NewRoutine);
         btnLogOut.setOnClickListener(v -> logOut()) ;
+        btnNewRoutine.setOnClickListener(v -> startActivity(new Intent(UserMenu.this, SkinTypeActivity.class)));
     }
     /**
      * El método `logOut` cierra la sesión del usuario en Firebase, lo redirecciona a la

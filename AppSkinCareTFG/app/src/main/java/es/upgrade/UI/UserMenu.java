@@ -20,6 +20,7 @@ import es.upgrade.SkinTypeActivity;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.manager.AuthenticatorManager;
 
+
 public class UserMenu extends AppCompatActivity {
 
     private Button btnLogOut,btnNewRoutine;

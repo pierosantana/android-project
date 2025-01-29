@@ -3,6 +3,7 @@ package es.upgrade;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +20,15 @@ public class SkinTypeActivity extends AppCompatActivity {
     private Button btnSeca;
     private Button btnMixta;
     private Button btnNoSabes;
+    private TextView tv_bienvenido;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_skin_type);
 
-
+        tv_bienvenido = findViewById(R.id.tv_bienvenido);
 
         btnNormal = findViewById(R.id.btn_normal);
         btnSeca = findViewById(R.id.btn_seca);

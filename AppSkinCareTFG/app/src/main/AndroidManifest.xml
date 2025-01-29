@@ -14,12 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppSkinCareTFG"
         tools:targetApi="31">
-<<<<<<< HEAD
         <activity
             android:name=".CustomizedActivity"
             android:exported="false" />
-=======
->>>>>>> carlos
+
         <activity
             android:name=".UI.UserLogin"
             android:exported="false" />

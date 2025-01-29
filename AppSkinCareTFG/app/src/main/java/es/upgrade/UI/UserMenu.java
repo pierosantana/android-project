@@ -20,7 +20,6 @@ import es.upgrade.SkinTypeActivity;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.manager.AuthenticatorManager;
 
-
 public class UserMenu extends AppCompatActivity {
 
     private Button btnLogOut,btnNewRoutine;
@@ -53,7 +52,6 @@ public class UserMenu extends AppCompatActivity {
         authenticatorManager.logout();
 
         // Redirige a Launcher (para que se verifique si el usuario está logueado o no)
-        startActivity(new Intent(UserMenu.this, Launcher.class));
-        finish();
+        startActivity(new Intent(UserMenu.this, UserLogin.class));
     }
 }

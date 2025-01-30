@@ -30,7 +30,7 @@ public class UserRegistration extends AppCompatActivity {
     private TextView alreadyAccount;
 
     private final AuthenticatorManager authenticatorManager = new AuthenticatorManager();
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao = UserDao.getInstance();
     //Se utiliza para mostrar una indicación visual al usuario de que alguna operación está en progreso,
     private AlertDialog progressDialog;
 
@@ -181,4 +181,5 @@ public class UserRegistration extends AppCompatActivity {
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
 }

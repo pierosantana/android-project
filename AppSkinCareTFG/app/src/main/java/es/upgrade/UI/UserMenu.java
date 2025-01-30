@@ -15,9 +15,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.upgrade.HourActivity;
 import es.upgrade.R;
 import es.upgrade.SkinTypeActivity;
+import es.upgrade.dao.UserDao;
 import es.upgrade.entidad.SkinType;
+import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 
 public class UserMenu extends AppCompatActivity {
@@ -37,11 +40,19 @@ public class UserMenu extends AppCompatActivity {
         });
         btnLogOut = findViewById(R.id.Btn_LogOut);
         btnNewRoutine = findViewById(R.id.Btn_NewRoutine);
+        UserDao userDao = UserDao.getInstance();
+        userDao.recoveryUser();
+        User user =User.getInstance();
 
 
         btnLogOut.setOnClickListener(v -> logOut()) ;
-        btnNewRoutine.setOnClickListener(v -> startActivity(new Intent(UserMenu.this, SkinTypeActivity.class)));
-
+        btnNewRoutine.setOnClickListener(v -> {
+               if(user.getSkynType() == null) {
+                   startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
+               }else {
+                   startActivity(new Intent(UserMenu.this, HourActivity.class));
+               }
+        });
     }
     /**
      * El método `logOut` cierra la sesión del usuario en Firebase, lo redirecciona a la
@@ -54,4 +65,5 @@ public class UserMenu extends AppCompatActivity {
         // Redirige a Launcher (para que se verifique si el usuario está logueado o no)
         startActivity(new Intent(UserMenu.this, UserLogin.class));
     }
+
 }

@@ -42,7 +42,7 @@ public class Launcher extends AppCompatActivity {
     }
 
     private void verifyUser() {
-        UserDao uDao = new UserDao();
+        UserDao uDao = UserDao.getInstance();
 
         boolean UserExist = uDao.verifyFirebaseUser();
 

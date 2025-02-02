@@ -23,6 +23,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 import es.upgrade.R;
+import es.upgrade.dao.UserDao;
+import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 
 public class UserLogin extends AppCompatActivity {
@@ -55,6 +57,8 @@ public class UserLogin extends AppCompatActivity {
         // Agregar logs para verificar que los datos se están recibiendo
         Log.d("UserLogin", "Received Email: " + receivedEmail);
         Log.d("UserLogin", "Received Password: " + receivedPassword);
+        User user = User.getInstance();
+        Log.d("USER", "DATOS: " + user.getName() + " " + user.getEmail());
 
         // Completar los campos automáticamente si los datos existen
         if (receivedEmail != null) {

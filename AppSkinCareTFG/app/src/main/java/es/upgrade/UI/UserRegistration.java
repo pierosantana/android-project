@@ -30,7 +30,7 @@ public class UserRegistration extends AppCompatActivity {
     private TextView alreadyAccount;
 
     private final AuthenticatorManager authenticatorManager = new AuthenticatorManager();
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao = UserDao.getInstance();
     //Se utiliza para mostrar una indicación visual al usuario de que alguna operación está en progreso,
     private AlertDialog progressDialog;
 
@@ -90,6 +90,8 @@ public class UserRegistration extends AppCompatActivity {
             createAccount(mail, password, name);
         }
     }
+
+
     /**
      * El método `createAccount` registra una cuenta de usuario con el correo electrónico,
      * la contraseña y el nombre proporcionados,manejando las excepciones.
@@ -132,10 +134,12 @@ public class UserRegistration extends AppCompatActivity {
             showMessage("Error al generar el hash de la contraseña");
             return;
         }
-        User user = new User();
+        User user = User.getInstance();
         user.setName(name);
         user.setEmail(mail);
         user.setPassword(passwordHash);
+
+
 
         // Guardar usuario en la base de datos
         userDao.saveUser(user, task -> {
@@ -177,4 +181,5 @@ public class UserRegistration extends AppCompatActivity {
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
 }

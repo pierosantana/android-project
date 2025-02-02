@@ -20,12 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/NewRoutine"
-            android:id="@+id/Btn_NewRoutine"
-            android:layout_marginTop="10dp"/>
 
         <Button
             android:layout_width="match_parent"

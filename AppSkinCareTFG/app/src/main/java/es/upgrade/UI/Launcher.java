@@ -15,12 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import es.upgrade.R;
+import es.upgrade.dao.UserDao;
 
 public class Launcher extends AppCompatActivity {
 
-    //FirebaseAuth permite la autenticación y verificación de usuarios
-    //a través de Firebase.
-    FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +31,23 @@ public class Launcher extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        
-        firebaseAuth = FirebaseAuth.getInstance();
 
         // Simulamos el tiempo de carga, pero la lógica de verificación se ejecuta de inmediato
         int TimeLoading = 5000; // 
 
         //Programa una tarea para que se ejecute después del retraso especificado en 'TimeLoading'
         new Handler().postDelayed(this::verifyUser, TimeLoading);
+
+
     }
 
-    /**
-     * El método `verifyUser` verifica si un usuario está autenticado con Firebase y lo redirecciona a
-     * la actividad adecuada según su estado de autenticación.
-     */
     private void verifyUser() {
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        Log.d("PantallaCarga", "Usuario autenticado: " + (firebaseUser != null));
+        UserDao uDao = UserDao.getInstance();
+
+        boolean UserExist = uDao.verifyFirebaseUser();
 
         // Si no hay un usuario autenticado, lo redirigimos al MainActivity
-        if (firebaseUser == null) {
+        if (UserExist == false) {
             Log.d("PantallaCarga", "Usuario no autenticado. Redirigiendo a MainActivity.");
             startActivity(new Intent(Launcher.this, MainActivity.class));
             finish();

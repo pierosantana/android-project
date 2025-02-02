@@ -1,15 +1,29 @@
 package es.upgrade.entidad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    private static User instance; // Instancia única
     private String name;
     private String email;
     private String password;
     private SkinType skinType;
     private List<Routine> routineList;
 
-    public User() {}
+    // Constructor privado para evitar instanciación externa
+    private User() {
+        routineList = new ArrayList<Routine>();
+    }
+
+    // Método para obtener la única instancia (Singleton)
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+        return instance;
+    }
 
    
 
@@ -51,5 +65,20 @@ public class User {
 
     public void setRoutineList(List<Routine> routineList) {
         this.routineList = routineList;
+    }
+
+    public void addRoutine(Routine routine){
+        this.routineList.add(routine);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", skinType=" + skinType +
+                ", routineList=" + routineList +
+                '}';
     }
 }

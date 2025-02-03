@@ -14,6 +14,7 @@ public class HourActivity extends AppCompatActivity {
 
     private Button btnMananaNoche;
     private Button  btnNoche;
+    private Button btnNosabes;
 
 
     @Override
@@ -24,6 +25,17 @@ public class HourActivity extends AppCompatActivity {
 
         btnMananaNoche = findViewById(R.id.btn_manana_noche);
         btnNoche = findViewById(R.id.btn_noche);
+        btnNosabes = findViewById(R.id.btn_no_sabes);
+
+        btnMananaNoche.setOnClickListener(v->{
+            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+        });
+        btnNoche.setOnClickListener(v->{
+            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+        });
+        btnNosabes.setOnClickListener(v->{
+            startActivity(new Intent(HourActivity.this,HourDescriptionActivity.class));
+        });
 
     }
 

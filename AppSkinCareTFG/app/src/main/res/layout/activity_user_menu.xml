@@ -48,7 +48,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_mail"
+            android:src="@drawable/ic_account"
             app:layout_constraintBottom_toBottomOf="@+id/textHello"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textHello"
@@ -222,7 +222,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_mail"
+                    android:src="@drawable/ic_favourite"
                     app:layout_constraintBottom_toBottomOf="@+id/textTrending"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textTrending"/>

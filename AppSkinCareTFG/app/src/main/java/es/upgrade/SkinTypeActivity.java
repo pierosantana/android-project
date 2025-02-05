@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import es.upgrade.UI.DescripcionPiel;
 import es.upgrade.UI.UserLogin;
 import es.upgrade.UI.UserRegistration;
 import es.upgrade.dao.UserDao;
@@ -60,7 +61,7 @@ public class SkinTypeActivity extends AppCompatActivity {
         btnNoSabes = findViewById(R.id.btn_no_sabes);
 
         btnNoSabes.setOnClickListener(v -> {
-            startActivity(new Intent(SkinTypeActivity.this, SkinDescriptionActivity.class));
+            startActivity(new Intent(SkinTypeActivity.this, DescripcionPiel.class));
         });
         tv_bienvenido.setText(User.getInstance().getName());
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import es.upgrade.manager.AuthenticatorManager;
 
 public class UserMenu extends AppCompatActivity {
 
-    private Button btnLogOut,btnNewRoutine;
+    private LinearLayout layoutExit, layoutNewRoutine;
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
     
     @Override
@@ -39,20 +40,23 @@ public class UserMenu extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnLogOut = findViewById(R.id.Btn_LogOut);
-        btnNewRoutine = findViewById(R.id.Btn_NewRoutine);
+        // Enlazar los LinearLayouts a sus respectivos IDs
+        layoutExit = findViewById(R.id.layoutExit);
+        layoutNewRoutine = findViewById(R.id.layoutNewRoutine);
+
+        // Recuperar el usuario
         UserDao userDao = UserDao.getInstance();
         userDao.recoveryUser();
-        User user =User.getInstance();
+        User user = User.getInstance();
 
-
-        btnLogOut.setOnClickListener(v -> logOut()) ;
-        btnNewRoutine.setOnClickListener(v -> {
-               if(user.getSkynType() == null) {
-                   startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
-               }else {
-                   startActivity(new Intent(UserMenu.this, HourActivity.class));
-               }
+        // Establecer listeners de clic en los LinearLayouts
+        layoutExit.setOnClickListener(v -> logOut());
+        layoutNewRoutine.setOnClickListener(v -> {
+            if (user.getSkynType() == null) {
+                startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
+            } else {
+                startActivity(new Intent(UserMenu.this, HourActivity.class));
+            }
         });
     }
     /**

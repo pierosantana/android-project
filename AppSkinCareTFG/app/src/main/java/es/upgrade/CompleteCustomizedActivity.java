@@ -1,30 +1,23 @@
 package es.upgrade;
 
-import android.annotation.SuppressLint;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomizedActivity extends AppCompatActivity {
+public class CompleteCustomizedActivity extends AppCompatActivity {
 
     private ExpandableListView expandableListView;
     private List<String> listGroupTitles;
@@ -37,7 +30,7 @@ public class CustomizedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_customized);
+        setContentView(R.layout.activity_complete_customized);
 
         expandableListView = findViewById(R.id.lista_expandible);
         listGroupTitles = new ArrayList<>();

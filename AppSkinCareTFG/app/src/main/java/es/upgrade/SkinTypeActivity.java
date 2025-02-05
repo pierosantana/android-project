@@ -68,6 +68,6 @@ public class SkinTypeActivity extends AppCompatActivity {
     }
 
     public void nextActivity(){
-        startActivity(new Intent(SkinTypeActivity.this, ReviewAndEditActivity.class));
+        startActivity(new Intent(SkinTypeActivity.this, HourActivity.class));
     }
 }

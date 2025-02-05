@@ -7,9 +7,18 @@ public class Routine {
 
     private Schedule schedule;
     private RoutineType routineType;
-    private Double budget;
+    private Budget Budget;
+    private Double budgetProducts;
     private List<Product> productList;
     private SkinType skinType;
+
+    public Budget getBudget() {
+        return Budget;
+    }
+
+    public void setBudget(Budget budget) {
+        Budget = budget;
+    }
 
     public SkinType getSkinType() {
         return skinType;
@@ -47,12 +56,12 @@ public class Routine {
         this.routineType = routineType;
     }
 
-    public Double getBudget() {
-        return budget;
+    public Double getBudgetProducts() {
+        return budgetProducts;
     }
 
-    public void setBudget(Double budget) {
-        this.budget = budget;
+    public void setBudgetProducts(Double budget) {
+        this.budgetProducts = budget;
     }
 
     public List<Product> getProductList() {
@@ -61,5 +70,18 @@ public class Routine {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Routine{" +
+                "schedule=" + schedule +
+                ", routineType=" + routineType +
+                ", Budget=" + Budget +
+                ", budgetProducts=" + budgetProducts +
+                ", productList=" + productList +
+                ", skinType=" + skinType +
+                '}';
     }
 }

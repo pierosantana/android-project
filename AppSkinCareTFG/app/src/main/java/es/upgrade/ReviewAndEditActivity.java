@@ -2,6 +2,7 @@ package es.upgrade;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,12 +13,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import es.upgrade.dao.UserDao;
+import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.RoutineType;
+import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 
 public class ReviewAndEditActivity extends AppCompatActivity {
     private TextView resumen;
     private Button continuar;
+    private Button edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +36,51 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         });
         resumen = findViewById(R.id.tv_resumen);
         continuar = findViewById(R.id.btn_continuar);
+        edit = findViewById(R.id.btn_editar);
 
 
         User user = User.getInstance();
+        Routine routine = Routine.getInstance();
+
+        Log.d("ReviewAndEdit",routine.toString());
+
         resumen.setText(user.toString());
         continuar.setOnClickListener(view -> {
             UserDao userDao = UserDao.getInstance();
 
-            Routine routine = Routine.getInstance();
+            if(routine.getRoutineType() == RoutineType.BASIC
+                    && routine.getBudget() == Budget.ECONOMIC){
+                startActivity(new Intent(ReviewAndEditActivity.this, BasicEconomicActivity.class));
+            }
+
+            if(routine.getRoutineType() == RoutineType.BASIC
+                    && routine.getBudget() == Budget.CUSTOMIZED){
+                startActivity(new Intent(ReviewAndEditActivity.this, BasicCustomizedActivity.class));
+            }
+
+            if(routine.getRoutineType() == RoutineType.COMPLETE
+                    && routine.getBudget() == Budget.ECONOMIC){
+                startActivity(new Intent(ReviewAndEditActivity.this, CompleteEconomicActivity.class));
+            }
+
+            if(routine.getRoutineType() == RoutineType.COMPLETE
+                    && routine.getBudget() == Budget.CUSTOMIZED){
+                startActivity(new Intent(ReviewAndEditActivity.this, CompleteCustomizedActivity.class));
+            }
+
+
+
+//            Routine routine = Routine.getInstance();
+
             user.addRoutine(routine);
 
-            userDao.updateUser();
+//            userDao.updateUser();
+
+
+
+        });
+
+        edit.setOnClickListener(v -> {
 
 
         });

@@ -33,7 +33,7 @@
             android:name=".UI.FinalActivity"
             android:exported="false" />
         <activity
-            android:name=".CustomizedActivity"
+            android:name=".CompleteCustomizedActivity"
             android:exported="false" />
         <activity
             android:name=".UI.UserLogin"

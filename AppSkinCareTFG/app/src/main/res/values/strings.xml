@@ -36,4 +36,10 @@
     <string name="PassLogin">Password</string>
     <string name="Btn_Login">Login</string>
     <string name="NewUserTxt">Dont have account?</string>
+
+    <!--SKIN TYPE ACTIVITY-->
+    <string name="NoIdeaSkin">You don´t know which is your skin tipe?</string>
+    <string name="NewRoutine">New Routine</string>
+
+
 </resources>

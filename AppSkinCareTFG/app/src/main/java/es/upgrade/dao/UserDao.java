@@ -86,20 +86,19 @@ public class UserDao {
         userRef.child(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User userInfo = task.getResult().getValue(User.class);
-                User user = User.getInstance();
-                user.setName(userInfo.getName());
-                user.setEmail(userInfo.getEmail());
-                user.setPassword(userInfo.getPassword());
-
                 if (userInfo != null) {
-                    Log.d("UserDao", "Usuario: " + userInfo.getName());
+                    User user = User.getInstance();
+                    user.setName(userInfo.getName());
+                    user.setEmail(userInfo.getEmail());
+                    user.setPassword(userInfo.getPassword());
+                    Log.d("UserDao", "Usuario encontrado: " + userInfo.getName());
+                } else {
+                    Log.e("UserDao", "Error: No se encontró el usuario en Firebase");
                 }
-            } else {
-                Log.d("UserDao", "No encontrado  ");
+            }else{
+                Log.e("UserDao", "Error al recuperar usuario", task.getException());
             }
-
         });
-
     }
     public void updateUser() {
         String userId = firebaseAuth.getUid();

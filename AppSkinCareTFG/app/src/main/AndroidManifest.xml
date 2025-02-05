@@ -24,6 +24,12 @@
             android:name=".BasicEconomicActivity"
             android:exported="false" />
         <activity
+            android:name=".UI.OptionFragment"
+            android:exported="false" />
+        <activity
+            android:name=".UI.DescripcionPiel"
+            android:exported="false" />
+        <activity
             android:name=".UI.FinalActivity"
             android:exported="false" />
         <activity

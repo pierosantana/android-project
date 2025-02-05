@@ -36,31 +36,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 1"
-            android:drawableTop=""
-            android:padding="8dp"/>
+            android:padding="8dp"
+            />
+            <!--android:drawableTop=""-->
+
 
         <RadioButton
             android:id="@+id/radio1_option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 2"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
         <RadioButton
             android:id="@+id/radio1_option3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 3"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
 
         <RadioButton
             android:id="@+id/radio1_option4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 4"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
     </RadioGroup>
 
     <!-- Título 2 -->
@@ -92,31 +97,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 3"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
 
         <RadioButton
             android:id="@+id/radio2_option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 4"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
         <RadioButton
             android:id="@+id/radio2_option3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 5"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
 
         <RadioButton
             android:id="@+id/radio2_option4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Opción 6"
-            android:drawableTop=""
             android:padding="8dp"/>
+        <!--android:drawableTop=""-->
+
     </RadioGroup>
 
     <!-- Botón -->

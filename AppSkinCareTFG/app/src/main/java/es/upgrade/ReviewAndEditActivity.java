@@ -43,7 +43,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         Routine routine = Routine.getInstance();
 
         Log.d("ReviewAndEdit",routine.toString());
-
+        Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
         resumen.setText(user.toString());
         continuar.setOnClickListener(view -> {
             UserDao userDao = UserDao.getInstance();

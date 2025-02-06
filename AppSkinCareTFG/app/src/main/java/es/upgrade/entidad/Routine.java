@@ -1,5 +1,7 @@
 package es.upgrade.entidad;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class Routine {
@@ -35,7 +37,12 @@ public class Routine {
     // Método público para acceder a la instancia
     public static Routine getInstance() {
         if (instance == null) {
+            Log.e("Routine", "❌ Se está creando una nueva instancia de Routine (NO DEBERÍA PASAR)");
+
             instance = new Routine();
+        }else{
+            Log.d("Routine", "✅ Se está reutilizando la misma instancia de Routine");
+
         }
         return instance;
     }

@@ -2,6 +2,7 @@ package es.upgrade;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,13 +33,20 @@ public class HourActivity extends AppCompatActivity {
         Routine routine = Routine.getInstance();
 
         btnMananaNoche.setOnClickListener(v->{
-            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
             routine.setSchedule(Schedule.COMPLETE);
+            Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
+            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+            nextActivity(progress);
+
         });
         btnNoche.setOnClickListener(v->{
-            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
-
             routine.setSchedule(Schedule.NIGHT);
+            Log.d("Routine", "El Schedule actual es: " + routine.getSchedule()); // Verifica el valor de schedule
+
+            startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+            Log.d("Routine", "El Schedule después de startActivity es: " + routine.getSchedule());
+            nextActivity(progress);
+
         });
 
         tvDontKnow = findViewById(R.id.NoIdeaChoose);
@@ -47,8 +55,7 @@ public class HourActivity extends AppCompatActivity {
         progress = getIntent().getIntExtra("progress", 0);
         updateProgressBar(progress);
 
-        btnMananaNoche.setOnClickListener(v -> nextActivity(progress));
-        btnNoche.setOnClickListener(v -> nextActivity(progress));
+
         tvDontKnow.setOnClickListener(v -> startActivity(new Intent(this, HourDescriptionActivity.class)));
     }
 

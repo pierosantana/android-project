@@ -1,339 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:id="@+id/complete_economic">
+    android:id="@+id/complete_economic"
+    android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BasicEconomicActivity"
-    android:padding="16dp">
-
-    <!-- Título 1 -->
-
-    <!-- Grupo de opciones 1 -->
-    <TextView
-        android:id="@+id/title1"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Limpieza"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Título 1 -->
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Limpieza"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Grupo de opciones 1 -->
         <RadioGroup
             android:id="@+id/radioGroup1"
-            android:layout_width="406dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title1">
+            android:gravity="center">
 
-            <RadioButton
-                android:id="@+id/radio1_option1"
-                android:layout_width="51dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="Opción 1" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio1_option2"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="Opción 2" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio1_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 3" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio1_option4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 4" />
-<!--                android:drawableTop=""-->
-
+            <RadioButton android:id="@+id/radio1_option1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 1" />
+            <RadioButton android:id="@+id/radio1_option2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 2" />
+            <RadioButton android:id="@+id/radio1_option3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 3" />
+            <RadioButton android:id="@+id/radio1_option4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 4" />
         </RadioGroup>
 
-    <!-- Título 2 -->
-    <TextView
-        android:id="@+id/title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hidratación"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        <!-- Título 2 -->
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hidratación"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
 
-    <!-- Grupo de opciones 2 -->
-
-    <!-- Grupo de opciones 2 -->
-
+        <!-- Grupo de opciones 2 -->
         <RadioGroup
             android:id="@+id/radioGroup2"
-            android:layout_width="391dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="332dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.916"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title2">
+            android:gravity="center">
 
-            <RadioButton
-                android:id="@+id/radio2_option1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 3" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio2_option2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 4" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio2_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 5" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio2_option4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 6" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio3_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 5" />
-<!--                android:drawableTop=""-->
-
+            <RadioButton android:id="@+id/radio2_option1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 1" />
+            <RadioButton android:id="@+id/radio2_option2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 2" />
+            <RadioButton android:id="@+id/radio2_option3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 3" />
+            <RadioButton android:id="@+id/radio2_option4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 4" />
         </RadioGroup>
 
+        <!-- Título 3 -->
         <TextView
-        android:id="@+id/title3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="Tonificacion"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup1" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="374dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title2">
-
-        <RadioButton
-            android:id="@+id/radio3_option1"
-            android:layout_width="wrap_content"
+            android:id="@+id/title3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Opción 3" />
-<!--            android:drawableTop=""-->
+            android:text="Tonificación"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
 
-
-        <RadioButton
-            android:id="@+id/radio3_option2"
-            android:layout_width="wrap_content"
+        <!-- Grupo de opciones 3 -->
+        <RadioGroup
+            android:id="@+id/radioGroup3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Opción 4" />
-<!--            android:drawableTop=""-->
+            android:orientation="horizontal"
+            android:gravity="center">
 
-
-        <RadioButton
-            android:id="@+id/radio3_option4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Opción 6" />
-<!--            android:drawableTop=""-->
-
-    </RadioGroup>
-
-
+            <RadioButton android:id="@+id/radio3_option1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 1" />
+            <RadioButton android:id="@+id/radio3_option2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 2" />
+            <RadioButton android:id="@+id/radio3_option3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 3" />
+            <RadioButton android:id="@+id/radio3_option4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 4" />
+        </RadioGroup>
         <TextView
             android:id="@+id/title4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="252dp"
             android:text="Tratamiento"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup1" />
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
 
         <RadioGroup
             android:id="@+id/radioGroup4"
-            android:layout_width="391dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="116dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title2">
+            android:gravity="center">
 
-            <RadioButton
-                android:id="@+id/radio4_option1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 3" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio4_option2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 4" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio4_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 5" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio4_option4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 6" />
-<!--                android:drawableTop=""-->
-
+            <RadioButton android:id="@+id/radio4_option1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 1" />
+            <RadioButton android:id="@+id/radio4_option2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 2" />
+            <RadioButton android:id="@+id/radio4_option3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 3" />
+            <RadioButton android:id="@+id/radio4_option4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 4" />
         </RadioGroup>
-
         <TextView
             android:id="@+id/title5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="356dp"
             android:text="Protector solar"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup1" />
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
 
         <RadioGroup
             android:id="@+id/radioGroup5"
-            android:layout_width="395dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="228dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.354"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title2">
+            android:gravity="center">
 
-            <RadioButton
-                android:id="@+id/radio5_option1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 3" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio5_option2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 4" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio5_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 5" />
-<!--                android:drawableTop=""-->
-
-
-            <RadioButton
-                android:id="@+id/radio5_option4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Opción 6" />
-<!--                android:drawableTop=""-->
-
+            <RadioButton android:id="@+id/radio5_option1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 1" />
+            <RadioButton android:id="@+id/radio5_option2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 2" />
+            <RadioButton android:id="@+id/radio5_option3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 3" />
+            <RadioButton android:id="@+id/radio5_option4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opción 4" />
         </RadioGroup>
 
+        <!-- Botón -->
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="284dp"
             android:text="Continuar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title4" />
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>
-

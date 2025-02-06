@@ -10,6 +10,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.Schedule;
+
 public class HourActivity extends AppCompatActivity {
 
     private Button btnMananaNoche;
@@ -26,12 +29,16 @@ public class HourActivity extends AppCompatActivity {
         btnMananaNoche = findViewById(R.id.btn_manana_noche);
         btnNoche = findViewById(R.id.btn_noche);
         btnNosabes = findViewById(R.id.btn_no_sabes);
+        Routine routine = Routine.getInstance();
 
         btnMananaNoche.setOnClickListener(v->{
             startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+            routine.setSchedule(Schedule.COMPLETE);
         });
         btnNoche.setOnClickListener(v->{
             startActivity(new Intent(HourActivity.this,SkinCareTypeActivity.class));
+
+            routine.setSchedule(Schedule.NIGHT);
         });
         btnNosabes.setOnClickListener(v->{
             startActivity(new Intent(HourActivity.this,HourDescriptionActivity.class));

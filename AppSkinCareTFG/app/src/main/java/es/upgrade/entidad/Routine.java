@@ -71,6 +71,16 @@ public class Routine {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
+    // Este metodo lo que hace es añadir a la lista de productos un producto
+    public void addProduct(Product product){
+        if(!productList.contains(product)){
+            productList.add(product);
+        }
+    }
+    // Este método lo que hace es limpiar la lista de productos
+    public void clearProduct(){
+        productList.clear();
+    }
 
 
     @Override

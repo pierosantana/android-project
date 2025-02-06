@@ -39,7 +39,7 @@
 
     <!--SKIN TYPE ACTIVITY-->
     <string name="NoIdeaSkin">You don´t know which is your skin tipe?</string>
-    <string name="NewRoutine">New Routine</string>
+    <string name="NewRoutineSkinType">New Routine</string>
 
 
 </resources>

@@ -61,6 +61,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         btnContinuar = findViewById(R.id.button);
         Routine routine = Routine.getInstance();
         Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
+        Log.d("RoutineCheck", "Schedule actual en CompleteEconomicActivity: " + routine.getSchedule());
         if(routine.getSchedule() == Schedule.NIGHT){
             radioGroup5.setVisibility(View.GONE);
             protectorSolar.setVisibility(View.GONE);

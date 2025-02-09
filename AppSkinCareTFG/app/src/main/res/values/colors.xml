@@ -1,4 +1,5 @@
 <resources>
+    <!--Colores de Material Theme Builder-->
     <color name="md_theme_primary">#166684</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#C0E8FF</color>
@@ -140,4 +141,11 @@
     <color name="md_theme_surfaceContainer_highContrast">#DFE3E7</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#D1D5D9</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#C3C7CB</color>
+
+    <!--Colores Questionary Fragment-->
+    <color name="white">#FFFFFF</color>
+    <color name="text_unselected">#D1D1D1</color>
+    <color name="text_selected">#009688</color>
+    <color name="background_selected">#A6E2E2</color>
+    <color name="background_unselected">#FFFFFF</color>
 </resources>

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "es.upgrade"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "es.upgrade"
@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     //Lottie Animations
-    implementation("com.airbnb.android:lottie:6.6.0")
+    implementation("com.airbnb.android:lottie:6.6.2")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
@@ -56,9 +56,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
 
     //Dependecies UI
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
-    implementation ("com.tbuonomo:dotsindicator:4.3")
-    implementation ("com.google.android.material:material:1.9.")
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    implementation ("com.tbuonomo:dotsindicator:5.1.0")
+    implementation ("com.google.android.material:material:1.12.0")
 
 
 

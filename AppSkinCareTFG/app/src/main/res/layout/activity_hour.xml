@@ -5,44 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F9F9F9">
-
-    <TextView
-        android:id="@+id/tv_titulo"
-        android:layout_width="374dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="¿Cuándo quieres hacerte la rutina?"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    android:background="@drawable/color_custom_background">
 
     <include
         android:id="@+id/include_progress"
         layout="@layout/progressbar" />
-
-    <Button
-        android:id="@+id/btn_manana_noche"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="12dp"
-        android:text="Mañana y Noche"
-        android:textColor="#000000"
-        android:textSize="16sp" />
-
+        android:background="@drawable/container_background"
+        android:padding="16dp"/>
     <Button
-        android:id="@+id/btn_noche"
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="12dp"
-        android:text="Noche"
-        android:textColor="#000000"
-        android:textSize="16sp"/>
+        android:text="Avanzar"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/button_background"
+        android:enabled="false" />
 
     <TextView
         android:id="@+id/NoIdeaChoose"

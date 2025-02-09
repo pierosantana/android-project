@@ -39,13 +39,13 @@
 
     <!--SKIN TYPE ACTIVITY-->
     <string name="NoIdeaSkin">You don´t know which is your skin tipe?</string>
-<<<<<<< HEAD
+
     <string name="NewRoutineSkinType">New Routine</string>
-=======
+
 
     <!--HOUR ACTIVITY-->
     <string name="NoIdeaChoose">You don´t know which choose?</string>
->>>>>>> carlos
+
 
 
 </resources>

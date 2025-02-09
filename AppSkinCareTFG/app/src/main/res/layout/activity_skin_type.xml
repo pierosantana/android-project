@@ -3,21 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#F9F9F9"
+    android:background="@drawable/color_custom_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <TextView
-        android:id="@+id/tv_bienvenido"
-        android:layout_width="385dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Bienvenid@"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <!-- Botón para "¿No sabes qué tipo de piel tienes?" -->
+    
     <TextView
         android:id="@+id/tv_configuracion"
         android:layout_width="384dp"
@@ -31,49 +19,21 @@
     <include
         android:id="@+id/include_progress"
         layout="@layout/progressbar" />
-
-    <TextView
-        android:id="@+id/et_tipo_piel"
-        android:layout_width="385dp"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:inputType="text"
-        android:padding="12dp"
-        android:text="Selecciona tipo de piel"
-        android:textColor="#000000" />
-
+        android:background="@drawable/container_background"
+        android:padding="16dp"/>
     <Button
-        android:id="@+id/btn_normal"
-        android:layout_width="380dp"
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="12dp"
-        android:text="NORMAL"
-        android:textColor="#000000"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btn_seca"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="12dp"
-        android:text="SECA"
-        android:textColor="#000000"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btn_mixta"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="12dp"
-        android:text="MIXTA"
-        android:textColor="#000000"
-        android:textSize="16sp" />
+        android:text="Avanzar"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/button_background"
+        android:enabled="false" />
 
     <TextView
         android:id="@+id/NoIdeaSkin"

@@ -1,0 +1,31 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Círculo en el centro -->
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:gravity="left|center_vertical">
+        <shape android:shape="oval">
+            <solid android:color="#39b7b7"/>
+        </shape>
+    </item>
+
+    <!-- Icono de Check en el centro del círculo -->
+    <item
+        android:width="18dp"
+        android:height="18dp"
+        android:gravity="center">
+        <!-- Usa <vector> en lugar de <bitmap> -->
+        <vector
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24"
+            android:tint="#FFFFFF">
+            <path
+                android:fillColor="@color/white"
+                android:pathData="M20.3,5.6l-10.9,11L3.7,10.8L2.3,12.2l6.6,6.6l12.3-12.3L20.3,5.6z"/>
+        </vector>
+    </item>
+
+</layer-list>

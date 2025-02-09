@@ -82,7 +82,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         User user = User.getInstance();
         Routine routine = Routine.getInstance();
         routine.setSkinType(type);
-        user.setSkynType(type);
+        user.setSkinType(type);
         progress = 1; // Puedes ajustar el progreso según lo que necesites
         nextActivity();
     }

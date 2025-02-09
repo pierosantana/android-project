@@ -2,9 +2,6 @@ package es.upgrade.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -14,14 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import es.upgrade.HourActivity;
 import es.upgrade.R;
 import es.upgrade.SkinTypeActivity;
-import es.upgrade.dao.UserDao;
-import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 
@@ -56,7 +48,7 @@ public class UserMenu extends AppCompatActivity {
 
         layoutNewRoutine.setOnClickListener(v -> {
             Toast.makeText(this, "Haz elegido Nueva Rutina "  + user.getName(), Toast.LENGTH_SHORT).show();
-            if (user.getSkynType() == null) {
+            if (user.getSkinType() == null) {
                 startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
             } else {
                 startActivity(new Intent(UserMenu.this, HourActivity.class));

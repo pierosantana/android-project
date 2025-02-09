@@ -21,10 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import es.upgrade.entidad.CategoryProduct;
+import es.upgrade.entidad.Category;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
-import es.upgrade.entidad.RoutineType;
 import es.upgrade.entidad.Schedule;
 
 public class CompleteEconomicActivity extends AppCompatActivity {
@@ -107,12 +106,12 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                         }
 
                         // Obtener la categoría del producto seleccionado (esto se asume por el grupo)
-                        CategoryProduct productCategory = selectedProduct.getCategoryProduct();
+                        Category productCategory = selectedProduct.getCategory();
 
                         // Buscar si ya existe un producto de esta categoría en la rutina
                         boolean productExists = false;
                         for (Product product : routine.getProductList()) {
-                            if (product.getCategoryProduct() == productCategory) {
+                            if (product.getCategory() == productCategory) {
                                 // Si ya existe un producto de esta categoría, reemplazarlo
                                 routine.getProductList().remove(product);
                                 routine.getProductList().add(selectedProduct);

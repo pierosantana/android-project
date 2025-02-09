@@ -44,9 +44,15 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
         Log.d("ReviewAndEdit",routine.toString());
         Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
-        resumen.setText(user.toString());
+        resumen.setText("Routine \n" +
+                "Schedule: " + routine.getSchedule() + "\n" +
+                "Skin Type: " + routine.getSkinType() + "\n" +
+                "Routine Type: " + routine.getRoutineType() + "\n" +
+                "Budget: " + routine.getBudget());
         continuar.setOnClickListener(view -> {
             UserDao userDao = UserDao.getInstance();
+            user.addRoutine(routine);
+            userDao.updateUser();
 
             if(routine.getRoutineType() == RoutineType.BASIC
                     && routine.getBudget() == Budget.ECONOMIC){
@@ -72,7 +78,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
 //            Routine routine = Routine.getInstance();
 
-            user.addRoutine(routine);
+            //user.addRoutine(routine);
 
 //            userDao.updateUser();
 

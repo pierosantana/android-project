@@ -1,6 +1,5 @@
 package es.upgrade.dao;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -9,13 +8,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import es.upgrade.UI.Launcher;
-import es.upgrade.UI.MainActivity;
-import es.upgrade.UI.UserMenu;
+import es.upgrade.entidad.Product;
+import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.User;
 
 
@@ -119,15 +118,60 @@ public class UserDao {
 
     public void updateUser() {
         String userId = firebaseAuth.getUid();
+        // Verificar si el usuario está autenticado
+        if (userId == null) {
+            Log.e("UserDao_updateUser", "Error: Usuario no autenticado.");
+            return;
+        }
+
         User user = User.getInstance();
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference userRef = firebaseDatabase.getReference("Users").child(userId);
+
+        // Verificar si la lista de rutinas no es null
+        List<Routine> routines = user.getRoutineList();
+        if (routines == null) {
+            routines = new ArrayList<>(); // Evitar que sea null
+        }
+
+        // Convertir lista de rutinas a un formato compatible con Firebase
+        List<Map<String, Object>> routineList = new ArrayList<>();
+        for (Routine r : user.getRoutineList()) {
+            Map<String, Object> routineMap = new HashMap<>();
+            routineMap.put("schedule", r.getSchedule().toString()); // Convertir a String si es un Enum
+            routineMap.put("routineType", r.getRoutineType().toString()); // Convertir a String si es un Enum
+            routineMap.put("budget", r.getBudget().toString()); // Convertir a String si es un Enum
+            routineMap.put("budgetProducts", r.getBudgetProducts()); // Double, no es necesario convertir
+            routineMap.put("skinType", r.getSkinType().toString()); // Convertir a String si es un Enum
+
+            // Convertir lista de productos a una estructura compatible con Firebase
+            List<Map<String, Object>> productList = new ArrayList<>();
+            for (Product p : r.getProductList()) {
+                if(p != null) {
+                    Map<String, Object> productMap = new HashMap<>();
+                    productMap.put("id", p.getId());
+                    productMap.put("name", p.getName());
+                    productMap.put("description", p.getDescription());
+                    productMap.put("price", p.getPrice());
+                    productMap.put("category", p.getCategory().toString()); // Si category es un Enum
+                    productList.add(productMap);
+                }
+            }
+
+            routineMap.put("productList", productList); // Agregar lista de productos a la rutina
+            routineList.add(routineMap);
+        }
+
+    // Guardar lista de rutinas en Firebase
+
+
         Map<String, Object> updates = new HashMap<>();
         updates.put("email",user.getEmail());
         updates.put("name",user.getName());
         updates.put("password",user.getPassword());
-        updates.put("skinType",user.getSkynType());
+        updates.put("skinType",user.getSkinType());
+        updates.put("routineList", routineList);
 
 
 

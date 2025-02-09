@@ -7,6 +7,7 @@ public class Product {
     private Double price;
     private String description;
     private CategoryProduct categoryProduct;
+    private SkinType skinType;
 
     private SkinType skintype;
 
@@ -58,12 +59,21 @@ public class Product {
         this.id = id;
     }
 
-    public Product(CategoryProduct categoryProduct, String description, int id, String name, Double price) {
+    public Product(CategoryProduct categoryProduct, String description, int id, String name, Double price,SkinType skinType) {
         this.categoryProduct = categoryProduct;
         this.description = description;
         this.id = id;
         this.name = name;
         this.price = price;
+        this.skinType = skinType;
+    }
+
+    public SkinType getSkinType() {
+        return skinType;
+    }
+
+    public void setSkinType(SkinType skinType) {
+        this.skinType = skinType;
     }
 
     @Override
@@ -74,6 +84,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", skinType=" + skinType +
                 '}';
     }
 }

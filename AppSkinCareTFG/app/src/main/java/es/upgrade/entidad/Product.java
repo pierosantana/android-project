@@ -8,6 +8,16 @@ public class Product {
     private String description;
     private CategoryProduct categoryProduct;
 
+    private SkinType skintype;
+
+    public SkinType getSkintype() {
+        return skintype;
+    }
+
+    public void setSkintype(SkinType skintype) {
+        this.skintype = skintype;
+    }
+
     public String getName() {
         return name;
     }

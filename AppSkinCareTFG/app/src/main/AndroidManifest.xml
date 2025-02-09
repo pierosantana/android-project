@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <!-- Permission access to Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permite acceso al almacenamiento externo de la app -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -66,7 +68,7 @@
             android:name=".UI.Launcher"
             android:exported="false" />
         <activity
-            android:name=".dao.api.EjemploParaObtenerProductosAPI"
+            android:name=".UI.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,7 +77,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".dao.api.EjemploParaObtenerProductosAPI"
             android:exported="true" />
     </application>
 

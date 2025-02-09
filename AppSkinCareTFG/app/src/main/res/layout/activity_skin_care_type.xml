@@ -6,7 +6,7 @@
     android:id="@+id/skin_care_type"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/color_custom_background">
+    android:background="#B6FFF9">
 
     <TextView
         android:id="@+id/tv_titulo"

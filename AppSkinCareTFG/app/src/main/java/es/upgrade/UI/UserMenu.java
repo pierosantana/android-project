@@ -1,14 +1,20 @@
 package es.upgrade.UI;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
 import es.upgrade.R;
 import es.upgrade.SkinTypeActivity;
@@ -27,41 +34,93 @@ import es.upgrade.manager.AuthenticatorManager;
 
 
 public class UserMenu extends AppCompatActivity {
-
-    private LinearLayout layoutExit, layoutNewRoutine;
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
 
     // Recuperar el usuario
     User user = User.getInstance();
+    private ActivityResultLauncher<Intent> galleryLauncher;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_menu);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        // Enlazar los LinearLayouts a sus respectivos IDs
-        layoutExit = findViewById(R.id.layoutExit);
-        layoutNewRoutine = findViewById(R.id.layoutNewRoutine);
+
+        CircleImageView profileImage = findViewById(R.id.profileImage);
+        ImageButton editImageButton = findViewById(R.id.editImagebutton);
 
 
-        // Establecer listeners de clic en los LinearLayouts
-        layoutExit.setOnClickListener(v -> logOut());
+        // Registrar el launcher para abrir la galería y manejar el resultado
+        galleryLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        if (selectedImageUri != null) {
+                            profileImage.setImageURI(selectedImageUri);
+                        } else {
+                            showToast("Error al seleccionar la imagen.");
+                        }
+                    } else {
+                        showToast("No se seleccionó ninguna imagen.");
+                    }
+                }
+                );
+        
 
-        layoutNewRoutine.setOnClickListener(v -> {
-            Toast.makeText(this, "Haz elegido Nueva Rutina "  + user.getName(), Toast.LENGTH_SHORT).show();
-            if (user.getSkynType() == null) {
-                startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
-            } else {
-                startActivity(new Intent(UserMenu.this, HourActivity.class));
-            }
-        });
+        // Configuración del botón "Mi Perfil"
+        CustomView btnProfile = findViewById(R.id.btnProfile);
+        btnProfile.setButtonText("Mi Perfil");
+        btnProfile.setButtonIcon(R.drawable.ic_face);
+        btnProfile.setOnClickListener(view ->
+                showToast("Acción general: Mi Perfil")
+        );
+
+        // Configuración del botón "Nueva Rutina"
+        CustomView btnNewRoutine = findViewById(R.id.btnNewRoutine);
+        btnNewRoutine.setButtonText("Nueva Rutina");
+        btnNewRoutine.setButtonIcon(R.drawable.ic_plus);
+        btnNewRoutine.setOnClickListener(view -> {
+            showToast("Has elegido Nueva Rutina ");
+                    if (user.getSkynType() == null) {
+                        startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
+                    } else {
+                        startActivity(new Intent(UserMenu.this, HourActivity.class));
+                    }
+                });
+        // Abrir la galería cuando se presiona el botón de edición
+        editImageButton.setOnClickListener(v -> openGallery());
+
+        // Configuración del botón "Mis Rutinas"
+        CustomView btnMyRoutines = findViewById(R.id.btnMyRoutines);
+        btnMyRoutines.setButtonText("Mis Rutinas");
+        btnMyRoutines.setButtonIcon(R.drawable.products_svgrepo_com);
+        btnMyRoutines.setOnClickListener(view ->
+                showToast("Acción general: Mis Rutinas")
+        );
+
+        // Configuración del botón "Calendario"
+        CustomView btnCalendar = findViewById(R.id.btnCalendar);
+        btnCalendar.setButtonText("Calendario");
+        btnCalendar.setButtonIcon(R.drawable.ic_calendar);
+        btnCalendar.setOnClickListener(view ->
+                showToast("Acción general: Calendario")
+        );
+
+        // Botón de cierre de sesión (Button estándar)
+        findViewById(R.id.btnLogout).setOnClickListener(view -> {
+                    logOut();
+                    Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
+                }
+
+        );
+    }
+    //Método para abrir la galeria
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        galleryLauncher.launch(intent);
     }
 
 
@@ -77,5 +136,7 @@ public class UserMenu extends AppCompatActivity {
         // Redirige a Launcher (para que se verifique si el usuario está logueado o no)
         startActivity(new Intent(UserMenu.this, UserLogin.class));
     }
-
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

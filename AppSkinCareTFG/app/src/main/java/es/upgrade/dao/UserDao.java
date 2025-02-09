@@ -29,6 +29,11 @@ public class UserDao {
         return instance;
     }
 
+    // Definimos la interfaz para el callback
+    public interface OnUserRecoveredListener {
+        void onUserRecovered(User user);
+    }
+
     //FirebaseAuth permite la autenticación y verificación de usuarios
     //a través de Firebase.
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -46,8 +51,7 @@ public class UserDao {
 
     /**
      * El método `saveUser` guarda un 'User' en una base de datos de Firebase usando
-     * el correo electrónico del usuario como clave después de reemplazar '.' con '_',
-     * debido a las restricciones de Firebase.
+     * el Uid del usuario como clave .
      *
      * @param user               El parámetro `user` es un objeto de tipo `User` que contiene
      *                           información sobre un usuario.
@@ -67,39 +71,52 @@ public class UserDao {
     public boolean verifyFirebaseUser() {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        Log.d("PantallaCarga", "Usuario autenticado: " + (firebaseUser != null));
+        Log.d("UserDao_verifyFirebaseUser", "Usuario autenticado: " + (firebaseUser != null));
 
 
         // Si no hay un usuario autenticado, lo redirigimos al MainActivity
         if (firebaseUser == null) {
-            Log.d("PantallaCarga", "EMAIL: null");
+            Log.d("UserDao_verifyFirebaseUser", "EMAIL: null");
             return false;
         } else {
-            Log.d("PantallaCarga", "EMAIL: " + firebaseUser.getEmail());
+            Log.d("UserDao_UserDao_verifyFirebaseUser", "EMAIL: " + firebaseUser.getEmail());
             return true;
         }
     }
 
-    public void recoveryUser() {
+    public void recoveryUser(OnUserRecoveredListener listener) {
+        User user = User.getInstance();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
         String userId = firebaseAuth.getUid();
+
         userRef.child(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User userInfo = task.getResult().getValue(User.class);
                 if (userInfo != null) {
-                    User user = User.getInstance();
                     user.setName(userInfo.getName());
                     user.setEmail(userInfo.getEmail());
                     user.setPassword(userInfo.getPassword());
-                    Log.d("UserDao", "Usuario encontrado: " + userInfo.getName());
+                    Log.d("UserDao_recoveryUser", "Usuario encontrado: " + user);
+
+                    // Notificamos que los datos están listos
+                    if (listener != null) {
+                        listener.onUserRecovered(user);
+                    }
                 } else {
-                    Log.e("UserDao", "Error: No se encontró el usuario en Firebase");
+                    Log.e("UserDao_recoveryUser", "Error: No se encontró el usuario en Firebase");
+                    if (listener != null) {
+                        listener.onUserRecovered(null);
+                    }
                 }
-            }else{
-                Log.e("UserDao", "Error al recuperar usuario", task.getException());
+            } else {
+                Log.e("UserDao_recoveryUser", "Error al recuperar usuario", task.getException());
+                if (listener != null) {
+                    listener.onUserRecovered(null);
+                }
             }
         });
     }
+
     public void updateUser() {
         String userId = firebaseAuth.getUid();
         User user = User.getInstance();
@@ -116,9 +133,9 @@ public class UserDao {
 
         userRef.updateChildren(updates).addOnCompleteListener(task -> {
            if(task.isSuccessful()){
-               Log.d("UserDao", "Hemos tenido un exito rotundo");
+               Log.d("UserDao_updateUser", "El usuario se ha actualizado en la base de datos.");
            }else{
-               Log.d("UserDao", "Piero se ha equivocado " + task.getException().getMessage());
+               Log.d("UserDao_updateUser", "El usuario NO se ha actualizado en la base de datos. ERROR: " + task.getException().getMessage());
            }
         });
 

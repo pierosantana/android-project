@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,15 +46,17 @@ public class Launcher extends AppCompatActivity {
         UserDao uDao = UserDao.getInstance();
 
         boolean UserExist = uDao.verifyFirebaseUser();
-
         // Si no hay un usuario autenticado, lo redirigimos al MainActivity
         if (UserExist == false) {
-            Log.d("PantallaCarga", "Usuario no autenticado. Redirigiendo a MainActivity.");
+            Log.d("Launcher_verifyUser", "Usuario no autenticado. Redirigiendo a MainActivity.");
             startActivity(new Intent(Launcher.this, MainActivity.class));
             finish();
         } else {
+            uDao.recoveryUser(userR -> {
+                Log.d("Launcher_verifyUser", "Usuario recuperado: " + userR);
+            });
             // Si el usuario está autenticado, lo redirigimos al MenuPrincipal
-            Log.d("PantallaCarga", "Usuario autenticado. Redirigiendo a MenuPrincipal.");
+            Log.d("Launcher_verifyUser", "Usuario autenticado. Redirigiendo a MenuPrincipal.");
             startActivity(new Intent(Launcher.this, UserMenu.class));
             finish();
         }

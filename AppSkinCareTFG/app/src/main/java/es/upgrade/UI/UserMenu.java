@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,9 +30,14 @@ public class UserMenu extends AppCompatActivity {
 
     private LinearLayout layoutExit, layoutNewRoutine;
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
+
+    // Recuperar el usuario
+    User user = User.getInstance();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_menu);
@@ -44,14 +50,12 @@ public class UserMenu extends AppCompatActivity {
         layoutExit = findViewById(R.id.layoutExit);
         layoutNewRoutine = findViewById(R.id.layoutNewRoutine);
 
-        // Recuperar el usuario
-        UserDao userDao = UserDao.getInstance();
-        userDao.recoveryUser();
-        User user = User.getInstance();
 
         // Establecer listeners de clic en los LinearLayouts
         layoutExit.setOnClickListener(v -> logOut());
+
         layoutNewRoutine.setOnClickListener(v -> {
+            Toast.makeText(this, "Haz elegido Nueva Rutina "  + user.getName(), Toast.LENGTH_SHORT).show();
             if (user.getSkynType() == null) {
                 startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
             } else {
@@ -59,12 +63,15 @@ public class UserMenu extends AppCompatActivity {
             }
         });
     }
+
+
     /**
      * El método `logOut` cierra la sesión del usuario en Firebase, lo redirecciona a la
      * actividad del Launcher y finaliza la actividad actual.
      */
     private void logOut() {
         // Cerrar sesión en Firebase
+        Toast.makeText(this, "Bye " + user.getName(), Toast.LENGTH_SHORT).show();
         authenticatorManager.logout();
 
         // Redirige a Launcher (para que se verifique si el usuario está logueado o no)

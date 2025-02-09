@@ -49,16 +49,17 @@ public class UserLogin extends AppCompatActivity {
         btnLogin = findViewById(R.id.Btn_Log);
         registerText = findViewById(R.id.NewUserTxt);
 
+        User user = User.getInstance();
+
         // Recibir email y password desde el registro
         Intent intent = getIntent();
         String receivedEmail = intent.getStringExtra("email");
         String receivedPassword = intent.getStringExtra("password");
 
         // Agregar logs para verificar que los datos se están recibiendo
-        Log.d("UserLogin", "Received Email: " + receivedEmail);
-        Log.d("UserLogin", "Received Password: " + receivedPassword);
-        User user = User.getInstance();
-        Log.d("USER", "DATOS: " + user.getName() + " " + user.getEmail());
+        Log.d("UserLogin_onCreate", "Received Email: " + receivedEmail);
+        Log.d("UserLogin_onCreate", "Received Password: " + receivedPassword);
+        Log.d("UserLogin_onCreate", "DATOS: " + user.getName() + " " + user.getEmail());
 
         // Completar los campos automáticamente si los datos existen
         if (receivedEmail != null) {
@@ -101,10 +102,17 @@ public class UserLogin extends AppCompatActivity {
     private void loginUser(String mail, String password) {
         authenticatorManager.login(mail,password,task -> {
             if(task.isSuccessful()){
-                FirebaseUser user = authenticatorManager.getCurrentUser();
-                showToast("Welcome " + user.getEmail() + "name " + user.getDisplayName());
-                startActivity(new Intent(UserLogin.this,UserMenu.class));
-                finish();
+                FirebaseUser userAuth = authenticatorManager.getCurrentUser();
+                if(userAuth != null) {
+                    UserDao userDao = UserDao.getInstance();
+                    userDao.recoveryUser(userR -> {
+                        Log.d("UserLogin_loginUser", "Usuario recuperado: " + userR);
+                        showToast("Welcome " + userR.getEmail() + ", Name " + userR.getName());
+                    });
+
+                    startActivity(new Intent(UserLogin.this, UserMenu.class));
+                    finish();
+                }
             }else{
                 showToast("Error al iniciar session");
             }

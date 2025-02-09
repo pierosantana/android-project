@@ -5,18 +5,18 @@ public class Product {
     private int id;
     private String name;
     private Double price;
-    private String description;
+    private String brand;
     private CategoryProduct categoryProduct;
     private SkinType skinType;
 
-    private SkinType skintype;
+
 
     public SkinType getSkintype() {
-        return skintype;
+        return skinType;
     }
 
     public void setSkintype(SkinType skintype) {
-        this.skintype = skintype;
+        this.skinType = skintype;
     }
 
     public String getName() {
@@ -35,12 +35,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public CategoryProduct getCategoryProduct() {
@@ -59,9 +59,9 @@ public class Product {
         this.id = id;
     }
 
-    public Product(CategoryProduct categoryProduct, String description, int id, String name, Double price,SkinType skinType) {
+    public Product(CategoryProduct categoryProduct, String brand, int id, String name, Double price, SkinType skinType) {
         this.categoryProduct = categoryProduct;
-        this.description = description;
+        this.brand = brand;
         this.id = id;
         this.name = name;
         this.price = price;
@@ -83,7 +83,7 @@ public class Product {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", description='" + description + '\'' +
+                ", brand='" + brand + '\'' +
                 ", skinType=" + skinType +
                 '}';
     }

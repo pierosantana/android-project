@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.upgrade.R;
+import es.upgrade.dao.ProductDao;
 import es.upgrade.entidad.Product;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +45,7 @@ public class EjemploParaObtenerProductosAPI extends AppCompatActivity {
                         for (Product producto : productos) {
                             Log.d("API", "Producto: " + producto.getName() + " - Precio: " + producto.getPrice());
                         }
+                        ProductDao.getInstance().setProductos(productos);
 
                         // Creamos el adapter con la lista de productos y lo asignamos al RecyclerView
                         productAdapter = new ProductAdapter(productos);

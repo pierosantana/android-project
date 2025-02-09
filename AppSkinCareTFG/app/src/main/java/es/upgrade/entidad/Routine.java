@@ -29,6 +29,7 @@ public class Routine {
     public void setSkinType(SkinType skinType) {
         this.skinType = skinType;
     }
+    private boolean isNightRoutine; // Indicador para rutina de noche
 
     // Constructor privado
     private Routine() {
@@ -88,7 +89,13 @@ public class Routine {
     public void clearProduct(){
         productList.clear();
     }
+    public void setNightRoutine(boolean isNightRoutine) {
+        this.isNightRoutine = isNightRoutine;
+    }
 
+    public boolean isNightRoutine() {
+        return isNightRoutine;
+    }
 
     @Override
     public String toString() {
@@ -99,6 +106,7 @@ public class Routine {
                 ", budgetProducts=" + budgetProducts +
                 ", productList=" + productList +
                 ", skinType=" + skinType +
+                ", isNightRoutine=" + isNightRoutine +
                 '}';
     }
 }

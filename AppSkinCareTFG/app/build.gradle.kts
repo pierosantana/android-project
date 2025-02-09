@@ -64,6 +64,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 
 
     // Add the dependencies for any other desired Firebase products

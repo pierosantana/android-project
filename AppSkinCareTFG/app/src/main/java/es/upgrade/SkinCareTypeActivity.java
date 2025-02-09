@@ -91,7 +91,7 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
     private void updateStepCircles(int progress) {
         findViewById(R.id.step1).setBackgroundResource(progress >= 1 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step2).setBackgroundResource(progress >= 33 ? R.drawable.circle_filled : R.drawable.circle_empty);
-        findViewById(R.id.step3).setBackgroundResource(progress >= 66 ? R.drawable.circle_filled : R.drawable.circle_empty);
+        findViewById(R.id.step3).setBackgroundResource(progress > 66 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step4).setBackgroundResource(progress >= 100 ? R.drawable.circle_filled : R.drawable.circle_empty);
     }
     @Override

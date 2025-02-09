@@ -131,7 +131,7 @@
         android:layout_height="8dp"
         android:max="100"
         android:progress="0"
-        android:progressTint="@color/colorPrimary"
+        android:progressTint="#06AB99"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

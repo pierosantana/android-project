@@ -1,0 +1,38 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!-- Icono -->
+    <ImageView
+        android:id="@+id/buttonIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_image"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Icono" />
+
+    <!-- Texto (ocupa el espacio restante) -->
+    <TextView
+        android:id="@+id/buttonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="250dp"
+        android:text="Custom Button"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Botón a la derecha -->
+    <ImageButton
+        android:id="@+id/btnCustom"
+        android:layout_width="14dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow" />
+</LinearLayout>

@@ -1,0 +1,44 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "name": "Hidratante Facial",
+      "price": 15.99,
+      "description": "Crema hidratante para uso diario.",
+      "categoryProduct": "MOISTURIZER",
+      "skintype": "DRY"
+    },
+    {
+      "id": 2,
+      "name": "Tónico Refrescante",
+      "price": 12.50,
+      "description": "Tónico para piel grasa con efecto calmante.",
+      "categoryProduct": "TONIC",
+      "skintype": "COMBINATION"
+    },
+    {
+      "id": 3,
+      "name": "Limpiador Suave",
+      "price": 9.99,
+      "description": "Gel limpiador suave para todo tipo de piel.",
+      "categoryProduct": "CLEANER",
+      "skintype": "NORMAL"
+    },
+    {
+      "id": 4,
+      "name": "Protector Solar SPF 50",
+      "price": 18.75,
+      "description": "Protección solar de amplio espectro.",
+      "categoryProduct": "SUNSCREEN",
+      "skintype": "NORMAL"
+    },
+    {
+      "id": 5,
+      "name": "Crema Antiarrugas",
+      "price": 22.30,
+      "description": "Crema con tratamiento antiarrugas intensivo.",
+      "categoryProduct": "CREAM_TREATMENT",
+      "skintype": "DRY"
+    }
+  ]
+}

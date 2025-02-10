@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import es.upgrade.R;
 
-public class CustomView extends LinearLayout {
+public class CustomViewMenu extends LinearLayout {
     private ImageView buttonIcon;
     private TextView buttonText;
     private ImageButton btnCustom;  // ImageButton que vamos a hacer funcional
 
-    public CustomView(Context context, AttributeSet attrs) {
+    public CustomViewMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }

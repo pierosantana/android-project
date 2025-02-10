@@ -69,6 +69,8 @@ dependencies {
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation ("androidx.appcompat:appcompat:1.5.1")
+
 
 
     // Add the dependencies for any other desired Firebase products

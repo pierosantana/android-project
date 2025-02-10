@@ -4,31 +4,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
 import es.upgrade.R;
 import es.upgrade.SkinTypeActivity;
-import es.upgrade.dao.UserDao;
-import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 
@@ -70,7 +57,7 @@ public class UserMenu extends AppCompatActivity {
         
 
         // Configuración del botón "Mi Perfil"
-        CustomView btnProfile = findViewById(R.id.btnProfile);
+        CustomViewMenu btnProfile = findViewById(R.id.btnProfile);
         btnProfile.setButtonText("Mi Perfil");
         btnProfile.setButtonIcon(R.drawable.ic_face);
         btnProfile.setOnClickListener(view ->
@@ -78,7 +65,7 @@ public class UserMenu extends AppCompatActivity {
         );
 
         // Configuración del botón "Nueva Rutina"
-        CustomView btnNewRoutine = findViewById(R.id.btnNewRoutine);
+        CustomViewMenu btnNewRoutine = findViewById(R.id.btnNewRoutine);
         btnNewRoutine.setButtonText("Nueva Rutina");
         btnNewRoutine.setButtonIcon(R.drawable.ic_plus);
         btnNewRoutine.setOnClickListener(view -> {
@@ -93,7 +80,7 @@ public class UserMenu extends AppCompatActivity {
         editImageButton.setOnClickListener(v -> openGallery());
 
         // Configuración del botón "Mis Rutinas"
-        CustomView btnMyRoutines = findViewById(R.id.btnMyRoutines);
+        CustomViewMenu btnMyRoutines = findViewById(R.id.btnMyRoutines);
         btnMyRoutines.setButtonText("Mis Rutinas");
         btnMyRoutines.setButtonIcon(R.drawable.products_svgrepo_com);
         btnMyRoutines.setOnClickListener(view ->
@@ -101,7 +88,7 @@ public class UserMenu extends AppCompatActivity {
         );
 
         // Configuración del botón "Calendario"
-        CustomView btnCalendar = findViewById(R.id.btnCalendar);
+        CustomViewMenu btnCalendar = findViewById(R.id.btnCalendar);
         btnCalendar.setButtonText("Calendario");
         btnCalendar.setButtonIcon(R.drawable.ic_calendar);
         btnCalendar.setOnClickListener(view ->

@@ -50,6 +50,8 @@
 
         <!--Esto permite poder cambiar el color de los Button-->
         <item name="materialButtonStyle">@style/Widget.AppCompat.Button</item>
+
+
     </style>
 
     <style name="Theme.AppSkinCareTFG" parent="Base.Theme.AppSkinCareTFG" />

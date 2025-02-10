@@ -74,28 +74,28 @@
         app:layout_constraintTop_toBottomOf="@id/skinType">
 
         <!-- Botones personalizados -->
-        <es.upgrade.UI.CustomView
+        <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_face"
             app:buttonText="Mi Perfil" />
 
-        <es.upgrade.UI.CustomView
+        <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnNewRoutine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_plus"
             app:buttonText="Nueva Rutina" />
 
-        <es.upgrade.UI.CustomView
+        <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnMyRoutines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/products_svgrepo_com"
             app:buttonText="Mis Rutinas" />
 
-        <es.upgrade.UI.CustomView
+        <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

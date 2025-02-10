@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#00564D">
+
+    <!-- Título del dialog -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Título"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <!-- Mensaje del dialog -->
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mensaje del diálogo"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btn_negative"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_logout"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btn_positive"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Aceptar"
+            android:background="@drawable/button_logout"
+            android:layout_marginStart="30dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -20,11 +20,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import es.upgrade.entidad.Category;
+
+import es.upgrade.dao.ProductDao;
+import es.upgrade.entidad.CategoryProduct;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.Schedule;
+import es.upgrade.entidad.SkinType;
 
 public class CompleteEconomicActivity extends AppCompatActivity {
 
@@ -106,12 +110,12 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                         }
 
                         // Obtener la categoría del producto seleccionado (esto se asume por el grupo)
-                        Category productCategory = selectedProduct.getCategory();
+                        CategoryProduct productCategory = selectedProduct.getCategoryProduct();
 
                         // Buscar si ya existe un producto de esta categoría en la rutina
                         boolean productExists = false;
                         for (Product product : routine.getProductList()) {
-                            if (product.getCategory() == productCategory) {
+                            if (product.getCategoryProduct() == productCategory) {
                                 // Si ya existe un producto de esta categoría, reemplazarlo
                                 routine.getProductList().remove(product);
                                 routine.getProductList().add(selectedProduct);
@@ -154,5 +158,17 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         });
 
 
+    }
+    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(){
+        List<Product>productosGuardados = ProductDao.getInstance().getProductos();
+        // Establecemos el precio maximo bajo
+        double precioMaximo = 15.0;
+        SkinType tipoPiel = Routine.getInstance().getSkinType();
+
+        // Filtramos por categoría(Limpieza e Hidratacion) y precio bajo
+        // Luego mas tarde habra que filtrar el producto por el tipo de piel
+
+        return productosGuardados.stream().filter
+                (product -> product.getPrice()<precioMaximo && product.getSkinType()==tipoPiel).collect(Collectors.toList());
     }
 }

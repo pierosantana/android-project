@@ -1,54 +1,57 @@
 package es.upgrade;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import es.upgrade.UI.AlertDialogCustom;
+import es.upgrade.UI.CustomViewOptionsRoutine;
+import es.upgrade.UI.DescripcionPiel;
 import es.upgrade.dao.UserDao;
 import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.RoutineType;
+import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 
 public class ReviewAndEditActivity extends AppCompatActivity {
-    private TextView resumen;
-    private Button continuar;
-    private Button edit;
+    private TextView titulo;
+    private Button continuar, edit;
+    private LinearLayout optionsContainer; //Contiene los customView
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_review_and_edit);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.RW), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        resumen = findViewById(R.id.tv_resumen);
+
+        titulo = findViewById(R.id.tvTitulo);
         continuar = findViewById(R.id.btn_continuar);
         edit = findViewById(R.id.btn_editar);
+        optionsContainer = findViewById(R.id.optionsContainer);
 
 
         User user = User.getInstance();
         Routine routine = Routine.getInstance();
 
-        Log.d("ReviewAndEdit",routine.toString());
-        Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
-        resumen.setText("Routine \n" +
-                "Schedule: " + routine.getSchedule() + "\n" +
-                "Skin Type: " + routine.getSkinType() + "\n" +
-                "Routine Type: " + routine.getRoutineType() + "\n" +
-                "Budget: " + routine.getBudget());
+
+        titulo.setText("Has elegido las siguientes cosas: ¿Deseas modificar algo?");
+
+
         continuar.setOnClickListener(view -> {
             UserDao userDao = UserDao.getInstance();
             user.addRoutine(routine);
@@ -87,9 +90,96 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         });
 
         edit.setOnClickListener(v -> {
-
-
+            AlertDialogCustom.showCustomAlertDialog(
+                    this,
+                    "Confirmación",
+                    "¿Está seguro que quiere editar la rutina?",
+                    "Sí",
+                    (dialog, which) -> {
+                        startActivity(new Intent(ReviewAndEditActivity.this, SkinTypeActivity.class));
+                        dialog.dismiss();
+                    },
+                    "No",
+                    (dialog, which) -> dialog.dismiss()
+            );
         });
+    }
+    // Función para agregar una vista personalizada al contenedor
+    private void addCustomOptionView(String title, String description, int iconResId) {
+        // Crear el CustomViewOptionsRoutine
+        CustomViewOptionsRoutine customView = new CustomViewOptionsRoutine(this, null);
 
+        // Establecer el texto y el ícono según la elección del usuario
+        customView.setOptionContent(title, iconResId);
+
+        // Aquí, description será la respuesta que el usuario ha elegido
+        customView.setAnswerText(description);  // Establecer la respuesta seleccionada
+
+        // Agregar la vista al contenedor
+        optionsContainer.addView(customView);
+    }
+    // Métodos de formateo de las respuestas
+    private String formatSkinType(SkinType skinType) {
+        switch (skinType) {
+            case DRY: return "Piel seca";
+            case NORMAL: return "Piel normal";
+            case COMBINATION: return "Piel mixta";
+            default: return "Tipo de piel desconocido";
+        }
+    }
+
+    private String formatSchedule(Schedule schedule) {
+        return (schedule == Schedule.NIGHT) ? "Noche" : "Completa";
+    }
+
+    private String formatRoutineType(RoutineType routineType) {
+        return (routineType == RoutineType.BASIC) ? "Básica" : "Completa";
+    }
+
+    private String formatBudget(Budget budget) {
+        return (budget == Budget.ECONOMIC) ? "Económico" : "Personalizado";
+    }
+
+    private int getIconForOption(String title, String description) {
+        switch (title) {
+            case "Tipo de piel":
+                if (description.equals("Piel seca")) return R.drawable.ic_piel_seca;
+                if (description.equals("Piel normal")) return R.drawable.ic_piel_normal;
+                if (description.equals("Piel mixta")) return R.drawable.ic_piel_mixta;
+                return R.drawable.ic_piel_normal; // Icono por defecto en caso de error
+
+            case "Momento del día":
+                return description.equals("Noche") ? R.drawable.ic_rutina_noche : R.drawable.ic_dia_y_noche;
+
+            case "Tipo de rutina":
+                return description.equals("Básica") ? R.drawable.ic_routine_basic_complete : R.drawable.ic_routine_basic_complete;
+
+            case "Presupuesto":
+                return description.equals("Económico") ? R.drawable.ic_economic : R.drawable.ic_budget_rich;
+
+            default:
+                return R.drawable.ic_settings; // Icono genérico en caso de error
+        }
+    }
+
+    protected void onResume() {
+        super.onResume();
+        updateCustomOptions();
+    }
+    private void updateCustomOptions() {
+        Routine routine = Routine.getInstance();
+
+        String skinTypeDesc = formatSkinType(routine.getSkinType());
+        String scheduleDesc = formatSchedule(routine.getSchedule());
+        String routineTypeDesc = formatRoutineType(routine.getRoutineType());
+        String budgetDesc = formatBudget(routine.getBudget());
+
+        // Limpia el contenedor y vuelve a agregar las vistas actualizadas
+        optionsContainer.removeAllViews();
+
+        addCustomOptionView("Tipo de piel", skinTypeDesc, getIconForOption("Tipo de piel", skinTypeDesc));
+        addCustomOptionView("Momento del día", scheduleDesc, getIconForOption("Momento del día", scheduleDesc));
+        addCustomOptionView("Tipo de rutina", routineTypeDesc, getIconForOption("Tipo de rutina", routineTypeDesc));
+        addCustomOptionView("Presupuesto", budgetDesc, getIconForOption("Presupuesto", budgetDesc));
     }
 }

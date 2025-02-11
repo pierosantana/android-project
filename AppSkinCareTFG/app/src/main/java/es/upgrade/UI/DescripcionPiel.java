@@ -52,7 +52,7 @@ public class DescripcionPiel extends AppCompatActivity {
         /*btnConfirmar.setOnClickListener(view -> {
             int posicion = viewPager.getCurrentItem();
             SkinType pielSeleccionada = tiposDePiel.get(posicion);
-            Toast.makeText(this, "Seleccionaste: " + pielSeleccionada.getDescription(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Seleccionaste: " + pielSeleccionada.getBrand(), Toast.LENGTH_SHORT).show();
         });*/
     }
 }

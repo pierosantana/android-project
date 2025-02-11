@@ -16,6 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import es.upgrade.dao.ProductDao;
+import es.upgrade.entidad.CategoryProduct;
+import es.upgrade.entidad.Product;
+import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.SkinType;
 
 public class CompleteCustomizedActivity extends AppCompatActivity {
 
@@ -192,5 +199,11 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
 
 
 
+    }
+    public List<Product> obtenerTodosLosProductos() {
+        List<Product>productosGuardados = ProductDao.getInstance().getProductos();
+        SkinType tipoPiel = Routine.getInstance().getSkinType();
+
+        return productosGuardados.stream().filter(product -> (product.getSkinType() ==tipoPiel)).collect(Collectors.toList());
     }
 }

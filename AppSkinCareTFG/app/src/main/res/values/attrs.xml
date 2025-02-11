@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="CustomButtonView">
+        <attr name="buttonText" format="string" />
+        <attr name="buttonIcon" format="reference" />
+    </declare-styleable>
+</resources>

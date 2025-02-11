@@ -13,6 +13,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import es.upgrade.dao.ProductDao;
+import es.upgrade.entidad.CategoryProduct;
+import es.upgrade.entidad.Product;
+import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.SkinType;
+
 public class BasicCustomizedActivity extends AppCompatActivity {
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
@@ -51,5 +60,16 @@ public class BasicCustomizedActivity extends AppCompatActivity {
         btnContinuar.setOnClickListener(v->{
 
         });
+    }
+    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(){
+        List<Product>productosGuardados = ProductDao.getInstance().getProductos();
+        SkinType tipoPiel = Routine.getInstance().getSkinType();
+
+
+        // Filtramos por categoría(Limpieza e Hidratacion) y precio bajo
+        // Luego mas tarde habra que filtrar el producto por el tipo de piel
+
+        return productosGuardados.stream().filter(product -> (product.getCategoryProduct() == CategoryProduct.CLEANER
+                || product.getCategoryProduct() == CategoryProduct.MOISTURIZER && product.getSkinType() == tipoPiel)).collect(Collectors.toList());
     }
 }

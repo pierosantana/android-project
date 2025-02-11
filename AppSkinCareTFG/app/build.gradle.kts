@@ -60,6 +60,17 @@ dependencies {
     implementation ("com.tbuonomo:dotsindicator:5.1.0")
     implementation ("com.google.android.material:material:1.12.0")
 
+    //Denpedencies for API
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converterGson)
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("androidx.appcompat:appcompat:1.5.1")
+
 
 
     // Add the dependencies for any other desired Firebase products

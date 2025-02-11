@@ -151,10 +151,9 @@ public class UserDao {
                 if(p != null) {
                     Map<String, Object> productMap = new HashMap<>();
                     productMap.put("id", p.getId());
-                    productMap.put("name", p.getName());
-                    productMap.put("description", p.getDescription());
-                    productMap.put("price", p.getPrice());
-                    productMap.put("category", p.getCategory().toString()); // Si category es un Enum
+                   // productMap.put("name", p.getName());
+                    // productMap.put("price", p.getPrice());
+                   // productMap.put("category", p.getCategoryProduct().toString()); // Si category es un Enum
                     productList.add(productMap);
                 }
             }

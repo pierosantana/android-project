@@ -1,5 +1,5 @@
 package es.upgrade.entidad;
 
-public enum Category {
+public enum CategoryProduct {
     MOISTURIZER, TONIC, CLEANER, SUNSCREEN, CREAM_TREATMENT
 }

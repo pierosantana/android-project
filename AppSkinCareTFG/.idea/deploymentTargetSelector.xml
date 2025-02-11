@@ -4,29 +4,6 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-06T11:27:24.023639Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/charlygoomezz/.android/avd/Medium_Phone.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="Launcher (3)">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="Launcher (4)">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="Launcher (5)">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="MainActivity">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="Launcher">
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>

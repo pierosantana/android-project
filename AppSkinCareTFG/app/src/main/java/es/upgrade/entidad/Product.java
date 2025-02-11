@@ -5,8 +5,21 @@ public class Product {
     private int id;
     private String name;
     private Double price;
-    private String description;
-    private Category category;
+
+    private CategoryProduct categoryProduct;
+    private String brand;
+
+    private SkinType skinType;
+
+
+
+    public SkinType getSkintype() {
+        return skinType;
+    }
+
+    public void setSkintype(SkinType skintype) {
+        this.skinType = skintype;
+    }
 
     public String getName() {
         return name;
@@ -24,20 +37,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryProduct getCategoryProduct() {
+        return categoryProduct;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory(CategoryProduct categoryProduct) {
+        this.categoryProduct = categoryProduct;
     }
 
     public int getId() {
@@ -48,22 +61,34 @@ public class Product {
         this.id = id;
     }
 
-    public Product(Category category, String description, int id, String name, Double price) {
-        this.category = category;
-        this.description = description;
+
+    public Product(CategoryProduct categoryProduct, String brand, int id, String name, Double price, SkinType skinType) {
+        this.categoryProduct = categoryProduct;
+        this.brand = brand;
+
         this.id = id;
         this.name = name;
         this.price = price;
+        this.skinType = skinType;
+    }
+
+    public SkinType getSkinType() {
+        return skinType;
+    }
+
+    public void setSkinType(SkinType skinType) {
+        this.skinType = skinType;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "category=" + category +
+                "categoryProduct=" + categoryProduct +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", description='" + description + '\'' +
+                ", brand='" + brand + '\'' +
+                ", skinType=" + skinType +
                 '}';
     }
 }

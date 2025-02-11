@@ -67,11 +67,13 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.converterGson)
 
+    //Dependencias para la imagen de usuario
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
     implementation ("androidx.appcompat:appcompat:1.5.1")
 
-
+    //Dependencias para coger la imagen de la API (Glide)
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries

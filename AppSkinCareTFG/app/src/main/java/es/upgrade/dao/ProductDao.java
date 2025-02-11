@@ -27,6 +27,9 @@ public class ProductDao {
 
     // Método para obtener los productos
     public List<Product> getProductos() {
+        if (productos == null) {
+            productos = new ArrayList<>();
+        }
         return productos;
     }
 

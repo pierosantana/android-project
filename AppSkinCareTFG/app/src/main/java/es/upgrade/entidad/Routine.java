@@ -2,6 +2,7 @@ package es.upgrade.entidad;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Routine {
@@ -33,6 +34,7 @@ public class Routine {
 
     // Constructor privado
     private Routine() {
+        productList = new ArrayList<>();
     }
 
     // Método público para acceder a la instancia
@@ -97,6 +99,7 @@ public class Routine {
         return isNightRoutine;
     }
 
+
     @Override
     public String toString() {
         return "Routine{" +
@@ -106,7 +109,6 @@ public class Routine {
                 ", budgetProducts=" + budgetProducts +
                 ", productList=" + productList +
                 ", skinType=" + skinType +
-                ", isNightRoutine=" + isNightRoutine +
                 '}';
     }
 }

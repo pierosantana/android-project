@@ -11,6 +11,7 @@ import es.upgrade.entidad.SkinType;
 public class ProductRepository {
     public static List<Product> getLimpiezaProducts() {
         List<Product> limpieza = new ArrayList<>();
+
         limpieza.add(new Product(CategoryProduct.CLEANER, "Limpiador piel seca", 1, "The Ordinary Limpieador Hidratante de Escualano", 10.90, SkinType.DRY));
         limpieza.add(new Product(CategoryProduct.CLEANER, "Limpiador piel seca", 2, "Revuele limpiador facil con ceramidas", 2.98, SkinType.DRY));
         limpieza.add(new Product(CategoryProduct.CLEANER, "Limpiador piel seca", 3, "CeraVe Limpiador Hidratante", 8.50, SkinType.DRY));
@@ -26,11 +27,13 @@ public class ProductRepository {
         limpieza.add(new Product(CategoryProduct.CLEANER, "Limpiador piel normal", 13, "CeraVe Gel Limpiador Hidratante", 7.95, SkinType.NORMAL));
 
 
+
         return limpieza;
     }
 
     public static List<Product> getHidratarProducts() {
         List<Product> hidratar = new ArrayList<>();
+
         hidratar.add(new Product(CategoryProduct.MOISTURIZER, "crema hidratante", 14, "Weleda Skin food light ", 7.96, SkinType.DRY));
         hidratar.add(new Product(CategoryProduct.MOISTURIZER, "crema hidratante", 15, "Ziaja Leche de cabra", 4.10, SkinType.DRY));
         hidratar.add(new Product(CategoryProduct.MOISTURIZER, "crema hidratante", 16, "Ziaja Caléndula", 2.80, SkinType.DRY));
@@ -44,11 +47,13 @@ public class ProductRepository {
         hidratar.add(new Product(CategoryProduct.MOISTURIZER, "crema hidratante", 24, "Ziaja MANUKA crema facial de noche", 4.99, SkinType.COMBINATION));
         hidratar.add(new Product(CategoryProduct.MOISTURIZER, "crema hidratante", 25, "Ziaja Pepino crema facila", 2.89, SkinType.COMBINATION));
 
+
         return hidratar;
     }
 
     public static List<Product> getTonificarProducts() {
         List<Product> tonificar = new ArrayList<>();
+
         tonificar.add(new Product(CategoryProduct.TONIC, "tonico", 26, "Beauty Drops", 3.99, SkinType.DRY));
         tonificar.add(new Product(CategoryProduct.TONIC, "tonico", 27, "Nivea tonico suave", 4.99, SkinType.DRY));
         tonificar.add(new Product(CategoryProduct.TONIC, "tonico", 28, "Clinique", 18.09, SkinType.DRY));
@@ -62,11 +67,13 @@ public class ProductRepository {
         tonificar.add(new Product(CategoryProduct.TONIC, "tonico", 36, "Clarins Loción tonificante  purificante", 30.25, SkinType.COMBINATION));
         tonificar.add(new Product(CategoryProduct.TONIC, "tonico", 37, "Revuele No problem tonico", 1.99, SkinType.COMBINATION));
 
+
         return tonificar;
     }
 
     public static List<Product> getTratamientoProducts() {
         List<Product> tratamiento = new ArrayList<>();
+
         // Para todas las pieles en vez de un tratamiento en especifico meter niacinamida y acido hialuronico para pieles secas que es lo que mas hidrata.
         // Para la piel mixta meter acido salicilico y niacinamida
         // Para la piel normal niacinamida
@@ -89,6 +96,7 @@ public class ProductRepository {
 
     public static List<Product> getProtectorSolarProducts() {
         List<Product> protectorSolar = new ArrayList<>();
+
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 48, "Bioderma Photderm Crema FPS 50+", 20.0, SkinType.DRY));
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 49, "Cetphill Sun FPS 50+", 25.0, SkinType.DRY));
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 50, "Avene Bloqueador FPS 50+", 30.0, SkinType.DRY));
@@ -101,6 +109,7 @@ public class ProductRepository {
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 57, "SVR Sun Secure Fluid SPF 50+", 20.0, SkinType.COMBINATION));
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 58, "Vichy Idéal Soleil Tinted Mattifying Face Fluid SPF 50", 25.0, SkinType.COMBINATION));
         protectorSolar.add(new Product(CategoryProduct.SUNSCREEN, "protector solar", 59, "Avene Cleanance Sunscreen SPF 50+", 20.0, SkinType.COMBINATION));
+
         return protectorSolar;
     }
 

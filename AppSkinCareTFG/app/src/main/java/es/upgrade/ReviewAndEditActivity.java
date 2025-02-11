@@ -1,5 +1,7 @@
 package es.upgrade;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,12 +48,14 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         User user = User.getInstance();
         Routine routine = Routine.getInstance();
 
-        titulo.setText("Has elegido las siguientes cosas: ¿Deseas modificar algo?");
 
+        titulo.setText("Has elegido las siguientes cosas: ¿Deseas modificar algo?");
 
 
         continuar.setOnClickListener(view -> {
             UserDao userDao = UserDao.getInstance();
+            user.addRoutine(routine);
+            userDao.updateUser();
 
             if(routine.getRoutineType() == RoutineType.BASIC
                     && routine.getBudget() == Budget.ECONOMIC){
@@ -77,7 +81,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
 //            Routine routine = Routine.getInstance();
 
-            user.addRoutine(routine);
+            //user.addRoutine(routine);
 
 //            userDao.updateUser();
 

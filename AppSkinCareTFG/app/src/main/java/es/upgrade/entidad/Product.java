@@ -5,8 +5,10 @@ public class Product {
     private int id;
     private String name;
     private Double price;
-    private String brand;
+
     private CategoryProduct categoryProduct;
+    private String brand;
+
     private SkinType skinType;
 
     private String url;
@@ -59,7 +61,7 @@ public class Product {
         return categoryProduct;
     }
 
-    public void setCategoryProduct(CategoryProduct categoryProduct) {
+    public void setCategory(CategoryProduct categoryProduct) {
         this.categoryProduct = categoryProduct;
     }
 
@@ -71,9 +73,11 @@ public class Product {
         this.id = id;
     }
 
+
     public Product(CategoryProduct categoryProduct, String brand, int id, String name, Double price, SkinType skinType) {
         this.categoryProduct = categoryProduct;
         this.brand = brand;
+
         this.id = id;
         this.name = name;
         this.price = price;

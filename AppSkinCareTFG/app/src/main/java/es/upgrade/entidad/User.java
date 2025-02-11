@@ -14,7 +14,7 @@ public class User {
 
     // Constructor privado para evitar instanciación externa
     private User() {
-        routineList = new ArrayList<Routine>();
+        routineList = new ArrayList<>();
     }
 
     // Método para obtener la única instancia (Singleton)
@@ -51,12 +51,12 @@ public class User {
         this.password = password;
     }
 
-    public SkinType getSkynType() {
+    public SkinType getSkinType() {
         return skinType;
     }
 
-    public void setSkynType(SkinType skynType) {
-        this.skinType = skynType;
+    public void setSkinType(SkinType skinType) {
+        this.skinType = skinType;
     }
 
     public List<Routine> getRoutineList() {

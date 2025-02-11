@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 import es.upgrade.dao.ProductDao;
 import es.upgrade.entidad.CategoryProduct;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
-import es.upgrade.entidad.RoutineType;
 import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.SkinType;
 

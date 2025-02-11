@@ -3,14 +3,17 @@ package es.upgrade.UI;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.provider.MediaStore;
 import android.widget.ImageButton;
+
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
@@ -56,6 +59,7 @@ public class UserMenu extends AppCompatActivity {
                 );
         
 
+
         // Configuración del botón "Mi Perfil"
         CustomViewMenu btnProfile = findViewById(R.id.btnProfile);
         btnProfile.setButtonText("Mi Perfil");
@@ -70,7 +74,7 @@ public class UserMenu extends AppCompatActivity {
         btnNewRoutine.setButtonIcon(R.drawable.ic_plus);
         btnNewRoutine.setOnClickListener(view -> {
             showToast("Has elegido Nueva Rutina ");
-                    if (user.getSkynType() == null) {
+                    if (user.getSkinType() == null) {
                         startActivity(new Intent(UserMenu.this, SkinTypeActivity.class));
                     } else {
                         startActivity(new Intent(UserMenu.this, HourActivity.class));
@@ -108,6 +112,7 @@ public class UserMenu extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         galleryLauncher.launch(intent);
+
     }
 
 

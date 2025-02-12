@@ -1,11 +1,11 @@
 package es.upgrade.dao.api;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,71 +22,82 @@ import es.upgrade.entidad.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private final Context context;
     private List<Product> productList;
-    private int selectedPosition = -1;  // Almacena la posición del producto seleccionado
+    private Context context;
+    private OnProductClickListener onProductClickListener;
+    private int selectedPosition = -1; // No producto seleccionado al inicio
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public interface OnProductClickListener {
+        void onProductClick(Product product);
+    }
+
+    public ProductAdapter(Context context, List<Product> productList, OnProductClickListener listener) {
         this.context = context;
         this.productList = productList;
+        this.onProductClickListener = listener;
     }
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false);
         return new ProductViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Product product = productList.get(position);
 
-        holder.productName.setText(product.getBrand());
+        // Asignamos el nombre y el precio del producto
+        holder.productName.setText(product.getName());
         holder.productPrice.setText("$" + product.getPrice());
 
-        // Cargar imagen con Glide, incluyendo un placeholder y una imagen de error
+        // Cargar imagen con Glide
         Glide.with(context)
                 .load(product.getUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.productImage);
 
-        // Actualizar el estado del CheckBox según la posición seleccionada
-        holder.checkBox.setChecked(position == selectedPosition);
+        // Marcar el RadioButton si este producto está seleccionado
+        holder.radioButton.setChecked(position == selectedPosition);
 
-        // Manejar clics en el CheckBox
-        holder.checkBox.setOnClickListener(v -> {
-            int currentPosition = holder.getBindingAdapterPosition();
-            if (selectedPosition != currentPosition) {
-                notifyItemChanged(selectedPosition);  // Desmarcar el producto anterior
-                selectedPosition = currentPosition;   // Actualizar la posición seleccionada
-                notifyItemChanged(selectedPosition);  // Marcar el nuevo producto
+        // Manejar clic en el producto
+        holder.itemView.setOnClickListener(v -> {
+            // Verificamos si el producto clickeado es diferente al seleccionado
+            if (selectedPosition != position) {
+                int previousPosition = selectedPosition;
+                selectedPosition = position;
+
+                // Notificar solo los cambios de los elementos afectados
+                notifyItemChanged(previousPosition);
+                notifyItemChanged(selectedPosition);
+
+                // Llamamos al listener con el producto seleccionado
+                onProductClickListener.onProductClick(product);
             }
         });
+
+        // Asegurar que el RadioButton también maneje el evento de clic
+        holder.radioButton.setOnClickListener(v -> holder.itemView.performClick());
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return productList.size(); // Devuelve el tamaño de la lista de productos
     }
 
-    // Método para actualizar los datos del adaptador
-    public void updateData(List<Product> newProducts) {
-        this.productList = newProducts;
-        notifyDataSetChanged();  // Notificar al adaptador que los datos han cambiado
-    }
-
+    // ViewHolder para manejar la vista de cada producto
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice;
         ImageView productImage;
-        CheckBox checkBox;
+        RadioButton radioButton;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productImage = itemView.findViewById(R.id.productImage);
-            checkBox = itemView.findViewById(R.id.checkProducto);
+            radioButton = itemView.findViewById(R.id.radioProducto);
         }
     }
 }

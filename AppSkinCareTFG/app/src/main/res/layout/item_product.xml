@@ -25,13 +25,12 @@
                 android:contentDescription="Imagen del producto"
                 android:scaleType="centerCrop" />
 
-            <CheckBox
-                android:id="@+id/checkProducto"
+            <RadioButton
+                android:id="@+id/radioProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:button="@drawable/ic_check" />
+                android:buttonTint="@color/colorAccent"/>
         </RelativeLayout>
 
         <!-- Nombre del producto -->

@@ -56,4 +56,64 @@
     <!--REVIEW AND EDIT-->
     <string name="TituloTxRw">Has elegido las siguientes cosas: ¿Deseas modificar algo?</string>
     <string name="ButtonTextRw">Tipo Piel</string>
+    <string name="ButtonTextMomentoDia">Momento del día</string>
+    <string name="ButtonTextTipoSK">Tipo Skincare</string>
+    <string name="ButtonTextPresupuesto">Presupuesto</string>
+    <string name="ButtonTextEditar">Editar</string>
+    <string name="ButtontextContinuar">Continuar</string>
+
+    <!--SKIN CARE TYPE-->
+    <string name="TextViewPregunta">¿Qué tipo de skincare quieres</string>
+    <string name="ButtonAvanzar">Avanzar</string>
+
+    <!--SKIN DESCRIPTION-->
+    <string name="TextSKD">Características</string>
+
+    <!--SKIN TYPE-->
+    <string name="TVConfiguracion">Configuración del tipo de piel</string>
+
+    <!--USER MENU-->
+    <string name="TVNombre">San Felix de Pablo</string>
+    <string name="TVTipoPielUserMenu">Normal Skin</string>
+    <string name="ButtonTextPerfil">Mi perfil</string>
+    <string name="ButtonTextRoutine">Nueva rutina</string>
+    <string name="ButtonTextRoutines">Mis rutinas</string>
+    <string name="ButtonTextCalendar">Calendario</string>
+    <string name="ButtonSalir">Cerrar sesión</string>
+
+    <!--CUSTOM ALERT-->
+    <string name="TituloTx">Título</string>
+    <string name="SubTitulo">Mensaje del diálogo</string>
+    <string name="ButtonCancelar">Cancelar</string>
+    <string name="ButtonAceptar">Aceptar</string>
+
+    <!--CUSTOM BUTTON-->
+    <string name="TextButtonCustom">Custom Button</string>
+
+    <!--CUSTOM VIEW OPTION ROUTINE-->
+    <string name="TitleCustomVoR">Titulo: </string>
+    <string name="SubtitleCustomVoR">Texto de opción</string>
+
+    <!--FRAGMENT CUESTIONARY-->
+    <string name="SelectedOption">Selecciona una opción</string>
+    <string name="RadioButonOpcion1">Opción 1</string>
+    <string name="RadioButonOpcion2">Opción 2</string>
+    <string name="RadioButonOpcion3">Opción 3</string>
+
+    <!--ITEM PRODUCT-->
+    <string name="NombreProducto">Nombre del Producto</string>
+    <string name="PrecioProducto">00.00€</string>
+
+    <!--PROGRESS BAR-->
+    <string name="Numero1"> 1</string>
+    <string name="Numero2"> 2</string>
+    <string name="Numero3"> 3</string>
+    <string name="Numero4"> 4</string>
+    <string name="Piel">Piel</string>
+    <string name="Horario">Horario</string>
+    <string name="Tipo">Tipo</string>
+    <string name="Presupuesto">Prespuesto</string>
+
+
+
 </resources>

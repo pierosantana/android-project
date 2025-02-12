@@ -14,7 +14,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecciona una opción"
+            android:text="@string/SelectedOption"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#000000"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@null"
-                    android:text="Opción 1"
+                    android:text="@string/RadioButonOpcion1"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:paddingStart="12dp" />
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@null"
-                    android:text="Opción 2"
+                    android:text="@string/RadioButonOpcion2"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:paddingStart="12dp" />
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@null"
-                    android:text="Opción 3"
+                    android:text="@string/RadioButonOpcion3"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:paddingStart="12dp" />

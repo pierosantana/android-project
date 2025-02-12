@@ -149,7 +149,7 @@ public class BasicEconomicActivity extends AppCompatActivity {
 
         return productos.stream()
                 .filter(product -> product.getPrice() < precioMaximo // Filtro por precio
-                        && product.getSkinType() == tipoPiel // Filtro por tipo de piel
+                        && product.getSkintype() == tipoPiel // Filtro por tipo de piel
                         && product.getCategoryProduct() == category) // Filtro por categoría
                 .collect(Collectors.toList());
 

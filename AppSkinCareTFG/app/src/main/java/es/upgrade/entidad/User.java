@@ -15,6 +15,7 @@ public class User {
     private SkinType skinType;
     private List<Routine> routineList;
 
+
     // Constructor privado para evitar instanciación externa
     private User() {
         routineList = new ArrayList<>();

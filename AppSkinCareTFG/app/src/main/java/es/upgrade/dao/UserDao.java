@@ -15,11 +15,13 @@ import java.util.Map;
 
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 
 
 public class UserDao {
     private static UserDao instance = null;
+
 
     public static UserDao getInstance() {
         if (instance == null) {

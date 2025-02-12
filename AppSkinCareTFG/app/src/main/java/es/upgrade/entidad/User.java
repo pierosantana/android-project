@@ -1,5 +1,7 @@
 package es.upgrade.entidad;
 
+import com.google.firebase.database.PropertyName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    @PropertyName("skinType")
     private SkinType skinType;
     private List<Routine> routineList;
 
@@ -51,10 +54,12 @@ public class User {
         this.password = password;
     }
 
+    @PropertyName("skinType")
     public SkinType getSkinType() {
+
         return skinType;
     }
-
+    @PropertyName("skinType")
     public void setSkinType(SkinType skinType) {
         this.skinType = skinType;
     }

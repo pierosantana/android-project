@@ -1,7 +1,9 @@
 package es.upgrade;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -76,8 +78,17 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
+                // Crear un Intent para abrir la RutinaActivity
+                Intent intent = new Intent(BasicCustomizedActivity.this, ResumenFinal.class);
+                // Pasar los productos seleccionados al Intent
+                intent.putExtra("limpiezaProducto", selectedLimpiezaProduct);
+                intent.putExtra("hidratacionProducto", selectedHidratacionProduct);
+
+                // Iniciar la RutinaActivity
+                startActivity(intent);
                 Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
             }
+
         });
     }
     private void obtenerProductDesdeApi(){

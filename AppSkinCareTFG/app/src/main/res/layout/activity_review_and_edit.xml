@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Has elegido las siguientes cosas: ¿Deseas modificar algo?"
+        android:text="@string/TituloTxRw"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"/>
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_face"
-            app:buttonText="Tipo Piel" />
+            app:buttonText="@string/ButtonTextRw" />
 
         <es.upgrade.UI.CustomViewOptionsRoutine
             android:id="@+id/tvSchedeule"

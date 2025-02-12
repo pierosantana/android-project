@@ -45,6 +45,15 @@
 
     <!--HOUR ACTIVITY-->
     <string name="NoIdeaChoose">You don´t know which choose?</string>
+    <string name="TextButton">Avanzar</string>
+    <!--HOUR ACTIVITY SELECTION-->
+    <string name="TextView">Rutina de skin care por la mañana</string>
+
+    <!--RECYCLER VIEW HOUR AND VIEW SKIN-->
+    <string name="ButtonText">Volver</string>
 
 
+    <!--REVIEW AND EDIT-->
+    <string name="TituloTxRw">Has elegido las siguientes cosas: ¿Deseas modificar algo?</string>
+    <string name="ButtonTextRw">Tipo Piel</string>
 </resources>

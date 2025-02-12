@@ -20,7 +20,7 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Avanzar"
+        android:text="@string/TextButton"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/button_background"

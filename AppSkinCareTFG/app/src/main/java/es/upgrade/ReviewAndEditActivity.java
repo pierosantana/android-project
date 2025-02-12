@@ -125,6 +125,9 @@ public class ReviewAndEditActivity extends AppCompatActivity {
     }
     // Métodos de formateo de las respuestas
     private String formatSkinType(SkinType skinType) {
+        if (skinType == null) {
+            return "Tipo de piel no definido";  // O cualquier texto por defecto
+        }
         switch (skinType) {
             case DRY: return "Piel seca";
             case NORMAL: return "Piel normal";

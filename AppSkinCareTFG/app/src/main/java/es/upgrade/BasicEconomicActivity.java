@@ -7,6 +7,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +42,11 @@ public class BasicEconomicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_economic);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.basic_economic), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
         recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
@@ -121,9 +129,17 @@ public class BasicEconomicActivity extends AppCompatActivity {
 
     private List<Product> obtenerProductosPorCategoria(CategoryProduct category) {
         List<Product> productos = ProductDao.getInstance().getProductos();
+        // Establecemos el precio máximo bajo
+        double precioMaximo = 7.0;
+
+        // Obtenemos el tipo de piel seleccionado
         SkinType tipoPiel = Routine.getInstance().getSkinType();
+
         return productos.stream()
-                .filter(product -> product.getCategoryProduct() == category && product.getSkinType() == tipoPiel)
+                .filter(product -> product.getPrice() < precioMaximo // Filtro por precio
+                        && product.getSkinType() == tipoPiel // Filtro por tipo de piel
+                        && product.getCategoryProduct() == category) // Filtro por categoría
                 .collect(Collectors.toList());
+
     }
 }

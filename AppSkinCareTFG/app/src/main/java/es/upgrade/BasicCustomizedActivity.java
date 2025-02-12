@@ -2,9 +2,11 @@ package es.upgrade;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +15,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +33,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BasicCustomizedActivity extends AppCompatActivity {
-   private ProductAdapter adapter;
-   private Button btnContinuar;
+    private RecyclerView recyclerViewLimpieza, recyclerViewHidratacion;
+    private TextView emptyView;
+    private Button btnContinuar;
+    private ProductAdapter limpiezaAdapter, hidratacionAdapter;
 
-    @SuppressLint("MissingInflatedId")
+    private Product selectedLimpiezaProduct;
+    private Product selectedHidratacionProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +52,33 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Configurar RecyclerView
-        //recyclerViewProductos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
+        recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
+        emptyView = findViewById(R.id.emptyView);
+        btnContinuar = findViewById(R.id.btnContinuar);
+
+        //Vista del reciclerView
+        recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewLimpieza.setNestedScrollingEnabled(false);
+        recyclerViewHidratacion.setNestedScrollingEnabled(false);
+
+        //Carrusel
+        LinearSnapHelper snapLimpieza = new LinearSnapHelper();
+        snapLimpieza.attachToRecyclerView(recyclerViewLimpieza);
+        LinearSnapHelper snapHidratacion = new LinearSnapHelper();
+        snapHidratacion.attachToRecyclerView(recyclerViewHidratacion);
 
         // Aqui llamamos al metodo para obtener productos desde la API al cargar la actividad
         obtenerProductDesdeApi();
-        btnContinuar.setOnClickListener(v->cargarProductos());
+
+        btnContinuar.setOnClickListener(v -> {
+            if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null) {
+                Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void obtenerProductDesdeApi(){
         // Llamamos al Retrofir para obetner los productos dede la API
@@ -79,41 +108,43 @@ public class BasicCustomizedActivity extends AppCompatActivity {
     }
 
     private void cargarProductos() {
-        // Obtener los productos guardados en el ProductDao
-        List<Product>products = ProductDao.getInstance().getProductos();
+        List<Product> products = ProductDao.getInstance().getProductos();
 
-        if(products == null || products.isEmpty()){
-            Toast.makeText(this, "⚠ No hay productos en ProductDao", Toast.LENGTH_LONG).show();
-            return;// Salimos del método para evitar errores
-        }else{
-            Toast.makeText(this, "✅ Productos cargados correctamente: " + products.size(), Toast.LENGTH_SHORT).show();
-        }
+        if (products == null || products.isEmpty()) {
+            emptyView.setVisibility(View.VISIBLE);
+            recyclerViewLimpieza.setVisibility(View.GONE);
+            recyclerViewHidratacion.setVisibility(View.GONE);
+        } else {
+            emptyView.setVisibility(View.GONE);
 
-        // Filtramos los productos por categoría
-        List<Product>productosFiltrados = obtenerProductosFilradosPorCategoria();
+            List<Product> productosLimpieza = obtenerProductosPorCategoria(CategoryProduct.CLEANER);
+            List<Product> productosHidratacion = obtenerProductosPorCategoria(CategoryProduct.MOISTURIZER);
 
-        if(!productosFiltrados.isEmpty()){
-            // Si hay productos filtrados lo pasamos al adapter??
-            /*
-                adapter = new ProductAdapter(this, productosFiltrados);
-                recyclerViewProductos.setAdapter(adapter);
-             */
-        }else{
-            // Si no hay productos filtrados vamos a mostrar un mensaje
-            Toast.makeText(this, "No hay productos disponibles", Toast.LENGTH_SHORT).show();
+            if (!productosLimpieza.isEmpty()) {
+                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product);
+                recyclerViewLimpieza.setAdapter(limpiezaAdapter);
+                recyclerViewLimpieza.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewLimpieza.setVisibility(View.GONE);
+            }
 
+            if (!productosHidratacion.isEmpty()) {
+                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product);
+                recyclerViewHidratacion.setAdapter(hidratacionAdapter);
+                recyclerViewHidratacion.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewHidratacion.setVisibility(View.GONE);
+            }
         }
     }
 
-    public List<Product> obtenerProductosFilradosPorCategoria(){
-        List<Product>productosGuardados = ProductDao.getInstance().getProductos();
+    private List<Product> obtenerProductosPorCategoria(CategoryProduct category) {
+        List<Product> productos = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = Routine.getInstance().getSkinType();
-
-
-        // Filtramos por categoría(Limpieza e Hidratacion)
-
-
-        return productosGuardados.stream().filter(product -> (product.getCategoryProduct() == CategoryProduct.CLEANER
-                || product.getCategoryProduct() == CategoryProduct.MOISTURIZER && product.getSkinType() == tipoPiel)).collect(Collectors.toList());
+        return productos.stream()
+                .filter(product ->product.getSkinType() == tipoPiel // Filtro por tipo de piel
+                        && product.getCategoryProduct() == category) // Filtro por categoría
+                .collect(Collectors.toList());
     }
+
 }

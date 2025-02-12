@@ -16,6 +16,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,16 +39,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CompleteEconomicActivity extends AppCompatActivity {
-
-    private ProductAdapter adapter;
+    private RecyclerView recyclerViewLimpieza, recyclerViewHidratacion,recyclerViewTonificacion,
+            recyclerViewTratamiento,recyclerViewProtectorSolar;
+    private TextView emptyView,txtProtector;
     private Button btnContinuar;
+    private ProductAdapter limpiezaAdapter, hidratacionAdapter,tonificacionAdapter,
+            tratamientoAdapter,protectorAdapter;
 
+    private Product selectedLimpiezaProduct,selectedHidratacionProduct,selectedTonificacionProduct,
+            selectedTratamientoProduct,selectedProtectorProduct;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_complete_economic);
@@ -55,19 +59,57 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Configurar RecyclerView
-        //recyclerViewProductos.setLayoutManager(new LinearLayoutManager(this));
 
-        // Llamada al método para obtener productos desde la API al cargar la actividad
+        recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
+        recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
+        recyclerViewTonificacion = findViewById(R.id.rvTonificacion);
+        recyclerViewTratamiento = findViewById(R.id.rvTratamiento);
+        recyclerViewProtectorSolar = findViewById(R.id.rvProtectorSolar);
+
+        //Vista del reciclerView
+        recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTonificacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTratamiento.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewProtectorSolar.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerViewLimpieza.setNestedScrollingEnabled(false);
+        recyclerViewHidratacion.setNestedScrollingEnabled(false);
+        recyclerViewTonificacion.setNestedScrollingEnabled(false);
+        recyclerViewTratamiento.setNestedScrollingEnabled(false);
+        recyclerViewProtectorSolar.setNestedScrollingEnabled(false);
+
+        emptyView = findViewById(R.id.emptyView);
+        txtProtector = findViewById(R.id.sectionTitle5);
+        btnContinuar = findViewById(R.id.btnContinuar);
+
+        //Carrusel
+        LinearSnapHelper snapLimpieza = new LinearSnapHelper();
+        snapLimpieza.attachToRecyclerView(recyclerViewLimpieza);
+        LinearSnapHelper snapHidratacion = new LinearSnapHelper();
+        snapHidratacion.attachToRecyclerView(recyclerViewHidratacion);
+        LinearSnapHelper snapTonico = new LinearSnapHelper();
+        snapTonico.attachToRecyclerView(recyclerViewTonificacion);
+        LinearSnapHelper snapTratamiento = new LinearSnapHelper();
+        snapTratamiento.attachToRecyclerView(recyclerViewTratamiento);
+        LinearSnapHelper snapProtector = new LinearSnapHelper();
+        snapProtector.attachToRecyclerView(recyclerViewProtectorSolar);
+
         obtenerProductosDesdeApi();
 
-
-        btnContinuar.setOnClickListener(v->cargarProductos());
-
+        btnContinuar.setOnClickListener(v -> {
+            if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null || selectedTonificacionProduct == null
+                    || selectedTratamientoProduct == null || selectedProtectorProduct == null) {
+                Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName()
+                        + "\nProducto de Tonificacion: " + selectedTonificacionProduct.getName()+ "\nProducto de Tratamiento: " + selectedTratamientoProduct.getName()
+                        + "\nProducto de Protector Solar: " + selectedProtectorProduct.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
-    private void obtenerProductosDesdeApi() {
-        // Llamamos a Retrofit para obtener productos desde la API
+    private void obtenerProductosDesdeApi(){
         Call<List<Product>> call = RetrofitClient.getApiService().getProducts();
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -82,34 +124,75 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable throwable) {
                 Toast.makeText(CompleteEconomicActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
 
     private void cargarProductos() {
-        // Obtener los productos guardados en el ProductDao
-        List<Product> productos = ProductDao.getInstance().getProductos();
+        List<Product> products = ProductDao.getInstance().getProductos();
 
-        if (productos == null || productos.isEmpty()) {
-            Toast.makeText(this, "⚠ No hay productos en ProductDao", Toast.LENGTH_LONG).show();
-            return; // Salimos del método para evitar errores
+        if (products == null || products.isEmpty()) {
+            emptyView.setVisibility(View.VISIBLE);
+            recyclerViewLimpieza.setVisibility(View.GONE);
+            recyclerViewHidratacion.setVisibility(View.GONE);
+            recyclerViewTonificacion.setVisibility(View.GONE);
+            recyclerViewTratamiento.setVisibility(View.GONE);
+            recyclerViewProtectorSolar.setVisibility(View.GONE);
         } else {
-            Toast.makeText(this, "✅ Productos cargados correctamente: " + productos.size(), Toast.LENGTH_SHORT).show();
-        }
+            emptyView.setVisibility(View.GONE);
 
-        // Filtrar los productos por categoría y precio
-        List<Product> productosFiltrados = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosLimpieza = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosHidratacion = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosTonificacion = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosTratamiento = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosProtector = obtenerProductosFilradosPorCategoriaYPrecioBajo();
 
-        if (!productosFiltrados.isEmpty()) {
-            // Si hay productos filtrados, los pasamos al adapter
-            //adapter = new ProductAdapter(this, productosFiltrados);
-            //recyclerViewProductos.setAdapter(adapter);
+            //Verificar si es rutina de noche
+            boolean esRutinaDeNoche = Routine.getInstance().getSchedule() == Schedule.NIGHT;
 
-        } else {
-            // Si no hay productos filtrados, mostramos un mensaje
-            Toast.makeText(this, "No hay productos disponibles", Toast.LENGTH_SHORT).show();
+            //Cargar RecuclerView
+            if (!productosLimpieza.isEmpty()) {
+                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product);
+                recyclerViewLimpieza.setAdapter(limpiezaAdapter);
+                recyclerViewLimpieza.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewLimpieza.setVisibility(View.GONE);
+            }
+
+            if (!productosHidratacion.isEmpty()) {
+                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product);
+                recyclerViewHidratacion.setAdapter(hidratacionAdapter);
+                recyclerViewHidratacion.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewHidratacion.setVisibility(View.GONE);
+            }
+            if (!productosTonificacion.isEmpty()) {
+                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product);
+                recyclerViewTonificacion.setAdapter(tonificacionAdapter);
+                recyclerViewTonificacion.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewTonificacion.setVisibility(View.GONE);
+            }
+            if (!productosTratamiento.isEmpty()) {
+                tratamientoAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedTratamientoProduct = product);
+                recyclerViewTratamiento.setAdapter(tratamientoAdapter);
+                recyclerViewTratamiento.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewTratamiento.setVisibility(View.GONE);
+            }
+            // Si la rutina es de noche, no mostramos el RecyclerView de Protector Solar
+            if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
+                protectorAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedProtectorProduct = product);
+                recyclerViewProtectorSolar.setAdapter(protectorAdapter);
+                recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
+                txtProtector.setVisibility(View.VISIBLE);
+            } else {
+                recyclerViewProtectorSolar.setVisibility(View.GONE);
+                txtProtector.setVisibility(View.GONE);
+            }
         }
     }
 

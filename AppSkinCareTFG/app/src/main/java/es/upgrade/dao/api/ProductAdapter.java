@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,8 +22,9 @@ import es.upgrade.entidad.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Product> productList;
+    private int selectedPosition = -1;  // Almacena la posición del producto seleccionado
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -39,17 +41,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
+
         holder.productName.setText(product.getBrand());
         holder.productPrice.setText("$" + product.getPrice());
 
-        // Aquí verificamos que la URL es la correcta
-        Log.d("Image URL", product.getUrl()); // Imprimir la URL para verificarla
-
-        // Cargar imagen con Glide
+        // Cargar imagen con Glide, incluyendo un placeholder y una imagen de error
         Glide.with(context)
                 .load(product.getUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.productImage);
+
+        // Actualizar el estado del CheckBox según la posición seleccionada
+        holder.checkBox.setChecked(position == selectedPosition);
+
+        // Manejar clics en el CheckBox
+        holder.checkBox.setOnClickListener(v -> {
+            int currentPosition = holder.getBindingAdapterPosition();
+            if (selectedPosition != currentPosition) {
+                notifyItemChanged(selectedPosition);  // Desmarcar el producto anterior
+                selectedPosition = currentPosition;   // Actualizar la posición seleccionada
+                notifyItemChanged(selectedPosition);  // Marcar el nuevo producto
+            }
+        });
     }
 
     @Override
@@ -57,15 +70,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
+    // Método para actualizar los datos del adaptador
+    public void updateData(List<Product> newProducts) {
+        this.productList = newProducts;
+        notifyDataSetChanged();  // Notificar al adaptador que los datos han cambiado
+    }
+
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice;
         ImageView productImage;
+        CheckBox checkBox;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productImage = itemView.findViewById(R.id.productImage);
+            checkBox = itemView.findViewById(R.id.checkProducto);
         }
     }
 }
+

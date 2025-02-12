@@ -2,6 +2,7 @@ package es.upgrade;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
@@ -39,8 +41,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 public class BasicEconomicActivity extends AppCompatActivity {
     private RadioGroup radioGroup1, radioGroup2;
     private Button btnContinuar;
-    private RecyclerView recyclerViewProductos;
-    private ProductAdapter adapter;
+    private RecyclerView recyclerViewLimpieza, recyclerViewHidratacion;
+    private ProductAdapter adapterLimpieza, adapterHidratacion;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -54,29 +56,24 @@ public class BasicEconomicActivity extends AppCompatActivity {
             return insets;
         });
 
-        radioGroup1 = findViewById(R.id.radioGroup1);
-        radioGroup2 = findViewById(R.id.radioGroup2);
-        btnContinuar = findViewById(R.id.button);
-        recyclerViewProductos = findViewById(R.id.recyclerViewProductos);
-
-        // Listener para el primer grupo de opciones de nuestro radio group.
-        radioGroup1.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton selectedRadioButton = findViewById(checkedId);
-            if (selectedRadioButton != null) {
-                Toast.makeText(this, "Seleccionaste: " + selectedRadioButton.getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Listener para el segundo grupo de opciones de nuestro radio grupo
-        radioGroup2.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton selectedRadioButton = findViewById(checkedId);
-            if (selectedRadioButton != null) {
-                Toast.makeText(this, "Seleccionaste: " + selectedRadioButton.getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnContinuar = findViewById(R.id.btnContinuar);
+        recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
+        recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
 
         // Configurar RecyclerView
-        recyclerViewProductos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false)); //false se pone para no invertir el orden
+        recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewLimpieza.setNestedScrollingEnabled(false);
+        recyclerViewHidratacion.setNestedScrollingEnabled(false);
+        //Efecto carrusel
+        LinearSnapHelper snapLimpieza = new LinearSnapHelper();
+        snapLimpieza.attachToRecyclerView(recyclerViewLimpieza);
+        LinearSnapHelper snapHidratacion = new LinearSnapHelper();
+        snapHidratacion.attachToRecyclerView(recyclerViewHidratacion);
+
+
 
         // Llamada al método para obtener productos desde la API al cargar la actividad
         obtenerProductosDesdeApi();
@@ -107,29 +104,52 @@ public class BasicEconomicActivity extends AppCompatActivity {
     }
 
     private void cargarProductos() {
-        // Obtener los productos guardados en el ProductDao
         List<Product> productos = ProductDao.getInstance().getProductos();
 
         if (productos == null || productos.isEmpty()) {
-            Toast.makeText(this, "⚠ No hay productos en ProductDao", Toast.LENGTH_LONG).show();
-            return; // Salimos del método para evitar errores
-        } else {
-            Toast.makeText(this, "✅ Productos cargados correctamente: " + productos.size(), Toast.LENGTH_SHORT).show();
+            findViewById(R.id.emptyView).setVisibility(View.VISIBLE);
+            recyclerViewLimpieza.setVisibility(View.GONE);
+            recyclerViewHidratacion.setVisibility(View.GONE);
+            return;
         }
 
-        // Filtrar los productos por categoría y precio
-        List<Product> productosFiltrados = obtenerProductosFiltradosPorCategoriaYPrecioBajo();
+        // Filtrar productos por categoría
+        List<Product> productosLimpieza = productos.stream()
+                .filter(product -> product.getCategoryProduct() == CategoryProduct.CLEANER)
+                .collect(Collectors.toList());
 
-        if (!productosFiltrados.isEmpty()) {
-            // Si hay productos filtrados, los pasamos al adapter
-            adapter = new ProductAdapter(this, productosFiltrados);
-            recyclerViewProductos.setAdapter(adapter);
+        List<Product> productosHidratacion = productos.stream()
+                .filter(product -> product.getCategoryProduct() == CategoryProduct.MOISTURIZER)
+                .collect(Collectors.toList());
 
+        // Verificar y mostrar u ocultar la vista vacía según los productos disponibles
+        if (productosLimpieza.isEmpty() && productosHidratacion.isEmpty()) {
+            findViewById(R.id.emptyView).setVisibility(View.VISIBLE);
+            recyclerViewLimpieza.setVisibility(View.GONE);
+            recyclerViewHidratacion.setVisibility(View.GONE);
         } else {
-            // Si no hay productos filtrados, mostramos un mensaje
-            Toast.makeText(this, "No hay productos disponibles", Toast.LENGTH_SHORT).show();
+            findViewById(R.id.emptyView).setVisibility(View.GONE);
+            recyclerViewLimpieza.setVisibility(View.VISIBLE);
+            recyclerViewHidratacion.setVisibility(View.VISIBLE);
+
+            // Configurar adaptadores solo si no están ya configurados o si los datos han cambiado
+            if (adapterLimpieza == null) {
+                adapterLimpieza = new ProductAdapter(this, productosLimpieza);
+                recyclerViewLimpieza.setAdapter(adapterLimpieza);
+            } else {
+                adapterLimpieza.updateData(productosLimpieza);
+            }
+
+            if (adapterHidratacion == null) {
+                adapterHidratacion = new ProductAdapter(this, productosHidratacion);
+                recyclerViewHidratacion.setAdapter(adapterHidratacion);
+            } else {
+                adapterHidratacion.updateData(productosHidratacion);
+            }
         }
     }
+
+
 
     public List<Product> obtenerProductosFiltradosPorCategoriaYPrecioBajo() {
         List<Product> productosGuardados = ProductDao.getInstance().getProductos();

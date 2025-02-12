@@ -1,0 +1,20 @@
+Para instalar el servidor:
+npm install -g json-server
+
+Para arrancar el servidor:
+json-server --watch db.json --port 3000
+-db.json = al nombre del archivo que querámoslas leer
+
+Si queremos correr el servidor pero desde nuestro movil:
+json-server --host 0.0.0.0 --watch db.json --port 3000
+
+Hay diferencias en la configuración de los archivos de la app
+Si ejecutamos la app en local se modifica los siguiente xml y clases:
+*-* network_security_config.xml: <domain includeSubdomains="true">10.0.2.2</domain>
+*-* private static final String BASE_URL = "http://nuestra ip:3000/"; 3000 es el puerto por el que queremos ir
+
+10.0.2.2 es la ip de localhost
+
+Si queremos ejecutar la app en nuestro movil:
+*-* network_security_config.xml: <domain includeSubdomains="true">Aqui ponemos la ip de nuestra maquina</domain>
+*-* private static final String BASE_URL = "http://nuestra ip:3000/"; 3000 es el puerto por el que queremos ir

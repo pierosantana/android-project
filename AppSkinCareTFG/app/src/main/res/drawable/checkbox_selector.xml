@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado marcado -->
+    <item android:drawable="@color/colorSelected" android:state_checked="true"/>
+    <!-- Estado no marcado -->
+    <item android:drawable="@color/colorUnselected" android:state_checked="false"/>
+    <!-- Estado presionado -->
+    <item android:drawable="@color/colorPressed" android:state_pressed="true"/>
+    <!-- Estado deshabilitado -->
+    <item android:drawable="@color/colorDisabled" android:state_enabled="false"/>
+</selector>

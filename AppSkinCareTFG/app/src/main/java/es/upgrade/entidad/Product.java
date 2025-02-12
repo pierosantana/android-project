@@ -1,5 +1,9 @@
 package es.upgrade.entidad;
 
+import android.util.Log;
+
+import java.util.Objects;
+
 public class Product {
     //Esto es para poder identificar cada producto
     private int id;
@@ -12,6 +16,7 @@ public class Product {
     private SkinType skinType;
 
     private String url;
+    private boolean isSelected;
 
     public String getUrl() {
         return url;
@@ -20,9 +25,6 @@ public class Product {
     public void setUrl(String url) {
         this.url = url;
     }
-
-
-
 
 
     public SkinType getSkintype() {
@@ -73,6 +75,14 @@ public class Product {
         this.id = id;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
 
     public Product(CategoryProduct categoryProduct, String brand, int id, String name, Double price, SkinType skinType) {
         this.categoryProduct = categoryProduct;
@@ -102,5 +112,17 @@ public class Product {
                 ", brand='" + brand + '\'' +
                 ", skinType=" + skinType +
                 '}';
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Product product = (Product) obj;
+        Log.d("Product", "Comparing this product " + this.getName() + " with " + product.getName());
+        return id == product.id;  // Compara los IDs de los productos
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);  // Usa el mismo campo para asegurar que las comparaciones sean correctas
     }
 }

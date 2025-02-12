@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start|top"
-            android:text=" Rutina de skin care por la mañana "
+            android:text="@string/TextView"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

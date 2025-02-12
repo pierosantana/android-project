@@ -15,6 +15,7 @@ public class Routine {
     private List<Product> productList;
     private SkinType skinType;
 
+
     public Budget getBudget() {
         return Budget;
     }

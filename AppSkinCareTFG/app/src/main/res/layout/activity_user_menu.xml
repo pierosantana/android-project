@@ -41,7 +41,7 @@
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jelly Grande"
+        android:text="@string/TVNombre"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/profileContainer"
@@ -53,7 +53,7 @@
         android:id="@+id/skinType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Normal Skin"
+        android:text="@string/TVTipoPielUserMenu"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/userName"
@@ -79,28 +79,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_face"
-            app:buttonText="Mi Perfil" />
+            app:buttonText="@string/ButtonTextPerfil" />
 
         <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnNewRoutine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_plus"
-            app:buttonText="Nueva Rutina" />
+            app:buttonText="@string/ButtonTextRoutine" />
 
         <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnMyRoutines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/products_svgrepo_com"
-            app:buttonText="Mis Rutinas" />
+            app:buttonText="@string/ButtonTextRoutines" />
 
         <es.upgrade.UI.CustomViewMenu
             android:id="@+id/btnCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonIcon="@drawable/ic_calendar"
-            app:buttonText="Calendario" />
+            app:buttonText="@string/ButtonTextCalendar" />
     </LinearLayout>
 
     <Button
@@ -113,7 +113,7 @@
         android:drawablePadding="8dp"
         android:gravity="center"
         android:padding="12dp"
-        android:text="Sign Out"
+        android:text="@string/ButtonSalir"
         android:textColor="#02433D"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

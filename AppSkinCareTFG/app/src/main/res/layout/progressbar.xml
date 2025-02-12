@@ -27,14 +27,14 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
-                android:text="1"
+                android:text="@string/Numero1"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Piel"
+                android:text="@string/Piel"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
                 android:gravity="center"/>
@@ -54,14 +54,14 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
-                android:text="2"
+                android:text="@string/Numero2"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Horario"
+                android:text="@string/Horario"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
                 android:gravity="center"/>
@@ -81,14 +81,14 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
-                android:text="3"
+                android:text="@string/Numero3"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo"
+                android:text="@string/Tipo"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
                 android:gravity="center"/>
@@ -107,14 +107,14 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
-                android:text="4"
+                android:text="@string/Numero4"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Presupuesto"
+                android:text="@string/Presupuesto"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
                 android:gravity="center"/>

@@ -11,7 +11,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Título"
+        android:text="@string/TituloTx"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -22,7 +22,7 @@
         android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mensaje del diálogo"
+        android:text="@string/SubTitulo"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
@@ -42,13 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:background="@drawable/button_logout"
-            android:text="Cancelar" />
+            android:text="@string/ButtonCancelar" />
 
         <Button
             android:id="@+id/btn_positive"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Aceptar"
+            android:text="@string/ButtonAceptar"
             android:background="@drawable/button_logout"
             android:layout_marginStart="30dp"/>
     </LinearLayout>

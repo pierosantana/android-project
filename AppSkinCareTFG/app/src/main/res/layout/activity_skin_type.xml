@@ -11,7 +11,7 @@
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Configuración del tipo de piel"
+        android:text="@string/TVConfiguracion"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -30,7 +30,7 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Avanzar"
+        android:text="@string/ButtonAvanzar"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/button_background"

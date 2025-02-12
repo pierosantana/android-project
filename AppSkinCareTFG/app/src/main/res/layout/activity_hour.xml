@@ -34,8 +34,7 @@
             android:enabled="false" />
 
 
-
-    <TextView
+        <TextView
         android:id="@+id/NoIdeaChoose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,5 +43,6 @@
         android:gravity="center"
         android:text="@string/NoIdeaChoose"
         android:textSize="16sp"/>
+    </LinearLayout>
 
 </LinearLayout>

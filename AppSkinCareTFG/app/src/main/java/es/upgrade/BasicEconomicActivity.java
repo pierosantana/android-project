@@ -149,8 +149,6 @@ public class BasicEconomicActivity extends AppCompatActivity {
         }
     }
 
-
-
     public List<Product> obtenerProductosFiltradosPorCategoriaYPrecioBajo() {
         List<Product> productosGuardados = ProductDao.getInstance().getProductos();
         // Establecemos el precio máximo bajo

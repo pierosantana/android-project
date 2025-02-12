@@ -114,6 +114,21 @@
     <string name="Tipo">Tipo</string>
     <string name="Presupuesto">Prespuesto</string>
 
+    <!--BASIC CUSTOMIZED, BASIC ECONOMY, COMPLETE ECONOMIC Y CUSTOMIZED (cunado este)-->
+    <string name="Title1Customized">Limpieza</string>
+    <string name="Title2Customized">Hidratación</string>
+    <string name="Title3Customized">Tonificación</string>
+    <string name="Title4Customized">Tratamiento</string>
+    <string name="Title5Customized">Tratamiento</string>
+    <string name="ButtonCustomized">Continuar</string>
+
+
+    <!--BUDGET ACTIVITY-->
+    <string name="BudgetTitle1">Presupuesto</string>
+
+    <!--ACTIVITY FINAL-->
+    <string name="Title1Final">Has elegido las siguientes cosas</string>
+    <string name="Title2Final">Resumen de las selecciones anteriores...</string>
 
 
 </resources>

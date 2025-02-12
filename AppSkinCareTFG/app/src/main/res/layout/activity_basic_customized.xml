@@ -17,7 +17,7 @@
             android:id="@+id/title1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Limpieza"
+            android:text="@string/Title1Customized"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -42,7 +42,7 @@
             android:id="@+id/title2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hidratación"
+            android:text="@string/Title2Customized"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -66,7 +66,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Continuar"
+            android:text="@string/ButtonCustomized"
             android:layout_gravity="center"
             android:layout_marginTop="24dp" />
 

@@ -142,7 +142,7 @@ public class BasicCustomizedActivity extends AppCompatActivity {
         List<Product> productos = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = Routine.getInstance().getSkinType();
         return productos.stream()
-                .filter(product ->product.getSkinType() == tipoPiel // Filtro por tipo de piel
+                .filter(product ->product.getSkintype() == tipoPiel // Filtro por tipo de piel
                         && product.getCategoryProduct() == category) // Filtro por categoría
                 .collect(Collectors.toList());
     }

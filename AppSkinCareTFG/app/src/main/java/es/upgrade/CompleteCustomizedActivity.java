@@ -199,6 +199,6 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         List<Product>productosGuardados = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = Routine.getInstance().getSkinType();
 
-        return productosGuardados.stream().filter(product -> (product.getSkinType() ==tipoPiel)).collect(Collectors.toList());
+        return productosGuardados.stream().filter(product -> (product.getSkintype() ==tipoPiel)).collect(Collectors.toList());
     }
 }

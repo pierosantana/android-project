@@ -9,12 +9,9 @@ public class Product {
     private int id;
     private String name;
     private Double price;
-
     private CategoryProduct categoryProduct;
     private String brand;
-
     private SkinType skinType;
-
     private String url;
     private boolean isSelected;
 
@@ -94,13 +91,7 @@ public class Product {
         this.skinType = skinType;
     }
 
-    public SkinType getSkinType() {
-        return skinType;
-    }
 
-    public void setSkinType(SkinType skinType) {
-        this.skinType = skinType;
-    }
 
     @Override
     public String toString() {

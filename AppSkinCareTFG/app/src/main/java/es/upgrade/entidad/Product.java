@@ -2,9 +2,10 @@ package es.upgrade.entidad;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     //Esto es para poder identificar cada producto
     private int id;
     private String name;
@@ -25,15 +26,7 @@ public class Product {
     public void setUrl(String url) {
         this.url = url;
     }
-
-
-    public SkinType getSkintype() {
-        return skinType;
-    }
-
-    public void setSkintype(SkinType skintype) {
-        this.skinType = skintype;
-    }
+    
 
     public String getName() {
         return name;

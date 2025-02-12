@@ -2,6 +2,8 @@ package es.upgrade.entidad;
 
 import android.util.Log;
 
+import com.google.firebase.database.PropertyName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ public class Routine {
     private Budget Budget;
     private Double budgetProducts;
     private List<Product> productList;
+
+
     private SkinType skinType;
 
 

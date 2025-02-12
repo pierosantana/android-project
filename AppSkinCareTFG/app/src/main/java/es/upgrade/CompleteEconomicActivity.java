@@ -1,6 +1,7 @@
 package es.upgrade;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -102,6 +103,14 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                     || selectedTratamientoProduct == null || selectedProtectorProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
+                // Crear el Intent para pasar los productos seleccionados
+                Intent intent = new Intent(this, ResumenFinal.class);
+                intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
+                intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
+                intent.putExtra("selectedTonificacion", selectedTonificacionProduct);
+                intent.putExtra("selectedTratamiento", selectedTratamientoProduct);
+                intent.putExtra("selectedProtector", selectedProtectorProduct);
+                startActivity(intent);
                 Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName()
                         + "\nProducto de Tonificacion: " + selectedTonificacionProduct.getName()+ "\nProducto de Tratamiento: " + selectedTratamientoProduct.getName()
                         + "\nProducto de Protector Solar: " + selectedProtectorProduct.getName(), Toast.LENGTH_SHORT).show();

@@ -57,6 +57,7 @@ public class User {
 
     @PropertyName("skinType")
     public SkinType getSkinType() {
+
         return skinType;
     }
     @PropertyName("skinType")

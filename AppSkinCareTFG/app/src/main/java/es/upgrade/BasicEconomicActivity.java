@@ -1,5 +1,6 @@
 package es.upgrade;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,8 +72,19 @@ public class BasicEconomicActivity extends AppCompatActivity {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
+                // Crear un Intent para abrir la RutinaActivity
+                Intent intent = new Intent(BasicEconomicActivity.this, ResumenFinal.class);
+                // Pasar los productos seleccionados al Intent
+                intent.putExtra("limpiezaProducto", selectedLimpiezaProduct);
+                intent.putExtra("hidratacionProducto", selectedHidratacionProduct);
+
+                // Iniciar la RutinaActivity
+                startActivity(intent);
+                Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 

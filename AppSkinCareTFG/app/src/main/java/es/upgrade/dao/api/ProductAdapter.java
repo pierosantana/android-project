@@ -19,6 +19,7 @@ import java.util.List;
 
 import es.upgrade.R;
 import es.upgrade.entidad.Product;
+import es.upgrade.entidad.Routine;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
@@ -74,6 +75,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                 // Llamamos al listener con el producto seleccionado
                 onProductClickListener.onProductClick(product);
+                // Aquí agregamos el producto a la lista de la rutina
+
+                Routine routine = Routine.getInstance();
+                routine.addProduct(product);  // Añadimos el producto seleccionado a la lista de la rutina
             }
         });
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -137,7 +138,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
     }
 
     private String formatSchedule(Schedule schedule) {
-        return (schedule == Schedule.NIGHT) ? "Noche" : "Completa";
+        return (schedule == Schedule.NIGHT) ? "Noche" : "Mañana y Noche";
     }
 
     private String formatRoutineType(RoutineType routineType) {
@@ -185,9 +186,9 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         // Limpia el contenedor y vuelve a agregar las vistas actualizadas
         optionsContainer.removeAllViews();
 
-        addCustomOptionView("Tipo de piel", skinTypeDesc, getIconForOption("Tipo de piel", skinTypeDesc));
-        addCustomOptionView("Momento del día", scheduleDesc, getIconForOption("Momento del día", scheduleDesc));
-        addCustomOptionView("Tipo de rutina", routineTypeDesc, getIconForOption("Tipo de rutina", routineTypeDesc));
-        addCustomOptionView("Presupuesto", budgetDesc, getIconForOption("Presupuesto", budgetDesc));
+        addCustomOptionView("Tipo de piel:", skinTypeDesc, getIconForOption("Tipo de piel", skinTypeDesc));
+        addCustomOptionView("Momento del día:", scheduleDesc, getIconForOption("Momento del día", scheduleDesc));
+        addCustomOptionView("Tipo de rutina:", routineTypeDesc, getIconForOption("Tipo de rutina", routineTypeDesc));
+        addCustomOptionView("Presupuesto:", budgetDesc, getIconForOption("Presupuesto", budgetDesc));
     }
 }

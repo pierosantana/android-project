@@ -41,9 +41,9 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         Bundle args = new Bundle();
         args.putInt("num_options", 3); // Número de opciones
         args.putStringArray("options_texts", new String[]{
-                "Piel Seca", // Opción 1
-                "Piel Grasa", // Opción 2
-                "Piel Mixta"  // Opción 3
+                "Piel seca", // Opción 1
+                "Piel grasa", // Opción 2
+                "Piel mixta"  // Opción 3
         });
         questionnaireFragment.setArguments(args);
 

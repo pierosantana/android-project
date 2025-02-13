@@ -149,6 +149,7 @@
     <color name="background_selected">#A6E2E2</color>
     <color name="background_unselected">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="NumberProgressBar">#FF7F50 </color>
 
     <!--Colores Checkbox Item Product-->
     <color name="colorSelected">#4CAF50</color>   <!-- Verde cuando está marcado -->

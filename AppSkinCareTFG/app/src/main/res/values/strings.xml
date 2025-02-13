@@ -6,46 +6,46 @@
     <string name="BtnRegister">Registration</string>
 
     <!--REGISTRATION ACTIVITY-->
-    <string name="AccountCreationTxt">Create new account</string>
-    <string name="EtName">Name</string>
+    <string name="AccountCreationTxt">Crear una nueva cuenta</string>
+    <string name="EtName">Nombre</string>
     <string name="EtMail">Email</string>
-    <string name="EtPassword">Password</string>
-    <string name="EtConfirmPassword">Confirm password</string>
-    <string name="RegisterUser">User registration</string>
-    <string name="AlreadyAccount">Do you already have an account??</string>
-    <string name="progress_loading">Loading...</string>
-    <string name="RegisterSuccess">Succesful account</string>
-    <string name="RegisterError">Error creating account</string>
-    <string name="HashError">Error generating password hash</string>
+    <string name="EtPassword">Contraseña</string>
+    <string name="EtConfirmPassword">Confirma la contraseña</string>
+    <string name="RegisterUser">Registrarse</string>
+    <string name="AlreadyAccount">¿Ya tienes una cuenta?</string>
+    <string name="progress_loading">Cargando...</string>
+    <string name="RegisterSuccess">Cuenta creada con exito</string>
+    <string name="RegisterError">Error al crear la cuenta</string>
+    <string name="HashError">Error al generar la contraseña hasheada</string>
 
     <!--VALIDATIONS-->
-    <string name="ValidationName">Please, enter a name</string>
-    <string name="ValidationEmail">Please, enter a validate email</string>
-    <string name="ValidationPassword">Please, enter a password</string>
-    <string name="ValidationConfirmPassword">Please, confirm password</string>
-    <string name="ValidationPasswordsMatch">Passwords do not match</string>
+    <string name="ValidationName">Porfavor introduce el nombre</string>
+    <string name="ValidationEmail">Porfavor, introduce el email de nuevo</string>
+    <string name="ValidationPassword">Porfavor introduce la contraseña</string>
+    <string name="ValidationConfirmPassword">Porfavor introduce la contraseña de nuevo</string>
+    <string name="ValidationPasswordsMatch">La contraseña no coincide</string>
 
     <!--USER MENU-->
-    <string name="CloseSession">Log Out</string>
-    <string name="NewRoutine">New Routine</string>
+    <string name="CloseSession">Cerrar sesión</string>
+    <string name="NewRoutine">Nueva rutina</string>
 
 
     <!--LOGIN ACTIVITY-->
     <string name="Login">Login</string>
     <string name="MailLogin">Email</string>
-    <string name="PassLogin">Password</string>
+    <string name="PassLogin">Contraseña</string>
     <string name="Btn_Login">Login</string>
-    <string name="NewUserTxt">Dont have account?</string>
+    <string name="NewUserTxt">¿No tienes cuenta?</string>
 
     <!--SKIN TYPE ACTIVITY-->
     <string name="NoIdeaSkin">¿No sabes que tipo de piel tienes?</string>
 
-    <string name="NewRoutineSkinType">New Routine</string>
+    <string name="NewRoutineSkinType">Nueva rutina</string>
 
 
     <!--HOUR ACTIVITY-->
-    <string name="NoIdeaChoose">You don´t know which choose?</string>
-    <string name="TextButton">Avanzar</string>
+    <string name="NoIdeaChoose">¿No sabes cual escoger?</string>
+    <string name="TextButton">Siguiente</string>
     <!--HOUR ACTIVITY SELECTION-->
     <string name="TextView">Rutina de skin care por la mañana</string>
 
@@ -54,17 +54,17 @@
 
 
     <!--REVIEW AND EDIT-->
-    <string name="TituloTxRw">Has elegido las siguientes cosas: ¿Deseas modificar algo?</string>
-    <string name="ButtonTextRw">Tipo Piel</string>
+    <string name="TituloTxRw">Has elegido lo siguiente: ¿Deseas modificar algo?</string>
+    <string name="ButtonTextRw">Tipo piel</string>
     <string name="ButtonTextMomentoDia">Momento del día</string>
-    <string name="ButtonTextTipoSK">Tipo Skincare</string>
+    <string name="ButtonTextTipoSK">Tipo de skincare</string>
     <string name="ButtonTextPresupuesto">Presupuesto</string>
-    <string name="ButtonTextEditar">Editar</string>
+    <string name="ButtonTextEditar">Cancelar</string>
     <string name="ButtontextContinuar">Continuar</string>
 
     <!--SKIN CARE TYPE-->
     <string name="TextViewPregunta">¿Qué tipo de skincare quieres</string>
-    <string name="ButtonAvanzar">Avanzar</string>
+    <string name="ButtonAvanzar">Siguiente</string>
 
     <!--SKIN DESCRIPTION-->
     <string name="TextSKD">Características</string>
@@ -74,7 +74,7 @@
 
     <!--USER MENU-->
     <string name="TVNombre">San Felix de Pablo</string>
-    <string name="TVTipoPielUserMenu">Normal Skin</string>
+    <string name="TVTipoPielUserMenu">Piel normal</string>
     <string name="ButtonTextPerfil">Mi perfil</string>
     <string name="ButtonTextRoutine">Nueva rutina</string>
     <string name="ButtonTextRoutines">Mis rutinas</string>
@@ -101,7 +101,7 @@
     <string name="RadioButonOpcion3">Opción 3</string>
 
     <!--ITEM PRODUCT-->
-    <string name="NombreProducto">Nombre del Producto</string>
+    <string name="NombreProducto">Nombre del producto</string>
     <string name="PrecioProducto">00.00€</string>
 
     <!--PROGRESS BAR-->
@@ -111,15 +111,15 @@
     <string name="Numero4"> 4</string>
     <string name="Piel">Piel</string>
     <string name="Horario">Horario</string>
-    <string name="Tipo">Tipo</string>
-    <string name="Presupuesto">Prespuesto</string>
+    <string name="Tipo">Tipo de rutina</string>
+    <string name="Presupuesto">Presupuesto</string>
 
     <!--BASIC CUSTOMIZED, BASIC ECONOMY, COMPLETE ECONOMIC Y CUSTOMIZED (cunado este)-->
     <string name="Title1Customized">Limpieza</string>
     <string name="Title2Customized">Hidratación</string>
     <string name="Title3Customized">Tonificación</string>
     <string name="Title4Customized">Tratamiento</string>
-    <string name="Title5Customized">Protector Solar</string>
+    <string name="Title5Customized">Protector solar</string>
     <string name="ButtonCustomized">Continuar</string>
 
 

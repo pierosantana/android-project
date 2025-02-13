@@ -16,6 +16,9 @@ public class Product implements Serializable {
     private String url;
     private boolean isSelected;
 
+    public Product() {
+    }
+
     public String getUrl() {
         return url;
     }
@@ -23,7 +26,18 @@ public class Product implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
+    public void setCategoryProduct(CategoryProduct categoryProduct) {
+        this.categoryProduct = categoryProduct;
+    }
+
+    public SkinType getSkinType() {
+        return skinType;
+    }
+
+    public void setSkinType(SkinType skinType) {
+        this.skinType = skinType;
+    }
 
     public String getName() {
         return name;
@@ -77,7 +91,6 @@ public class Product implements Serializable {
     public Product(CategoryProduct categoryProduct, String brand, int id, String name, Double price, SkinType skinType) {
         this.categoryProduct = categoryProduct;
         this.brand = brand;
-
         this.id = id;
         this.name = name;
         this.price = price;

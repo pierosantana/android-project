@@ -215,6 +215,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         // Luego mas tarde habra que filtrar el producto por el tipo de piel
 
         return productosGuardados.stream().filter
-                (product -> product.getPrice()<precioMaximo && product.getSkintype()==tipoPiel).collect(Collectors.toList());
+                (product -> product.getPrice()<precioMaximo && product.getSkinType()
+                        ==tipoPiel).collect(Collectors.toList());
     }
 }

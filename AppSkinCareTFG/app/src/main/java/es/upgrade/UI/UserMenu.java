@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ImageButton;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ import es.upgrade.manager.AuthenticatorManager;
 public class UserMenu extends AppCompatActivity {
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
 
+
     // Recuperar el usuario
     User user = User.getInstance();
     private ActivityResultLauncher<Intent> galleryLauncher;
@@ -39,6 +41,11 @@ public class UserMenu extends AppCompatActivity {
 
         CircleImageView profileImage = findViewById(R.id.profileImage);
         ImageButton editImageButton = findViewById(R.id.editImagebutton);
+        TextView tvSkin = findViewById(R.id.skinType);
+        TextView tvName = findViewById(R.id.userName);
+
+        tvName.setText(user.getName());
+        //tvName.setText(user.getSkinType().toString());
 
 
         // Registrar el launcher para abrir la galería y manejar el resultado

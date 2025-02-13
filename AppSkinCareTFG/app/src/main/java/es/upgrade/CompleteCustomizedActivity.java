@@ -153,11 +153,11 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         } else {
             emptyView.setVisibility(View.GONE);
 
-            List<Product> productosLimpieza = obtenerTodosLosProductos();
-            List<Product> productosHidratacion = obtenerTodosLosProductos();
-            List<Product> productosTonificacion = obtenerTodosLosProductos();
-            List<Product> productosTratamiento = obtenerTodosLosProductos();
-            List<Product> productosProtector = obtenerTodosLosProductos();
+            List<Product> productosLimpieza = obtenerTodosLosProductos(CategoryProduct.CLEANER);
+            List<Product> productosHidratacion = obtenerTodosLosProductos(CategoryProduct.MOISTURIZER);
+            List<Product> productosTonificacion = obtenerTodosLosProductos(CategoryProduct.TONIC);
+            List<Product> productosTratamiento = obtenerTodosLosProductos(CategoryProduct.CREAM_TREATMENT);
+            List<Product> productosProtector = obtenerTodosLosProductos(CategoryProduct.SUNSCREEN);
 
             // Verificamos el tipo de rutina (si es noche completa, no mostramos el protector solar)
             boolean esRutinaDeNoche= Routine.getInstance().getSchedule() == Schedule.NIGHT;
@@ -185,14 +185,14 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                 recyclerViewTonificacion.setVisibility(View.GONE);
             }
             if (!productosTratamiento.isEmpty()) {
-                tratamientoAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedTratamientoProduct = product);
+                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product);
                 recyclerViewTratamiento.setAdapter(tratamientoAdapter);
                 recyclerViewTratamiento.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTratamiento.setVisibility(View.GONE);
             }
             if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
-                protectorAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedProtectorProduct = product);
+                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product);
                 recyclerViewProtectorSolar.setAdapter(protectorAdapter);
                 recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
                 txtProtector.setVisibility(View.VISIBLE);
@@ -201,13 +201,16 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                 txtProtector.setVisibility(View.GONE);
             }
         }
+
+
     }
 
-
-    public List<Product> obtenerTodosLosProductos() {
-        List<Product>productosGuardados = ProductDao.getInstance().getProductos();
+    private List<Product> obtenerTodosLosProductos(CategoryProduct category) {
+        List<Product> productos = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = Routine.getInstance().getSkinType();
-
-        return productosGuardados.stream().filter(product -> (product.getSkinType() ==tipoPiel)).collect(Collectors.toList());
+        return productos.stream()
+                .filter(product ->product.getSkinType() == tipoPiel // Filtro por tipo de piel
+                        && product.getCategoryProduct() == category) // Filtro por categoría
+                .collect(Collectors.toList());
     }
 }

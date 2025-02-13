@@ -153,11 +153,12 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         } else {
             emptyView.setVisibility(View.GONE);
 
-            List<Product> productosLimpieza = obtenerProductosFilradosPorCategoriaYPrecioBajo();
-            List<Product> productosHidratacion = obtenerProductosFilradosPorCategoriaYPrecioBajo();
-            List<Product> productosTonificacion = obtenerProductosFilradosPorCategoriaYPrecioBajo();
-            List<Product> productosTratamiento = obtenerProductosFilradosPorCategoriaYPrecioBajo();
-            List<Product> productosProtector = obtenerProductosFilradosPorCategoriaYPrecioBajo();
+            List<Product> productosLimpieza = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CLEANER);
+            List<Product> productosHidratacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.MOISTURIZER);
+            List<Product> productosTonificacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.TONIC);
+            List<Product> productosTratamiento = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CREAM_TREATMENT);
+            List<Product> productosProtector = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.SUNSCREEN);
+
 
             //Verificar si es rutina de noche
             boolean esRutinaDeNoche = Routine.getInstance().getSchedule() == Schedule.NIGHT;
@@ -186,7 +187,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                 recyclerViewTonificacion.setVisibility(View.GONE);
             }
             if (!productosTratamiento.isEmpty()) {
-                tratamientoAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedTratamientoProduct = product);
+                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product);
                 recyclerViewTratamiento.setAdapter(tratamientoAdapter);
                 recyclerViewTratamiento.setVisibility(View.VISIBLE);
             } else {
@@ -194,7 +195,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             }
             // Si la rutina es de noche, no mostramos el RecyclerView de Protector Solar
             if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
-                protectorAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedProtectorProduct = product);
+                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product);
                 recyclerViewProtectorSolar.setAdapter(protectorAdapter);
                 recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
                 txtProtector.setVisibility(View.VISIBLE);
@@ -205,7 +206,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         }
     }
 
-    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(){
+    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct category){
         List<Product>productosGuardados = ProductDao.getInstance().getProductos();
         // Establecemos el precio maximo bajo
         double precioMaximo = 15.0;
@@ -214,8 +215,9 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         // Filtramos por categoría(Limpieza e Hidratacion) y precio bajo
         // Luego mas tarde habra que filtrar el producto por el tipo de piel
 
-        return productosGuardados.stream().filter
-                (product -> product.getPrice()<precioMaximo && product.getSkinType()
-                        ==tipoPiel).collect(Collectors.toList());
+        return productosGuardados.stream()
+                .filter(product -> product.getPrice()<precioMaximo && product.getSkinType() ==tipoPiel
+                        && product.getCategoryProduct() == category)
+                .collect(Collectors.toList());
     }
 }

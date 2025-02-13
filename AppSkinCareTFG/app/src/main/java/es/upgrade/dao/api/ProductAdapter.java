@@ -50,7 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = productList.get(position);
 
         // Asignamos el nombre y el precio del producto
-        holder.productName.setText(product.getName());
+        holder.productName.setText(product.getBrand());
         holder.productPrice.setText("$" + product.getPrice());
 
         // Cargar imagen con Glide

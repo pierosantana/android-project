@@ -50,6 +50,7 @@ El proyecto se encuentra en desarrollo. Próximamente se incluirán avances en l
 - Integración de base de datos para almacenar perfiles y rutinas.  
 - Mejora de la interfaz gráfica (UI/UX).  
 - Adición de más contenido multimedia.
+- Comando para cargar nuestra API de productosjson-server --watch nombreArhcivo.json --port 3000
 
 ---
 

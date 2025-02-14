@@ -1,17 +1,12 @@
 package es.upgrade;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import es.upgrade.UI.AlertDialogCustom;
 import es.upgrade.UI.CustomViewOptionsRoutine;
-import es.upgrade.UI.DescripcionPiel;
 import es.upgrade.dao.UserDao;
 import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.Routine;

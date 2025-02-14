@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import es.upgrade.UI.DescripcionPiel;
 import es.upgrade.UI.fragments.QuestionnaireFragment;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
@@ -64,7 +63,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         });
 
         // Click en el texto para la descripción de la piel
-        whichIsMySkin.setOnClickListener(v -> startActivity(new Intent(this, DescripcionPiel.class)));
+        whichIsMySkin.setOnClickListener(v -> startActivity(new Intent(this, SkinDescriptionActivity.class)));
     }
 
     @Override

@@ -156,4 +156,19 @@
     <color name="colorUnselected">#CCCCCC</color>  <!-- Gris claro cuando no está marcado -->
     <color name="colorPressed">#FF5722</color>     <!-- Naranja cuando está presionado -->
     <color name="colorDisabled">#BDBDBD</color>    <!-- Gris para estado deshabilitado -->
+
+
+        <color name="text_primary">#212121</color>
+        <color name="text_secondary">#757575</color>
+
+        <color name="dry_skin_bg">#E3F2FD</color>
+        <color name="dry_skin_accent">#2196F3</color>
+
+        <color name="normal_skin_bg">#E8F5E9</color>
+        <color name="normal_skin_accent">#4CAF50</color>
+
+        <color name="combination_skin_bg">#F3E5F5</color>
+        <color name="combination_skin_accent">#9C27B0</color>
+
+
 </resources>

@@ -151,13 +151,6 @@
     <color name="black">#000000</color>
     <color name="NumberProgressBar">#222222 </color>
 
-    <!--Colores Checkbox Item Product-->
-    <color name="colorSelected">#4CAF50</color>   <!-- Verde cuando está marcado -->
-    <color name="colorUnselected">#CCCCCC</color>  <!-- Gris claro cuando no está marcado -->
-    <color name="colorPressed">#FF5722</color>     <!-- Naranja cuando está presionado -->
-    <color name="colorDisabled">#BDBDBD</color>    <!-- Gris para estado deshabilitado -->
-
-
         <color name="text_primary">#212121</color>
         <color name="text_secondary">#757575</color>
 

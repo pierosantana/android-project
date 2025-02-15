@@ -30,8 +30,8 @@ public enum SkinType {
     private final int iconResId;
     private final String description;
 
-    SkinType(int imageResId, String description) {
-        this.iconResId = imageResId;
+    SkinType(int iconResId, String description) {
+        this.iconResId = iconResId;
         this.description = description;
     }
 

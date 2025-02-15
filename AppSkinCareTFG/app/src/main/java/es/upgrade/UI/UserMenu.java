@@ -16,6 +16,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
 import es.upgrade.R;
@@ -26,12 +29,9 @@ import es.upgrade.manager.AuthenticatorManager;
 
 public class UserMenu extends AppCompatActivity {
     AuthenticatorManager authenticatorManager = new AuthenticatorManager();
-
-
     // Recuperar el usuario
     User user = User.getInstance();
     private ActivityResultLauncher<Intent> galleryLauncher;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,6 +43,7 @@ public class UserMenu extends AppCompatActivity {
         ImageButton editImageButton = findViewById(R.id.editImagebutton);
         TextView tvSkin = findViewById(R.id.skinType);
         TextView tvName = findViewById(R.id.userName);
+
 
         tvName.setText(user.getName());
         //tvName.setText(user.getSkinType().toString());
@@ -69,16 +70,12 @@ public class UserMenu extends AppCompatActivity {
 
         // Configuración del botón "Mi Perfil"
         CustomViewMenu btnProfile = findViewById(R.id.btnProfile);
-        btnProfile.setButtonText("Mi Perfil");
-        btnProfile.setButtonIcon(R.drawable.ic_face);
         btnProfile.setOnClickListener(view ->
                 showToast("Acción general: Mi Perfil")
         );
 
         // Configuración del botón "Nueva Rutina"
         CustomViewMenu btnNewRoutine = findViewById(R.id.btnNewRoutine);
-        btnNewRoutine.setButtonText("Nueva Rutina");
-        btnNewRoutine.setButtonIcon(R.drawable.ic_plus);
         btnNewRoutine.setOnClickListener(view -> {
             showToast("Has elegido Nueva Rutina ");
                     if (user.getSkinType() == null) {
@@ -92,27 +89,16 @@ public class UserMenu extends AppCompatActivity {
 
         // Configuración del botón "Mis Rutinas"
         CustomViewMenu btnMyRoutines = findViewById(R.id.btnMyRoutines);
-        btnMyRoutines.setButtonText("Mis Rutinas");
-        btnMyRoutines.setButtonIcon(R.drawable.products_svgrepo_com);
         btnMyRoutines.setOnClickListener(view ->
                 showToast("Acción general: Mis Rutinas")
         );
 
         // Configuración del botón "Calendario"
-        CustomViewMenu btnCalendar = findViewById(R.id.btnCalendar);
-        btnCalendar.setButtonText("Calendario");
-        btnCalendar.setButtonIcon(R.drawable.ic_calendar);
-        btnCalendar.setOnClickListener(view ->
-                showToast("Acción general: Calendario")
-        );
+        CustomViewMenu btnCalendar = findViewById(R.id.btnLogout);
+        btnCalendar.setOnClickListener(view -> {
+            logOut();
+        });
 
-        // Botón de cierre de sesión (Button estándar)
-        findViewById(R.id.btnLogout).setOnClickListener(view -> {
-                    logOut();
-                    Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
-                }
-
-        );
     }
     //Método para abrir la galeria
     private void openGallery() {

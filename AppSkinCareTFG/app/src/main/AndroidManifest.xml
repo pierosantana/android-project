@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UI.LobbyActivity"
+            android:exported="false" />
+        <activity
             android:name=".HourDescriptionActivity"
             android:exported="false" />
         <activity
@@ -43,9 +46,6 @@
             android:exported="false" />
         <activity
             android:name=".UI.UserRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".UI.UserMenu"
             android:exported="false" />
         <activity
             android:name=".SkinDescriptionActivity"

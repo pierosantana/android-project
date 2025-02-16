@@ -110,7 +110,7 @@ public class UserLogin extends AppCompatActivity {
                         showToast("Welcome " + userR.getEmail() + ", Name " + userR.getName());
                     });
 
-                    startActivity(new Intent(UserLogin.this, UserMenu.class));
+                    startActivity(new Intent(UserLogin.this, LobbyActivity.class));
                     finish();
                 }
             }else{

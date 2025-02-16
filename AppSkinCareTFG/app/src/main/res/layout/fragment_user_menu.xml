@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="60dp"
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"> <!-- Espacio para Bottom Navigation -->
+
+    <!-- Contenedor para la imagen y el botón de editar -->
+    <FrameLayout
+        android:id="@+id/profileContainer"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar"
+            android:scaleType="centerCrop" />
+
+        <ImageButton
+            android:id="@+id/editImagebutton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="4dp"
+            android:background="@drawable/circle_background"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Editar foto"
+            app:tint="@color/white" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TVNombre"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/profileContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/skinType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TVTipoPielUserMenu"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/userName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <LinearLayout
+        android:id="@+id/menuContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/skinType">
+
+        <es.upgrade.UI.CustomViewMenu
+            android:id="@+id/btnProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonIcon="@drawable/ic_face"
+            app:buttonText="@string/ButtonTextPerfil" />
+
+        <es.upgrade.UI.CustomViewMenu
+            android:id="@+id/btnNewRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonIcon="@drawable/ic_plus"
+            app:buttonText="@string/ButtonTextRoutine" />
+
+        <es.upgrade.UI.CustomViewMenu
+            android:id="@+id/btnMyRoutines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonIcon="@drawable/products_svgrepo_com"
+            app:buttonText="@string/ButtonTextRoutines" />
+
+        <es.upgrade.UI.CustomViewMenu
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonIcon="@drawable/logout_rounded_left"
+            app:buttonText="@string/ButtonSalir" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

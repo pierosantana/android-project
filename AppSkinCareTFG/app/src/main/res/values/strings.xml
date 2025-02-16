@@ -129,6 +129,8 @@
     <!--ACTIVITY FINAL-->
     <string name="Title1Final">Has elegido las siguientes cosas</string>
     <string name="Title2Final">Resumen de las selecciones anteriores...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

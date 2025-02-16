@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services") version "4.4.2"
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -31,8 +32,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -80,6 +84,10 @@ dependencies {
 
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+    //Dependencias para la barra del menu
+    implementation ("com.github.Foysalofficial:NafisBottomNav:5.0")
+
 
 
 

@@ -53,7 +53,7 @@ public class Launcher extends AppCompatActivity {
             });
             // Si el usuario está autenticado, lo redirigimos al MenuPrincipal
             Log.d("Launcher_verifyUser", "Usuario autenticado. Redirigiendo a MenuPrincipal.");
-            startActivity(new Intent(Launcher.this, UserMenu.class));
+            startActivity(new Intent(Launcher.this, LobbyActivity.class));
             finish();
         }
     }

@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 
 import es.upgrade.dao.ProductDao;
+import es.upgrade.dao.UserDao;
 import es.upgrade.dao.api.ProductAdapter;
 import es.upgrade.dao.api.RetrofitClient;
 import es.upgrade.entidad.CategoryProduct;
@@ -35,6 +36,7 @@ import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.SkinType;
+import es.upgrade.entidad.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,22 +102,50 @@ public class CompleteEconomicActivity extends AppCompatActivity {
 
         btnContinuar.setOnClickListener(v -> {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null || selectedTonificacionProduct == null
-                    || selectedTratamientoProduct == null || selectedProtectorProduct == null) {
+                    || selectedTratamientoProduct == null && selectedProtectorProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
-                // Crear el Intent para pasar los productos seleccionados
+                Routine routine = Routine.getInstance();
+
+                // Agregar los productos seleccionados a la rutina
+                routine.addProduct(selectedLimpiezaProduct);
+                routine.addProduct(selectedHidratacionProduct);
+                routine.addProduct(selectedTonificacionProduct);
+                routine.addProduct(selectedTratamientoProduct);
+                routine.addProduct(selectedProtectorProduct);
+
+                // Guardar la rutina en el usuario y actualizar en Firebase
+                UserDao userDao = UserDao.getInstance();
+                User user = User.getInstance();
+                user.addRoutine(routine);
+                userDao.updateUser();
+
+                // Recibir datos de la Intent anterior
+                String skinType = getIntent().getStringExtra("skinType");
+                String schedule = getIntent().getStringExtra("schedule");
+                String routineType = getIntent().getStringExtra("routineType");
+                String budget = getIntent().getStringExtra("budget");
+
+                // Crear Intent para pasar los datos a ResumenFinal
                 Intent intent = new Intent(this, ResumenFinal.class);
                 intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
                 intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
                 intent.putExtra("selectedTonificacion", selectedTonificacionProduct);
                 intent.putExtra("selectedTratamiento", selectedTratamientoProduct);
                 intent.putExtra("selectedProtector", selectedProtectorProduct);
+
+                // Pasar también los valores de skinType, schedule, routineType y budget
+                intent.putExtra("skinType", skinType);
+                intent.putExtra("schedule", schedule);
+                intent.putExtra("routineType", routineType);
+                intent.putExtra("budget", budget);
+
+                // Iniciar ResumenFinal
                 startActivity(intent);
-                Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName()
-                        + "\nProducto de Tonificacion: " + selectedTonificacionProduct.getName()+ "\nProducto de Tratamiento: " + selectedTratamientoProduct.getName()
-                        + "\nProducto de Protector Solar: " + selectedProtectorProduct.getName(), Toast.LENGTH_SHORT).show();
+
             }
         });
+
 
     }
     private void obtenerProductosDesdeApi(){

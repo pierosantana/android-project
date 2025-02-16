@@ -1,12 +1,15 @@
 package es.upgrade;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import es.upgrade.UI.LobbyActivity;
 import es.upgrade.entidad.Product;
 
 public class ResumenFinal extends AppCompatActivity {
@@ -23,6 +26,12 @@ public class ResumenFinal extends AppCompatActivity {
         txtTotalPrecio = findViewById(R.id.txtTotalPrecio);
         btnContinuar = findViewById(R.id.btn_continuar);
 
+        // Obtener los datos de la rutina
+        String skinType = getIntent().getStringExtra("skinType");
+        String schedule = getIntent().getStringExtra("schedule");
+        String routineType = getIntent().getStringExtra("routineType");
+        String budget = getIntent().getStringExtra("budget");
+
         // Obtener los productos seleccionados desde el Intent
         Product selectedLimpieza = (Product) getIntent().getSerializableExtra("selectedLimpieza");
         Product selectedHidratacion = (Product) getIntent().getSerializableExtra("selectedHidratacion");
@@ -30,8 +39,14 @@ public class ResumenFinal extends AppCompatActivity {
         Product selectedTratamiento = (Product) getIntent().getSerializableExtra("selectedTratamiento");
         Product selectedProtector = (Product) getIntent().getSerializableExtra("selectedProtector");
 
-        // Crear el resumen con nombre y precio
-        StringBuilder resumen = new StringBuilder("Resumen de productos seleccionados:\n\n");
+        // Crear el resumen de la rutina
+        StringBuilder resumen = new StringBuilder("Resumen de tu rutina:");
+        resumen.append("\n\nTipo de piel: ").append(skinType);
+        resumen.append("\nMomento del día: ").append(schedule);
+        resumen.append("\nTipo de rutina: ").append(routineType);
+        resumen.append("\nPresupuesto: ").append(budget);
+        resumen.append("\n\nProductos seleccionados:\n\n");
+
         double totalPrecio = 0.0;
 
         if (selectedLimpieza != null) {
@@ -72,8 +87,10 @@ public class ResumenFinal extends AppCompatActivity {
 
         // Evento para el botón continuar
         btnContinuar.setOnClickListener(v -> {
-            Toast.makeText(this, "Continuando con la compra...", Toast.LENGTH_SHORT).show();
-            // Aquí podrías iniciar otra actividad o finalizar esta
+            Intent intent = new Intent(ResumenFinal.this, LobbyActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 }

@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.google.firebase.database.PropertyName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Routine {
+public class Routine implements Serializable {
     private static Routine instance;  // Instancia única de la clase
 
     private Schedule schedule;

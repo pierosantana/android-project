@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
+import es.upgrade.MyRoutinesActivity;
 import es.upgrade.R;
 import es.upgrade.SkinTypeActivity;
 import es.upgrade.UI.LobbyActivity;
@@ -69,6 +70,13 @@ public class UserMenuFragment extends Fragment {
             } else {
                 startActivity(new Intent(getActivity(), HourActivity.class));
             }
+        });
+        view.findViewById(R.id.btnMyRoutines).setOnClickListener(v -> {
+            if(user.getRoutineList() == null){
+                showToast("No hay rutinas creadas aun");
+            }
+            Intent intent = new Intent(getActivity(), MyRoutinesActivity.class);
+            startActivity(intent);
         });
         view.findViewById(R.id.btnLogout).setOnClickListener(v -> logOut());
 

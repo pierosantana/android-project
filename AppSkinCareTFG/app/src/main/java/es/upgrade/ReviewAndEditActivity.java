@@ -57,25 +57,28 @@ public class ReviewAndEditActivity extends AppCompatActivity {
             user.addRoutine(routine);
             userDao.updateUser();
 
-            if(routine.getRoutineType() == RoutineType.BASIC
-                    && routine.getBudget() == Budget.ECONOMIC){
-                startActivity(new Intent(ReviewAndEditActivity.this, BasicEconomicActivity.class));
+            Intent intent = null;
+
+            if (routine.getRoutineType() == RoutineType.BASIC && routine.getBudget() == Budget.ECONOMIC) {
+                intent = new Intent(ReviewAndEditActivity.this, BasicEconomicActivity.class);
+            } else if (routine.getRoutineType() == RoutineType.BASIC && routine.getBudget() == Budget.CUSTOMIZED) {
+                intent = new Intent(ReviewAndEditActivity.this, BasicCustomizedActivity.class);
+            } else if (routine.getRoutineType() == RoutineType.COMPLETE && routine.getBudget() == Budget.ECONOMIC) {
+                intent = new Intent(ReviewAndEditActivity.this, CompleteEconomicActivity.class);
+            } else if (routine.getRoutineType() == RoutineType.COMPLETE && routine.getBudget() == Budget.CUSTOMIZED) {
+                intent = new Intent(ReviewAndEditActivity.this, CompleteCustomizedActivity.class);
             }
 
-            if(routine.getRoutineType() == RoutineType.BASIC
-                    && routine.getBudget() == Budget.CUSTOMIZED){
-                startActivity(new Intent(ReviewAndEditActivity.this, BasicCustomizedActivity.class));
-            }
+            if (intent != null) {
+                // Pasar los datos al siguiente Activity
+                intent.putExtra("skinType", formatSkinType(routine.getSkinType()));
+                intent.putExtra("schedule", formatSchedule(routine.getSchedule()));
+                intent.putExtra("routineType", formatRoutineType(routine.getRoutineType()));
+                intent.putExtra("budget", formatBudget(routine.getBudget()));
 
-            if(routine.getRoutineType() == RoutineType.COMPLETE
-                    && routine.getBudget() == Budget.ECONOMIC){
-                startActivity(new Intent(ReviewAndEditActivity.this, CompleteEconomicActivity.class));
+                startActivity(intent);
             }
-
-            if(routine.getRoutineType() == RoutineType.COMPLETE
-                    && routine.getBudget() == Budget.CUSTOMIZED){
-                startActivity(new Intent(ReviewAndEditActivity.this, CompleteCustomizedActivity.class));
-            }
+        });
 
 
 
@@ -87,7 +90,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
 
 
-        });
+
 
         edit.setOnClickListener(v -> {
             AlertDialogCustom.showCustomAlertDialog(

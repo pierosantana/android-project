@@ -1,5 +1,6 @@
 package es.upgrade.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ import es.upgrade.R;
 import es.upgrade.UI.fragments.CalendarFragment;
 import es.upgrade.UI.fragments.ProductsFragment;
 import es.upgrade.UI.fragments.UserMenuFragment;
+import es.upgrade.manager.AuthenticatorManager;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -25,6 +27,7 @@ public class LobbyActivity extends AppCompatActivity {
     private static final int ID_PRODUCTS = 3;
 
     NafisBottomNavigation bottomNavigation;
+    private AuthenticatorManager authenticatorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,16 @@ public class LobbyActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        authenticatorManager = new AuthenticatorManager();
+
+        // Verificar si el usuario está logueado
+        if (authenticatorManager.getCurrentUser() == null) {
+            // Si no está logueado, redirigir a la pantalla de login
+            startActivity(new Intent(this, LobbyActivity.class));
+            finish(); // Terminamos la actividad actual
+            return;
+        }
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
         // Set up bottom navigation

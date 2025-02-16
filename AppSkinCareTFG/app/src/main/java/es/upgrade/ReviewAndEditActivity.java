@@ -53,9 +53,6 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
 
         continuar.setOnClickListener(view -> {
-            UserDao userDao = UserDao.getInstance();
-            user.addRoutine(routine);
-            userDao.updateUser();
 
             Intent intent = null;
 
@@ -79,17 +76,6 @@ public class ReviewAndEditActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-//            Routine routine = Routine.getInstance();
-
-            //user.addRoutine(routine);
-
-//            userDao.updateUser();
-
-
-
 
 
         edit.setOnClickListener(v -> {

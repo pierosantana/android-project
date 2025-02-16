@@ -99,6 +99,11 @@ public class UserDao {
                     user.setPassword(userInfo.getPassword());
                     Log.d("UserDao_recoveryUser", "Usuario encontrado: " + user);
 
+                    //Recuperar las rutinas del usuario
+                    List<Routine> routines = userInfo.getRoutineList();
+                    if(routines != null){
+                        user.setRoutineList(routines);
+                    }
                     // Notificamos que los datos están listos
                     if (listener != null) {
                         listener.onUserRecovered(user);
@@ -127,7 +132,6 @@ public class UserDao {
         }
 
         User user = User.getInstance();
-
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference userRef = firebaseDatabase.getReference("Users").child(userId);
 
@@ -164,9 +168,7 @@ public class UserDao {
             routineList.add(routineMap);
         }
 
-    // Guardar lista de rutinas en Firebase
-
-
+        // Guardar lista de rutinas en Firebase
         Map<String, Object> updates = new HashMap<>();
         updates.put("email",user.getEmail());
         updates.put("name",user.getName());

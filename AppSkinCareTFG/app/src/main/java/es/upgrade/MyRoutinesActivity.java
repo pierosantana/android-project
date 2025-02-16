@@ -45,7 +45,7 @@ public class MyRoutinesActivity extends AppCompatActivity {
         if (routineList == null || routineList.isEmpty()) {
             Toast.makeText(this, "No hay rutinas creadas aún", Toast.LENGTH_SHORT).show();
         } else {
-            routineAdapter = new RoutineAdapter(routineList, this::openRoutineDetail);
+            routineAdapter = new RoutineAdapter(this,routineList);
             recyclerView.setAdapter(routineAdapter);
         }
     }

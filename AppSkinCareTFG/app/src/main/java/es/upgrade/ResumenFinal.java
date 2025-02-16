@@ -10,7 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.upgrade.UI.LobbyActivity;
+import es.upgrade.dao.UserDao;
 import es.upgrade.entidad.Product;
+import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.User;
 
 public class ResumenFinal extends AppCompatActivity {
 
@@ -85,8 +88,16 @@ public class ResumenFinal extends AppCompatActivity {
             Toast.makeText(this, "Faltan productos por seleccionar.", Toast.LENGTH_SHORT).show();
         }
 
+        User user = User.getInstance();
+        Routine routine = Routine.getInstance();
         // Evento para el botón continuar
         btnContinuar.setOnClickListener(v -> {
+            //Persistir la informacion
+            UserDao userDao = UserDao.getInstance();
+            user.addRoutine(routine);
+            userDao.updateUser();
+
+            //Volver al lobby
             Intent intent = new Intent(ResumenFinal.this, LobbyActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

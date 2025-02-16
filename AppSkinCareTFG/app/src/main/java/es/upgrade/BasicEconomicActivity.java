@@ -80,11 +80,6 @@ public class BasicEconomicActivity extends AppCompatActivity {
                 routine.addProduct(selectedLimpiezaProduct);
                 routine.addProduct(selectedHidratacionProduct);
 
-                // Guardar la rutina en el usuario y actualizar en Firebase
-                UserDao userDao = UserDao.getInstance();
-                User user = User.getInstance();
-                user.addRoutine(routine);
-                userDao.updateUser();
                 // Recibir datos de la Intent anterior
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");

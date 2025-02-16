@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Routine implements Serializable {
+
+
     private static Routine instance;  // Instancia única de la clase
 
     private Schedule schedule;
@@ -116,5 +118,14 @@ public class Routine implements Serializable {
                 ", productList=" + productList +
                 ", skinType=" + skinType +
                 '}';
+    }
+    //Método para obtener la cantidad de pasos de la rutina
+    public int getStepCount(){
+        if(routineType == RoutineType.BASIC){
+            return 2;
+        } else if (routineType == RoutineType.COMPLETE) {
+            return isNightRoutine ? 4 : 5;
+        }
+        return 0; //Si no se ha definido
     }
 }

@@ -62,6 +62,9 @@ public class UserDao {
      */
     public void saveUser(User user, OnCompleteListener<Void> onCompleteListener) {
         String userId = firebaseAuth.getUid();
+        if (user.getRoutineList() == null) {
+            user.setRoutineList(new ArrayList<>()); // Inicializar la lista de rutinas vacía
+        }
         userReference.child(userId).setValue(user).addOnCompleteListener(onCompleteListener);
     }
 
@@ -89,7 +92,7 @@ public class UserDao {
         User user = User.getInstance();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
         String userId = firebaseAuth.getUid();
-
+    
         userRef.child(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User userInfo = task.getResult().getValue(User.class);
@@ -98,12 +101,15 @@ public class UserDao {
                     user.setEmail(userInfo.getEmail());
                     user.setPassword(userInfo.getPassword());
                     Log.d("UserDao_recoveryUser", "Usuario encontrado: " + user);
-
-                    //Recuperar las rutinas del usuario
+    
+                    // Recuperar las rutinas del usuario
                     List<Routine> routines = userInfo.getRoutineList();
-                    if(routines != null){
+                    if (routines != null) {
                         user.setRoutineList(routines);
+                    } else {
+                        user.setRoutineList(new ArrayList<>()); // Inicializar la lista de rutinas vacía si es null
                     }
+    
                     // Notificamos que los datos están listos
                     if (listener != null) {
                         listener.onUserRecovered(user);
@@ -139,29 +145,58 @@ public class UserDao {
         List<Routine> routines = user.getRoutineList();
         if (routines == null) {
             routines = new ArrayList<>(); // Evitar que sea null
+            Log.w("UserDao_updateUser", "La lista de rutinas es null, se ha inicializado como una lista vacía.");
+        } else {
+            Log.d("UserDao_updateUser", "La lista de rutinas contiene " + routines.size() + " rutinas.");
         }
 
         // Convertir lista de rutinas a un formato compatible con Firebase
         List<Map<String, Object>> routineList = new ArrayList<>();
-        for (Routine r : user.getRoutineList()) {
+        for (Routine r : routines) {
+            if (r == null) {
+                Log.e("UserDao_updateUser", "Una rutina es null.");
+                continue; // Salir si la rutina es null
+            }
             Map<String, Object> routineMap = new HashMap<>();
-            routineMap.put("schedule", r.getSchedule().toString()); // Convertir a String si es un Enum
-            routineMap.put("routineType", r.getRoutineType().toString()); // Convertir a String si es un Enum
-            routineMap.put("budget", r.getBudget().toString()); // Convertir a String si es un Enum
-            routineMap.put("budgetProducts", r.getBudgetProducts()); // Double, no es necesario convertir
-            routineMap.put("skinType", r.getSkinType().toString()); // Convertir a String si es un Enum
+            Log.d("UserDao_updateUser", "Procesando rutina: " + r.getRoutineType());
+
+            // Verifica si los campos de la rutina son null o válidos
+            Log.d("UserDao_updateUser", "Schedule: " + (r.getSchedule() != null ? r.getSchedule() : "null"));
+            routineMap.put("schedule", r.getSchedule() != null ? r.getSchedule().toString() : "null");
+
+            Log.d("UserDao_updateUser", "RoutineType: " + (r.getRoutineType() != null ? r.getRoutineType() : "null"));
+            routineMap.put("routineType", r.getRoutineType() != null ? r.getRoutineType().toString() : "null");
+
+            Log.d("UserDao_updateUser", "Budget: " + (r.getBudget() != null ? r.getBudget() : "null"));
+            routineMap.put("budget", r.getBudget() != null ? r.getBudget().toString() : "null");
+
+            Log.d("UserDao_updateUser", "SkinType: " + (r.getSkinType() != null ? r.getSkinType() : "null"));
+            routineMap.put("skinType", r.getSkinType() != null ? r.getSkinType().toString() : "null");
 
             // Convertir lista de productos a una estructura compatible con Firebase
             List<Map<String, Object>> productList = new ArrayList<>();
             for (Product p : r.getProductList()) {
-                if(p != null) {
-                    Map<String, Object> productMap = new HashMap<>();
-                    productMap.put("id", p.getId());
-                    productMap.put("name", p.getName());
-                    productMap.put("price", p.getPrice());
-                    productMap.put("category", p.getCategoryProduct().toString()); // Si category es un Enum
-                    productList.add(productMap);
+                if (p == null) {
+                    Log.e("UserDao_updateUser", "Producto es null en la rutina: " + r.getRoutineType());
+                    continue; // Saltar este producto si es null
                 }
+
+                Map<String, Object> productMap = new HashMap<>();
+                Log.d("UserDao_updateUser", "Procesando producto: " + p.getName());
+
+                if (p.getCategoryProduct() == null) {
+                    Log.e("UserDao_updateUser", "CategoryProduct es null para el producto: " + p.getName());
+                    productMap.put("category", "null"); // O cualquier valor por defecto
+                } else {
+                    Log.d("UserDao_updateUser", "CategoryProduct: " + p.getCategoryProduct());
+                    productMap.put("category", p.getCategoryProduct().toString());
+                }
+
+                productMap.put("id", p.getId());
+                productMap.put("name", p.getName());
+                productMap.put("price", p.getPrice());
+
+                productList.add(productMap);
             }
 
             routineMap.put("productList", productList); // Agregar lista de productos a la rutina
@@ -170,23 +205,24 @@ public class UserDao {
 
         // Guardar lista de rutinas en Firebase
         Map<String, Object> updates = new HashMap<>();
-        updates.put("email",user.getEmail());
-        updates.put("name",user.getName());
-        updates.put("password",user.getPassword());
-        updates.put("skinType",user.getSkinType());
+        updates.put("email", user.getEmail());
+        updates.put("name", user.getName());
+        updates.put("password", user.getPassword());
+        updates.put("skinType", user.getSkinType());
         updates.put("routineList", routineList);
 
-
+        // Verificar los datos que se van a guardar
+        Log.d("UserDao_updateUser", "Datos que se van a guardar en Firebase: " + updates.toString());
 
         userRef.updateChildren(updates).addOnCompleteListener(task -> {
-           if(task.isSuccessful()){
-               Log.d("UserDao_updateUser", "El usuario se ha actualizado en la base de datos.");
-           }else{
-               Log.d("UserDao_updateUser", "El usuario NO se ha actualizado en la base de datos. ERROR: " + task.getException().getMessage());
-           }
+            if (task.isSuccessful()) {
+                Log.d("UserDao_updateUser", "El usuario se ha actualizado en la base de datos.");
+            } else {
+                Log.e("UserDao_updateUser", "El usuario NO se ha actualizado en la base de datos. ERROR: " + task.getException().getMessage());
+            }
         });
-
     }
+
 }
 
 

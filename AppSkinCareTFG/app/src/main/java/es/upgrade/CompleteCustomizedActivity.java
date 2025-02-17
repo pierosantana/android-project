@@ -30,9 +30,11 @@ import es.upgrade.dao.ProductDao;
 import es.upgrade.dao.UserDao;
 import es.upgrade.dao.api.ProductAdapter;
 import es.upgrade.dao.api.RetrofitClient;
+import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.CategoryProduct;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.RoutineType;
 import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
@@ -51,6 +53,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
 
     private Product selectedLimpiezaProduct,selectedHidratacionProduct,selectedTonificacionProduct,
             selectedTratamientoProduct,selectedProtectorProduct;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
         recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
         recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
@@ -105,26 +110,23 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                     || selectedTratamientoProduct == null && selectedProtectorProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
-                Routine routine = Routine.getInstance();
 
-                // Agregar los productos seleccionados a la rutina
                 routine.addProduct(selectedLimpiezaProduct);
                 routine.addProduct(selectedHidratacionProduct);
                 routine.addProduct(selectedTonificacionProduct);
                 routine.addProduct(selectedTratamientoProduct);
                 routine.addProduct(selectedProtectorProduct);
 
-                // Guardar la rutina en el usuario y actualizar en Firebase
-                UserDao userDao = UserDao.getInstance();
-                User user = User.getInstance();
-                user.addRoutine(routine);
-                userDao.updateUser();
-
                 // Recibir datos de la Intent anterior
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
                 String budget = getIntent().getStringExtra("budget");
+
+                routine.setSkinType(SkinType.valueOf(skinType));
+                routine.setSchedule(Schedule.valueOf(schedule));
+                routine.setRoutineType(RoutineType.valueOf(routineType));
+                routine.setBudget(Budget.valueOf(budget));
 
                 // Crear Intent para pasar los datos a ResumenFinal
                 Intent intent = new Intent(this, ResumenFinal.class);
@@ -182,17 +184,17 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         } else {
             emptyView.setVisibility(View.GONE);
 
-            List<Product> productosLimpieza = obtenerTodosLosProductos(CategoryProduct.CLEANER);
-            List<Product> productosHidratacion = obtenerTodosLosProductos(CategoryProduct.MOISTURIZER);
-            List<Product> productosTonificacion = obtenerTodosLosProductos(CategoryProduct.TONIC);
-            List<Product> productosTratamiento = obtenerTodosLosProductos(CategoryProduct.CREAM_TREATMENT);
-            List<Product> productosProtector = obtenerTodosLosProductos(CategoryProduct.SUNSCREEN);
+            List<Product> productosLimpieza = obtenerTodosLosProductos(CategoryProduct.CLEANER,routine);
+            List<Product> productosHidratacion = obtenerTodosLosProductos(CategoryProduct.MOISTURIZER,routine);
+            List<Product> productosTonificacion = obtenerTodosLosProductos(CategoryProduct.TONIC,routine);
+            List<Product> productosTratamiento = obtenerTodosLosProductos(CategoryProduct.CREAM_TREATMENT,routine);
+            List<Product> productosProtector = obtenerTodosLosProductos(CategoryProduct.SUNSCREEN,routine);
 
             // Verificamos el tipo de rutina (si es noche completa, no mostramos el protector solar)
-            boolean esRutinaDeNoche= Routine.getInstance().getSchedule() == Schedule.NIGHT;
+            boolean esRutinaDeNoche= routine.getSchedule() == Schedule.NIGHT;
 
             if (!productosLimpieza.isEmpty()) {
-                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product);
+                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product,routine);
                 recyclerViewLimpieza.setAdapter(limpiezaAdapter);
                 recyclerViewLimpieza.setVisibility(View.VISIBLE);
             } else {
@@ -200,28 +202,28 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
             }
 
             if (!productosHidratacion.isEmpty()) {
-                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product);
+                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product,routine);
                 recyclerViewHidratacion.setAdapter(hidratacionAdapter);
                 recyclerViewHidratacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewHidratacion.setVisibility(View.GONE);
             }
             if (!productosTonificacion.isEmpty()) {
-                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product);
+                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product,routine);
                 recyclerViewTonificacion.setAdapter(tonificacionAdapter);
                 recyclerViewTonificacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTonificacion.setVisibility(View.GONE);
             }
             if (!productosTratamiento.isEmpty()) {
-                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product);
+                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product,routine);
                 recyclerViewTratamiento.setAdapter(tratamientoAdapter);
                 recyclerViewTratamiento.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTratamiento.setVisibility(View.GONE);
             }
             if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
-                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product);
+                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product,routine);
                 recyclerViewProtectorSolar.setAdapter(protectorAdapter);
                 recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
                 txtProtector.setVisibility(View.VISIBLE);
@@ -234,9 +236,9 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
 
     }
 
-    private List<Product> obtenerTodosLosProductos(CategoryProduct category) {
+    private List<Product> obtenerTodosLosProductos(CategoryProduct category,Routine routine) {
         List<Product> productos = ProductDao.getInstance().getProductos();
-        SkinType tipoPiel = Routine.getInstance().getSkinType();
+        SkinType tipoPiel = routine.getSkinType();
         return productos.stream()
                 .filter(product ->product.getSkinType() == tipoPiel // Filtro por tipo de piel
                         && product.getCategoryProduct() == category) // Filtro por categoría

@@ -23,6 +23,7 @@ public class BudgetActivity extends AppCompatActivity implements
     private int selectedOption = -1;
     private ProgressBar progressBar;
     private int progress;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class BudgetActivity extends AppCompatActivity implements
 
         progressBar = findViewById(R.id.progressBar);
         btnNext = findViewById(R.id.btn_next);
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
         progress = getIntent().getIntExtra("progress", 100);
         updateProgressBar(progress);
@@ -58,10 +60,9 @@ public class BudgetActivity extends AppCompatActivity implements
         btnNext.setOnClickListener(v -> {
             if (selectedOption != -1) {
                 Budget selectedBudget = (selectedOption == 0) ? Budget.ECONOMIC : Budget.CUSTOMIZED;
-                Routine routine = Routine.getInstance();
                 routine.setBudget(selectedBudget);
                 Log.d("Budget", "El presupuesto actual es: " + selectedBudget);
-                startActivity(new Intent(this, ReviewAndEditActivity.class));
+                nextActivity();
             }
         });
     }
@@ -69,6 +70,8 @@ public class BudgetActivity extends AppCompatActivity implements
     // Método para cambiar de actividad
     private void nextActivity() {
         Intent intent = new Intent(this, ReviewAndEditActivity.class);
+        // Pasar la rutina a la siguiente actividad
+        intent.putExtra("routine", routine);
         startActivity(intent);
     }
 

@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rutina ID"
-            android:textStyle="bold"
-            android:textSize="21sp"/>
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
         <!-- Subtítulo -->
         <TextView
@@ -29,20 +29,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipo de rutina"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
         <!-- Contenedor de los pasos -->
         <LinearLayout
             android:id="@+id/stepsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
             <!-- Aquí se agregarán dinámicamente los círculos -->
 
         </LinearLayout>
+
+        <!-- Espaciador para mover el tvBudget hacia abajo -->
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <!-- Precio -->
         <TextView
@@ -50,10 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Precio: $0.00"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 

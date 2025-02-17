@@ -1,18 +1,27 @@
 package es.upgrade.entidad;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Step implements Serializable {
+
+    private int id;
     private String title;
     private String description;
     private String duration;
-    private String proTip;
+    private Product product;
+    private List<String> proTips;
 
-    public Step(String title, String description, String duration, String proTip) {
+    public Step(int id, String title, String description, String duration, Product product, List<String> proTips) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.duration = duration;
-        this.proTip = proTip;
+        this.proTips = proTips;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -27,7 +36,20 @@ public class Step implements Serializable {
         return duration;
     }
 
-    public String getProTip() {
-        return proTip;
+
+    public List<String> getProTips() {
+        return proTips;
+    }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", duration='" + duration + '\'' +
+                ", product='" + product + '\'' +
+                ", proTips=" + proTips +
+                '}';
     }
 }

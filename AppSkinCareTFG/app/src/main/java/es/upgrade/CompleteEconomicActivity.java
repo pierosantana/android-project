@@ -31,9 +31,11 @@ import es.upgrade.dao.ProductDao;
 import es.upgrade.dao.UserDao;
 import es.upgrade.dao.api.ProductAdapter;
 import es.upgrade.dao.api.RetrofitClient;
+import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.CategoryProduct;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.RoutineType;
 import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
@@ -51,6 +53,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
 
     private Product selectedLimpiezaProduct,selectedHidratacionProduct,selectedTonificacionProduct,
             selectedTratamientoProduct,selectedProtectorProduct;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
         recyclerViewLimpieza = findViewById(R.id.rvLimpieza);
         recyclerViewHidratacion = findViewById(R.id.rvHidratacion);
@@ -105,21 +110,29 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                     || selectedTratamientoProduct == null && selectedProtectorProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
-                Routine routine = Routine.getInstance();
 
-                // Agregar los productos seleccionados a la rutina
                 routine.addProduct(selectedLimpiezaProduct);
                 routine.addProduct(selectedHidratacionProduct);
                 routine.addProduct(selectedTonificacionProduct);
                 routine.addProduct(selectedTratamientoProduct);
                 routine.addProduct(selectedProtectorProduct);
 
-
                 // Recibir datos de la Intent anterior
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
                 String budget = getIntent().getStringExtra("budget");
+                
+                // Verificar que los valores no sean null antes de convertirlos
+                if (skinType != null && schedule != null && routineType != null && budget != null) {
+                    routine.setSkinType(SkinType.valueOf(skinType));
+                    routine.setSchedule(Schedule.valueOf(schedule));
+                    routine.setRoutineType(RoutineType.valueOf(routineType));
+                    routine.setBudget(Budget.valueOf(budget));
+                } else {
+                    Toast.makeText(this, "Error: Datos incompletos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Crear Intent para pasar los datos a ResumenFinal
                 Intent intent = new Intent(this, ResumenFinal.class);
@@ -178,19 +191,19 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         } else {
             emptyView.setVisibility(View.GONE);
 
-            List<Product> productosLimpieza = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CLEANER);
-            List<Product> productosHidratacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.MOISTURIZER);
-            List<Product> productosTonificacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.TONIC);
-            List<Product> productosTratamiento = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CREAM_TREATMENT);
-            List<Product> productosProtector = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.SUNSCREEN);
+            List<Product> productosLimpieza = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CLEANER,routine);
+            List<Product> productosHidratacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.MOISTURIZER,routine);
+            List<Product> productosTonificacion = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.TONIC,routine);
+            List<Product> productosTratamiento = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.CREAM_TREATMENT,routine);
+            List<Product> productosProtector = obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct.SUNSCREEN,routine);
 
 
             //Verificar si es rutina de noche
-            boolean esRutinaDeNoche = Routine.getInstance().getSchedule() == Schedule.NIGHT;
+            boolean esRutinaDeNoche = routine.getSchedule() == Schedule.NIGHT;
 
             //Cargar RecuclerView
             if (!productosLimpieza.isEmpty()) {
-                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product);
+                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product,routine);
                 recyclerViewLimpieza.setAdapter(limpiezaAdapter);
                 recyclerViewLimpieza.setVisibility(View.VISIBLE);
             } else {
@@ -198,21 +211,21 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             }
 
             if (!productosHidratacion.isEmpty()) {
-                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product);
+                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product,routine);
                 recyclerViewHidratacion.setAdapter(hidratacionAdapter);
                 recyclerViewHidratacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewHidratacion.setVisibility(View.GONE);
             }
             if (!productosTonificacion.isEmpty()) {
-                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product);
+                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product,routine);
                 recyclerViewTonificacion.setAdapter(tonificacionAdapter);
                 recyclerViewTonificacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTonificacion.setVisibility(View.GONE);
             }
             if (!productosTratamiento.isEmpty()) {
-                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product);
+                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product,routine);
                 recyclerViewTratamiento.setAdapter(tratamientoAdapter);
                 recyclerViewTratamiento.setVisibility(View.VISIBLE);
             } else {
@@ -220,7 +233,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
             }
             // Si la rutina es de noche, no mostramos el RecyclerView de Protector Solar
             if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
-                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product);
+                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product,routine);
                 recyclerViewProtectorSolar.setAdapter(protectorAdapter);
                 recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
                 txtProtector.setVisibility(View.VISIBLE);
@@ -231,11 +244,11 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         }
     }
 
-    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct category){
+    public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct category,Routine routine){
         List<Product>productosGuardados = ProductDao.getInstance().getProductos();
         // Establecemos el precio maximo bajo
         double precioMaximo = 15.0;
-        SkinType tipoPiel = Routine.getInstance().getSkinType();
+        SkinType tipoPiel = routine.getSkinType();
 
         // Filtramos por categoría(Limpieza e Hidratacion) y precio bajo
         // Luego mas tarde habra que filtrar el producto por el tipo de piel

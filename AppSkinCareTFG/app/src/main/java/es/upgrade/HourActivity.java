@@ -21,7 +21,7 @@ public class HourActivity extends AppCompatActivity implements
 
     private Button btnNext;
     private int selectedOption = -1;
-    private Routine routine = Routine.getInstance();
+    private Routine routine;
     private TextView tvDontKnow;
     private ProgressBar progressBar;
     private int progress = 0;
@@ -34,7 +34,10 @@ public class HourActivity extends AppCompatActivity implements
 
         btnNext = findViewById(R.id.btn_next);
         progressBar = findViewById(R.id.progressBar);
-        Routine routine = Routine.getInstance();
+        routine = (Routine) getIntent().getSerializableExtra("routine");
+        if (routine == null) {
+            routine = new Routine();  // Si es null, crea una nueva instancia
+        }
         // Crear una instancia del fragmento
         QuestionnaireFragment questionnaireFragment = new QuestionnaireFragment();
 
@@ -82,6 +85,8 @@ public class HourActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, SkinCareTypeActivity.class);
         // Pasamos el progreso a la siguiente actividad
         intent.putExtra("progress", progress + 33);
+        // Pasar la rutina a la siguiente actividad
+        intent.putExtra("routine", routine);
         startActivity(intent);
     }
 

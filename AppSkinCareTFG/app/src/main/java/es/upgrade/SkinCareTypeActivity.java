@@ -22,6 +22,7 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
     private int selectedOption = -1;
     private ProgressBar progressBar;
     private int progress;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
         btnNext = findViewById(R.id.btn_next);
         progress = getIntent().getIntExtra("progress", 66); // Tomamos el progreso de la actividad anterior
         updateProgressBar(progress);
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
         // Crear una instancia del fragmento
         QuestionnaireFragment questionnaireFragment = new QuestionnaireFragment();
@@ -58,7 +60,6 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
         btnNext.setOnClickListener(v -> {
             if (selectedOption != -1) {
                 // Asignar el valor a routine según la opción seleccionada
-                Routine routine = Routine.getInstance();
                 if (selectedOption == 0) {
                     routine.setRoutineType(RoutineType.COMPLETE);
                 } else if (selectedOption == 1) {
@@ -80,6 +81,7 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, BudgetActivity.class);
         // Pasamos el progreso a la siguiente actividad
         intent.putExtra("progress", progress);
+        intent.putExtra("routine", routine); // Pasar la rutina a la siguiente actividad
         startActivity(intent);
     }
 

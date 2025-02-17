@@ -22,6 +22,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
     private Button btnNext;
     private int selectedOption = -1;
     private int progress = 0;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         whichIsMySkin = findViewById(R.id.NoIdeaSkin);
         progressBar = findViewById(R.id.progressBar);
         btnNext = findViewById(R.id.btn_next);
+        routine = new Routine();
 
         // Crear una instancia del fragmento
         QuestionnaireFragment questionnaireFragment = new QuestionnaireFragment();
@@ -79,7 +81,6 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
 
     private void selectSkinType(SkinType type) {
         User user = User.getInstance();
-        Routine routine = Routine.getInstance();
         routine.setSkinType(type);
         user.setSkinType(type);
         progress = 1; // Puedes ajustar el progreso según lo que necesites
@@ -89,6 +90,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
     private void nextActivity() {
         Intent intent = new Intent(this, HourActivity.class);
         intent.putExtra("progress", progress);
+        intent.putExtra("routine", routine); // Pasar la rutina a la siguiente actividad
         startActivity(intent);
     }
 

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="443dp"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -25,9 +25,9 @@
                 android:id="@+id/tvStepTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paso X"
+                android:text="Nombre Rutina"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -36,39 +36,58 @@
             android:id="@+id/tvStepName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Título del Paso"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold" />
 
         <!-- Descripción del paso -->
         <TextView
             android:id="@+id/tvStepDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción del paso aquí..."
-            android:textSize="14sp"
             android:layout_marginTop="4dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:text="Descripción del paso aquí..."
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
         <!-- Pro Tips -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:background="@android:color/holo_blue_light"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:background="@android:color/holo_blue_light">
+            app:cardElevation="2dp">
 
             <TextView
-                android:id="@+id/tvProTips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="💡 Pro Tips: Consejo opcional"
-                android:textSize="14sp"
-                android:padding="12dp"
-                android:textColor="@android:color/white"/>
+                android:id="@+id/tvStepProTips"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:padding="8dp"
+                android:text="ProTips"
+                android:textColor="@android:color/black" />
         </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvStepDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Duracion"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvStepCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paso 1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_vertical" />
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

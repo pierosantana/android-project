@@ -2,21 +2,36 @@ package es.upgrade;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import es.upgrade.dao.StepAdapter;
+import es.upgrade.dao.api.RetrofitClient;
+import es.upgrade.dao.api.StepDao;
+import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.Step;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RoutineExplainActivity extends AppCompatActivity {
 
     private TextView tvRoutineTitle, tvRoutineType, tvStepCounter, backToRoutines;
     private RecyclerView recyclerViewSteps;
-    private List<Step> stepList;
+    private Routine routine;
+    private LinearLayout dotsLayout; // Contenedor de los dots
+    private List<Step> stepsApi = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,48 +42,113 @@ public class RoutineExplainActivity extends AppCompatActivity {
         backToRoutines = findViewById(R.id.tvBackToRoutines);
         tvRoutineTitle = findViewById(R.id.tvRoutineTitleDetail);
         tvRoutineType = findViewById(R.id.tvRoutineTypeDetail);
-        tvStepCounter = findViewById(R.id.tvStepCounter); // Asegúrate que este ID esté en el XML
+        dotsLayout = findViewById(R.id.dotsLayout); // Inicializa el contenedor de dots
         recyclerViewSteps = findViewById(R.id.rvSteps);
 
-        // Obtener la rutina desde el Singleton
-        Routine routine = Routine.getInstance();
+        // Obtener la rutina actual desde el Intent
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
-        // Mostrar información de la rutina
-        tvRoutineTitle.setText("Rutina: " + routine.getRoutineType());
-        tvRoutineType.setText(routine.isNightRoutine() ? "Rutina Nocturna" : "Rutina Diurna");
+        if (routine != null) {
+            // Mostrar información de la rutina
+            tvRoutineTitle.setText("Rutina: " + routine.getRoutineType());
+            tvRoutineType.setText(routine.isNightRoutine() ? "Rutina Nocturna" : "Rutina Completa");
+        } else {
+            Toast.makeText(this, "No se encontró información de la rutina", Toast.LENGTH_SHORT).show();
+        }
 
-        // Generar los pasos para la rutina
-        stepList = generateSteps(routine);
-
-        // Crear el adaptador para los pasos
-        StepAdapter stepAdapter = new StepAdapter(stepList);
-        recyclerViewSteps.setAdapter(stepAdapter);
-        recyclerViewSteps.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        // Actualizar el contador de pasos
-        tvStepCounter.setText("Paso 1 de " + stepList.size()); // Contador inicial
+        // Cargar los pasos desde la API
+        cargarStepsFromApi();
 
         // Manejar el evento de regreso a las rutinas
         backToRoutines.setOnClickListener(v -> {
-            // Navegar de regreso a la actividad de rutinas
             Intent intent = new Intent(RoutineExplainActivity.this, MyRoutinesActivity.class);
             startActivity(intent);
         });
     }
 
-    // Método para generar los pasos de la rutina
-    private List<Step> generateSteps(Routine routine) {
-        List<Step> steps = new ArrayList<>();
-        int stepCount = routine.getStepCount();
+    private void cargarStepsFromApi() {
+        Call<List<Step>> call = RetrofitClient.getApiService().getSteps(); // Llamada al endpoint
+        call.enqueue(new Callback<List<Step>>() {
+            @Override
+            public void onResponse(Call<List<Step>> call, Response<List<Step>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Obtener la lista de pasos desde la API
+                    stepsApi = response.body();
+                    // Limitamos los pasos según el método getStepCount() de la rutina
+                    int stepCount = routine.getStepCount();
+                    if (stepCount != -1 && stepsApi.size() > stepCount) {
+                        stepsApi = stepsApi.subList(0, stepCount);
+                    }
 
-        for (int i = 1; i <= stepCount; i++) {
-            steps.add(new Step(
-                    "Paso " + i,
-                    "Descripción del paso " + i,
-                    (i * 10) + " segundos", // Duración del paso
-                    "Consejo útil para el paso " + i
-            ));
-        }
-        return steps;
+                    StepDao.getInstance().setSteps(stepsApi); // Guardamos los pasos en StepDao
+                    setupRecyclerView(stepsApi, routine.getProductList());
+                } else {
+                    Toast.makeText(RoutineExplainActivity.this, "Error al obtener los pasos", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Step>> call, Throwable throwable) {
+                Log.e("API_ERROR", "Fallo en la conexión", throwable);
+                Toast.makeText(RoutineExplainActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-}
+
+    private void setupRecyclerView(List<Step> stepList, List<Product> selectedProducts) {
+
+        // Configura RecyclerView
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewSteps.setLayoutManager(layoutManager);
+
+        // Configurar SnapHelper para deslizar una tarjeta a la vez
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerViewSteps);
+
+        StepAdapter stepAdapter = new StepAdapter(stepList, selectedProducts);
+        recyclerViewSteps.setAdapter(stepAdapter);
+
+        // Inicializa los dots
+        initializeDots(stepList.size());
+
+        recyclerViewSteps.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager != null) {
+                    int currentPosition = layoutManager.findFirstVisibleItemPosition();
+                    updateDots(currentPosition);
+                }
+            }
+        });
+    }
+
+    // Método para inicializar los dots
+    private void initializeDots(int count) {
+        dotsLayout.removeAllViews(); // Limpia cualquier punto previo
+        for (int i = 0; i < count; i++) {
+            TextView dot = new TextView(this);
+            dot.setText("●"); // Símbolo del dot
+            dot.setTextSize(16);
+            dot.setTextColor(getResources().getColor(android.R.color.darker_gray)); // Color inicial (gris)
+            dot.setPadding(8, 0, 8, 0); // Espaciado entre los dots
+            dotsLayout.addView(dot);
+        }
+        // Activa el primer dot
+        updateDots(0);
+    }
+
+    // Método para actualizar los dots
+    private void updateDots(int currentPosition) {
+        int count = dotsLayout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            TextView dot = (TextView) dotsLayout.getChildAt(i);
+            if (i == currentPosition) {
+                dot.setTextColor(getResources().getColor(android.R.color.holo_blue_dark)); // Color activo
+            } else {
+                dot.setTextColor(getResources().getColor(android.R.color.darker_gray)); // Color inactivo
+            }
+        }
+    }}

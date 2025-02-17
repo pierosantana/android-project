@@ -18,6 +18,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
 
     private Context context;
     private List<Routine> routineList;
+    private Routine currentRoutine;
 
     public RoutineAdapter(Context context, List<Routine> routineList) {
         this.context = context;
@@ -39,17 +40,35 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
         holder.tvType.setText(routine.getSchedule().toString());
         holder.tvBudget.setText("Precio: $" + routine.getBudget());
 
-        // Establecemos la rutina seleccionada en el Singleton para evitar la creación de una nueva instancia.
-        Routine.getInstance().setRoutineType(routine.getRoutineType());
-        Routine.getInstance().setSchedule(routine.getSchedule());
-        Routine.getInstance().setBudget(routine.getBudget());
-        Routine.getInstance().setSkinType(routine.getSkinType());
-        Routine.getInstance().setNightRoutine(routine.isNightRoutine());
-        Routine.getInstance().setProductList(routine.getProductList());
+        // Limpiar los círculos anteriores
+        holder.stepsContainer.removeAllViews();
+
+        // Crear los círculos según el número de pasos de la rutina
+        int stepCount = routine.getStepCount();
+        for (int i = 0; i < stepCount; i++) {
+            TextView stepCircle = new TextView(holder.itemView.getContext());
+            stepCircle.setWidth(60);
+            stepCircle.setHeight(60);
+            stepCircle.setText("");
+            stepCircle.setBackgroundResource(R.drawable.rounded_image); // Usamos el drawable circle.xml
+
+            // Agregar márgenes entre los círculos
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins(8, 0, 8, 0);
+            stepCircle.setLayoutParams(layoutParams);
+
+            // Agregar el círculo al contenedor
+            holder.stepsContainer.addView(stepCircle);
+        }
+
 
         holder.itemView.setOnClickListener(v -> {
+            currentRoutine = routine;
             Intent intent = new Intent(context, RoutineExplainActivity.class);
-            // Aquí no necesitamos pasar la rutina con el Intent porque ya está en el Singleton
+            intent.putExtra("routine",currentRoutine);
             context.startActivity(intent);
         });
     }

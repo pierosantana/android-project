@@ -87,4 +87,8 @@ public class User {
                 ", routineList=" + routineList +
                 '}';
     }
+    // Método para reinicializar la instancia
+    public static void resetInstance() {
+        instance = new User();
+    }
 }

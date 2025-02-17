@@ -1,7 +1,10 @@
 package es.upgrade;
 
+import java.math.RoundingMode;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +29,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
     private TextView titulo;
     private Button continuar, edit;
     private LinearLayout optionsContainer; //Contiene los customView
-
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +47,18 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         edit = findViewById(R.id.btn_editar);
         optionsContainer = findViewById(R.id.optionsContainer);
 
+        // Obtener la rutina desde el Intent anterior
+        routine = (Routine) getIntent().getSerializableExtra("routine");
 
-        User user = User.getInstance();
-        Routine routine = Routine.getInstance();
+        if (routine == null) {
+                Log.e("ReviewAndEditActivity", "La rutina es null");
+                return;
 
+        }
 
         titulo.setText("Has elegido las siguientes cosas: ¿Deseas modificar algo?");
 
-
         continuar.setOnClickListener(view -> {
-
             Intent intent = null;
 
             if (routine.getRoutineType() == RoutineType.BASIC && routine.getBudget() == Budget.ECONOMIC) {
@@ -68,15 +73,14 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
             if (intent != null) {
                 // Pasar los datos al siguiente Activity
-                intent.putExtra("skinType", formatSkinType(routine.getSkinType()));
-                intent.putExtra("schedule", formatSchedule(routine.getSchedule()));
-                intent.putExtra("routineType", formatRoutineType(routine.getRoutineType()));
-                intent.putExtra("budget", formatBudget(routine.getBudget()));
-
+                intent.putExtra("skinType", routine.getSkinType().name());
+                intent.putExtra("schedule", routine.getSchedule().name());
+                intent.putExtra("routineType", routine.getRoutineType().name());
+                intent.putExtra("budget", routine.getBudget().name());
+                intent.putExtra("routine", routine);
                 startActivity(intent);
             }
         });
-
 
         edit.setOnClickListener(v -> {
             AlertDialogCustom.showCustomAlertDialog(
@@ -93,6 +97,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
             );
         });
     }
+
     // Función para agregar una vista personalizada al contenedor
     private void addCustomOptionView(String title, String description, int iconResId) {
         // Crear el CustomViewOptionsRoutine
@@ -107,6 +112,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         // Agregar la vista al contenedor
         optionsContainer.addView(customView);
     }
+
     // Métodos de formateo de las respuestas
     private String formatSkinType(SkinType skinType) {
         if (skinType == null) {
@@ -154,13 +160,13 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         updateCustomOptions();
     }
-    private void updateCustomOptions() {
-        Routine routine = Routine.getInstance();
 
+    private void updateCustomOptions() {
         String skinTypeDesc = formatSkinType(routine.getSkinType());
         String scheduleDesc = formatSchedule(routine.getSchedule());
         String routineTypeDesc = formatRoutineType(routine.getRoutineType());

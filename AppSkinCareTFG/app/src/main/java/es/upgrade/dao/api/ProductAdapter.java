@@ -26,16 +26,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList;
     private Context context;
     private OnProductClickListener onProductClickListener;
-    private int selectedPosition = -1; // No producto seleccionado al inicio
+    private int selectedPosition = -1;
+    private Routine routine;// No producto seleccionado al inicio
 
     public interface OnProductClickListener {
         void onProductClick(Product product);
     }
 
-    public ProductAdapter(Context context, List<Product> productList, OnProductClickListener listener) {
+    public ProductAdapter(Context context, List<Product> productList, OnProductClickListener listener,Routine routine) {
         this.context = context;
         this.productList = productList;
         this.onProductClickListener = listener;
+        this.routine = routine;
     }
 
     @NonNull
@@ -75,9 +77,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                 // Llamamos al listener con el producto seleccionado
                 onProductClickListener.onProductClick(product);
-                // Aquí agregamos el producto a la lista de la rutina
-
-                Routine routine = Routine.getInstance();
                 routine.addProduct(product);  // Añadimos el producto seleccionado a la lista de la rutina
             }
         });

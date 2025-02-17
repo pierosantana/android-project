@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import es.upgrade.R;
 import es.upgrade.dao.UserDao;
+import es.upgrade.entidad.User;
 
 public class Launcher extends AppCompatActivity {
 
@@ -43,18 +44,26 @@ public class Launcher extends AppCompatActivity {
 
         boolean UserExist = uDao.verifyFirebaseUser();
         // Si no hay un usuario autenticado, lo redirigimos al MainActivity
-        if (UserExist == false) {
+        if (!UserExist) {
             Log.d("Launcher_verifyUser", "Usuario no autenticado. Redirigiendo a MainActivity.");
             startActivity(new Intent(Launcher.this, MainActivity.class));
             finish();
         } else {
             uDao.recoveryUser(userR -> {
                 Log.d("Launcher_verifyUser", "Usuario recuperado: " + userR);
+                if (userR != null) {
+                    User user = User.getInstance();
+                    user.setName(userR.getName());
+                    user.setEmail(userR.getEmail());
+                    user.setPassword(userR.getPassword());
+                    user.setSkinType(userR.getSkinType());
+                    user.setRoutineList(userR.getRoutineList());
+                }
+                // Si el usuario está autenticado, lo redirigimos al LobbyActivity
+                Log.d("Launcher_verifyUser", "Usuario autenticado. Redirigiendo a LobbyActivity.");
+                startActivity(new Intent(Launcher.this, LobbyActivity.class));
+                finish();
             });
-            // Si el usuario está autenticado, lo redirigimos al MenuPrincipal
-            Log.d("Launcher_verifyUser", "Usuario autenticado. Redirigiendo a MenuPrincipal.");
-            startActivity(new Intent(Launcher.this, LobbyActivity.class));
-            finish();
         }
     }
 

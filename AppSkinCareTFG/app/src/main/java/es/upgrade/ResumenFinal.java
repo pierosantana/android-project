@@ -9,10 +9,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import es.upgrade.UI.LobbyActivity;
 import es.upgrade.dao.UserDao;
+import es.upgrade.entidad.Budget;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
+import es.upgrade.entidad.RoutineType;
+import es.upgrade.entidad.Schedule;
+import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 
 public class ResumenFinal extends AppCompatActivity {
@@ -80,7 +86,8 @@ public class ResumenFinal extends AppCompatActivity {
 
         // Mostrar el resumen y el total
         txtResumen.setText(resumen.toString());
-        txtTotalPrecio.setText("Total: " + totalPrecio + "€");
+        String totalFormatted = String.format("%.2f", totalPrecio);
+        txtTotalPrecio.setText("Total: " + totalFormatted + "€");
 
         // Si algún producto no fue seleccionado, mostrar un mensaje
         if (selectedLimpieza == null || selectedHidratacion == null || selectedTonificacion == null
@@ -88,8 +95,20 @@ public class ResumenFinal extends AppCompatActivity {
             Toast.makeText(this, "Faltan productos por seleccionar.", Toast.LENGTH_SHORT).show();
         }
 
+        Routine routine = new Routine();
+        routine.setSkinType(SkinType.valueOf(skinType));
+        routine.setSchedule(Schedule.valueOf(schedule));
+        routine.setRoutineType(RoutineType.valueOf(routineType));
+        routine.setBudget(Budget.valueOf(budget));
+
+        routine.setProductList(new ArrayList<>());
+        if (selectedLimpieza != null) routine.getProductList().add(selectedLimpieza);
+        if (selectedHidratacion != null) routine.getProductList().add(selectedHidratacion);
+        if (selectedTonificacion != null) routine.getProductList().add(selectedTonificacion);
+        if (selectedTratamiento != null) routine.getProductList().add(selectedTratamiento);
+        if (selectedProtector != null) routine.getProductList().add(selectedProtector);
+
         User user = User.getInstance();
-        Routine routine = Routine.getInstance();
         // Evento para el botón continuar
         btnContinuar.setOnClickListener(v -> {
             //Persistir la informacion

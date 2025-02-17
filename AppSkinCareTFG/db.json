@@ -41,7 +41,7 @@
 
         {"categoryProduct": "CREAM_TREATMENT", "name": "Puntos negros", "id": 38, "brand": "Niacinamida The Ordinary", "price": 6.00, "skinType": "DRY", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/niacinamida-ordy.png"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "Puntos negros", "id": 39, "brand": "Niacinamida de Roche Posai", "price": 33.10, "skinType": "DRY", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/niacinamida-roche-posai.png"},
-        {"categoryProduct": "CREAM_TREATMENT", "name": "crema hidratante", "id": 40, "brand": "Ácido hialurónico The Ordinary", "price": 7.00, "skinType": "DRY", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/acido-hialuronico-the-ordinary.png"},
+        {"categoryProduct": "CREAM_TREATMENT", "name": "crema hidratante", "id": 40, "brand": "Ácido hialurónico The Ordinary", "price": 7.00, "skinType": "DRY", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/acido-hialu-ordyn.png"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "aceite facial", "id": 41, "brand": "Ácido hialurónico Roche Posai", "price": 39.50, "skinType": "DRY", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/acido-hialu-roche.png"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "Puntos negros", "id": 42, "description": "Niacinamida The Ordinary", "price": 6.00, "skinType": "NORMAL","url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/niacinamida-ordy.png"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "Puntos negros", "id": 43, "description": "Niacinamida de Roche Posai", "price": 33.10, "skinType": "NORMAL","url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/niacinamida-roche-posai.png"},
@@ -58,6 +58,58 @@
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 53, "brand": "Neutrogena Ultra Sheer Dry-Touch Sunscreen SPF 100", "price": 10.00, "skinType": "NORMAL", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/neutrogena-sp100.png"},
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 54, "brand": "Avene Cleanance Sunscreen SPF 50+", "price": 20.00, "skinType": "COMBINATION", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/avene-bloqueador.png"},
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 55, "brand": "Banana Boat Sunscreen Ultra Mist Sport SPF50", "price": 12.50, "skinType": "COMBINATION", "url": "https://raw.githubusercontent.com/pierosantana/android-project/main/AppSkinCareTFG/imagenes/banana-boat.png"}
+  ],
+  "steps":[
+    {
+      "id": 1,
+      "title": "Limpieza",
+      "description": "Humedece tu rostro con agua tibia. Aplica una pequeña cantidad de limpiador en tus manos y masajea suavemente en movimientos circulares, enfocándote en la zona T y el contorno de la nariz. Enjuaga bien y seca con una toalla limpia dando toques suaves.",
+      "duration": "30-60 segundos",
+      "proTips": [
+        "Evita el agua caliente.",
+        "Si usas maquillaje o protector solar, realiza doble limpieza."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Hidratación",
+      "description": "Aplica una cantidad adecuada de crema hidratante en tu rostro y cuello. Masajea con movimientos ascendentes hasta que se absorba completamente.",
+      "duration": "30 segundos",
+      "proTips": [
+        "No olvides el cuello y escote.",
+        "Si sientes la piel pesada, usa una crema más ligera."
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Tratamiento",
+      "description": "Aplica el tratamiento adecuado según las necesidades de tu piel. Usa una pequeña cantidad y distribúyelo con suaves toques en el rostro hasta que se absorba.",
+      "duration": "1 minuto",
+      "proTips": [
+        "2-3 gotas son suficientes.",
+        "Espera 1-2 minutos para mejor absorción."
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Tónico",
+      "description": "Aplica unas gotas de tónico en las manos o en un algodón. Da pequeños toques en el rostro sin frotar para equilibrar el pH y preparar la piel para los siguientes productos.",
+      "duration": "10-15 segundos",
+      "proTips": [
+        "Sin alcohol para evitar resequedad.",
+        "Hidratante en zonas secas y astringente en la zona T."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Protección Solar",
+      "description": "Toma una cantidad generosa de protector solar y distribúyelo en el rostro y cuello. Asegúrate de cubrir bien todas las áreas expuestas.",
+      "duration": "1 minuto",
+      "proTips": [
+        "Reaplica cada 2-3 horas si estás al aire libre.",
+        "Usa al menos 2 dedos de producto."
+      ]
+    }
+    
   ]
 }
-

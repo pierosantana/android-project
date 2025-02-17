@@ -19,8 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 import es.upgrade.R;
 import es.upgrade.dao.UserDao;
+import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 
@@ -134,12 +137,17 @@ public class UserRegistration extends AppCompatActivity {
             showMessage("Error al generar el hash de la contraseña");
             return;
         }
+        // Reinicializar las instancias de User y Routine
+        User.resetInstance();
+
+
         User user = User.getInstance();
         user.setName(name);
         user.setEmail(mail);
         user.setPassword(passwordHash);
 
-
+        // Asegurarse de que la lista de rutinas esté vacía
+        user.setRoutineList(new ArrayList<>());
 
         // Guardar usuario en la base de datos
         userDao.saveUser(user, task -> {

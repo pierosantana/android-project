@@ -100,6 +100,7 @@ public class UserDao {
                     user.setName(userInfo.getName());
                     user.setEmail(userInfo.getEmail());
                     user.setPassword(userInfo.getPassword());
+                    user.setSkinType((userInfo.getSkinType()));
                     Log.d("UserDao_recoveryUser", "Usuario encontrado: " + user);
     
                     // Recuperar las rutinas del usuario

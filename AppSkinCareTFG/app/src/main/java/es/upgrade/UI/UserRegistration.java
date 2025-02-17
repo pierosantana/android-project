@@ -140,7 +140,6 @@ public class UserRegistration extends AppCompatActivity {
         // Reinicializar las instancias de User y Routine
         User.resetInstance();
 
-
         User user = User.getInstance();
         user.setName(name);
         user.setEmail(mail);

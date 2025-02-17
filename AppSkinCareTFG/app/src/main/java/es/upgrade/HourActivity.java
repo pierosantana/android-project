@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import es.upgrade.UI.fragments.QuestionnaireFragment;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.Schedule;
+import es.upgrade.entidad.User;
 
 public class HourActivity extends AppCompatActivity implements
         QuestionnaireFragment.OnQuestionnaireCompletedListener {
@@ -25,6 +26,7 @@ public class HourActivity extends AppCompatActivity implements
     private TextView tvDontKnow;
     private ProgressBar progressBar;
     private int progress = 0;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,10 @@ public class HourActivity extends AppCompatActivity implements
 
         btnNext = findViewById(R.id.btn_next);
         progressBar = findViewById(R.id.progressBar);
+
         routine = (Routine) getIntent().getSerializableExtra("routine");
+
+
         if (routine == null) {
             routine = new Routine();  // Si es null, crea una nueva instancia
         }

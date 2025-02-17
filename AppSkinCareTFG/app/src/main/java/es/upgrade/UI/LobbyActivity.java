@@ -3,6 +3,7 @@ package es.upgrade.UI;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import es.upgrade.MyRoutinesActivity;
 import es.upgrade.UI.fragments.CalendarFragment;
 import es.upgrade.UI.fragments.EmptyFragment;
 import es.upgrade.UI.fragments.ProductsFragment;
+import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
 import kotlin.Unit;
@@ -41,6 +43,7 @@ public class LobbyActivity extends AppCompatActivity {
     NafisBottomNavigation bottomNavigation;
     private AuthenticatorManager authenticatorManager;
     private ActivityResultLauncher<Intent> galleryLauncher;
+    private Routine routine;
 
 
     @Override
@@ -102,6 +105,7 @@ public class LobbyActivity extends AppCompatActivity {
     }
     // Función para cargar el fragmento de Home (vacío o con la interfaz de Lobby)
     private void loadHomeFragment() {
+        findViewById(R.id.mainUser).setVisibility(View.VISIBLE);
         // Aquí no se necesita ningún fragmento, ya que solo se debe mostrar el Lobby sin fragmentos
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.barCustomMenu, new EmptyFragment()) // Un fragmento vacío que muestra el Lobby
@@ -110,6 +114,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     // Función para cargar los fragmentos (Calendar, Products)
     private void loadFragment(Fragment fragment) {
+        findViewById(R.id.mainUser).setVisibility(View.GONE);
         // Reemplazar el contenido del contenedor con el fragmento adecuado
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.barCustomMenu, fragment)
@@ -128,11 +133,11 @@ public class LobbyActivity extends AppCompatActivity {
         // Establecer nombre del usuario
         tvName.setText(user.getName());
         // Verificar y mostrar el tipo de piel
-        /*
-        * if (user.getSkinType() != null) {
-            tvSkin.setText(user.getSkinType().toString());  // Muestra el tipo de piel en el TextView
-        }
-        */
+
+       // if (user.getSkinType() != null) {
+         //   tvSkin.setText(user.getSkinType().toString());  // Muestra el tipo de piel en el TextView
+        //}
+
 
 
         galleryLauncher = registerForActivityResult(
@@ -159,7 +164,14 @@ public class LobbyActivity extends AppCompatActivity {
             if (user.getSkinType() == null) {
                 startActivity(new Intent(LobbyActivity.this, SkinTypeActivity.class));
             } else {
-                startActivity(new Intent(LobbyActivity.this, HourActivity.class));
+                if(user.getSkinType() != null){
+                    routine = new Routine();
+                    routine.setSkinType(user.getSkinType());
+                    Log.e("LobbyActivity","SkinType es nulo");
+                }
+                Intent intent = new Intent(this, HourActivity.class);
+                intent.putExtra("routine", routine); // Pasar la rutina a la siguiente actividad
+                startActivity(intent);
             }
         });
         findViewById(R.id.btnMyRoutines).setOnClickListener(v -> {

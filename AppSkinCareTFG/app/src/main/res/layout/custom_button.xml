@@ -12,7 +12,6 @@
         android:id="@+id/buttonIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/rounded_image"
         android:layout_marginEnd="16dp"
         android:contentDescription="Icono" />
 

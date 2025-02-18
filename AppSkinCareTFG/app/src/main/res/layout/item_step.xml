@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre Rutina"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/black"
             android:text="Título del Paso"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -48,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Descripción del paso aquí..."
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <!-- Pro Tips -->
@@ -68,7 +70,7 @@
                 android:maxLines="5"
                 android:padding="8dp"
                 android:text="ProTips"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/tvStepDuration"
@@ -76,13 +78,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Duracion"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
         <TextView
             android:id="@+id/tvStepCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Paso 1"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginEnd="8dp"

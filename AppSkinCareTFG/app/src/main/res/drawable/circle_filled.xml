@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#06AB99"/> <!-- Color del círculo relleno -->
+    <solid android:color="@color/backgroundButtonAccent"/> <!-- Color del círculo relleno -->
     <size android:width="20dp" android:height="20dp"/> <!-- Tamaño del círculo -->
     <corners android:radius="10dp"/> <!-- Hace que el rectángulo sea un círculo -->
 </shape>

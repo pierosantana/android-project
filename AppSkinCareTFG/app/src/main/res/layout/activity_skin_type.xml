@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#B6FFF9"
+    android:background="@color/backgroundApplication"
     xmlns:android="http://schemas.android.com/apk/res/android">
     
     <TextView
@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/TVConfiguracion"
+        android:textStyle="bold"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/ButtonAvanzar"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorLetterButtons"
         android:background="@drawable/button_background"
         android:enabled="false" />
 
@@ -43,6 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="@string/NoIdeaSkin"
         android:textSize="16sp"/>
 

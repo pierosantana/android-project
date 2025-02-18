@@ -5,39 +5,39 @@
     android:viewportHeight="24">
 
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="@color/backgroundButtonAccent"
         android:strokeWidth="1"
         android:pathData="M19.8785,20.3773C17.7312,22.3968 14.8904,23.5145 11.9427,23.4999C8.99506,23.4852 6.16558,22.3392 4.0385,20.2985C1.91142,18.2578 0.649175,15.4782 0.512389,12.5337C0.375602,9.58912 1.37472,6.70449 3.30345,4.47538C5.23217,2.24626 7.94323,0.84287 10.8768,0.554979C13.8104,0.267088 16.7426,1.11668 19.0679,2.92833C21.3931,4.73998 22.934,7.37535 23.3722,10.2903C23.8104,13.2052 23.1126,16.1772 21.4228,18.5924"/>
 
     <path
-        android:fillColor="#0F0F0F"
+        android:fillColor="@color/backgroundButtonAccent"
         android:pathData="M6.17752,6.94373C6.17752,6.81867 6.07613,6.71729 5.95107,6.71729C5.82601,6.71729 5.72462,6.81867 5.72462,6.94373C5.72462,7.25111 5.78514,7.56363 5.96972,7.80359C6.16266,8.0544 6.46218,8.18918 6.85686,8.18918C6.98192,8.18918 7.0833,8.0878 7.0833,7.96274C7.0833,7.83767 6.98192,7.73629 6.85686,7.73629C6.57219,7.73629 6.41882,7.64463 6.3287,7.52746C6.23023,7.39945 6.17752,7.20247 6.17752,6.94373Z"/>
 
     <path
-        android:fillColor="#0F0F0F"
+        android:fillColor="@color/backgroundButtonAccent"
         android:fillType="evenOdd"
         android:pathData="M7.24837,4.14107C7.07367,3.95297 6.77854,3.95298 6.60386,4.14109C6.39016,4.37121 5.99576,4.81766 5.65337,5.32678C5.31173,5.83479 4.9945,6.41338 5.00007,7.04183C5.00056,7.09742 5.00352,7.17543 5.01321,7.2685C5.03246,7.45337 5.07894,7.70428 5.19016,7.95853C5.30187,8.21389 5.48116,8.47743 5.76717,8.67639C6.05449,8.87627 6.43378,9 6.92612,9C7.41846,9 7.79775,8.87627 8.08509,8.67639C8.37109,8.47743 8.55041,8.21392 8.66214,7.95855C8.77337,7.7043 8.81989,7.45337 8.83913,7.2685C8.84883,7.17546 8.85179,7.09745 8.85229,7.04185C8.85791,6.4134 8.54059,5.83476 8.19895,5.32676C7.85652,4.81764 7.46209,4.37119 7.24837,4.14107Z"/>
 
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="@color/backgroundButtonAccent"
         android:strokeWidth="1"
         android:strokeLineCap="square"
         android:pathData="M6.5,22L7.5,20L6,19L7,17.5"/>
 
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="@color/backgroundButtonAccent"
         android:strokeWidth="1"
         android:strokeLineCap="square"
         android:pathData="M1,12L2.5,13L3,12L5,13V11H7"/>
 
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="@color/backgroundButtonAccent"
         android:strokeWidth="1"
         android:strokeLineCap="square"
         android:pathData="M20,4L18,6L19,7L18,8L19,9H16.5V10.5"/>
 
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="@color/backgroundButtonAccent"
         android:strokeWidth="1"
         android:strokeLineCap="square"
         android:pathData="M18.5,5L16,3L15,4L14,3.5L12.5,5"/>

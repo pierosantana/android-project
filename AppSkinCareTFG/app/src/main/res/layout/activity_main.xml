@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundApplication"
     tools:context=".UI.MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -34,11 +35,17 @@
             android:text="@string/BtnLogin"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/button_background"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/BtnRegister"
             android:text="@string/BtnRegister"
             android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/button_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

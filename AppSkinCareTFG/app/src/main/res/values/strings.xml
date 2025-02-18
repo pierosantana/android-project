@@ -132,5 +132,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- ACTIVITY RESUMEN FINAL -->
+    <string name="Title1ResumenFinal">Your routine resume</string>
+    <string name="SubTitle1ResumenFinal">Resume</string>
+    <string name="Valor1ResumenFinal">Total: 0.00€</string>
+    <string name="Valor1Boton">Finish</string>
+
+    <!-- ROUTINE EXPLAIN -->
+
+
 
 </resources>

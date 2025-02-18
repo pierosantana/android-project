@@ -164,4 +164,10 @@
         <color name="combination_skin_accent">#9C27B0</color>
 
 
+    <!--Colores de la aplicación-->
+    <color name="backgroundApplication">#E7E5DF</color>
+    <color name="backgroundButtonAccent">#44BBA4</color>
+    <color name="colorLetterButtons">#FFFFFF</color>
+
+
 </resources>

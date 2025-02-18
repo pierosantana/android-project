@@ -27,6 +27,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="@string/Numero1"
                 android:textColor="@color/NumberProgressBar"
                 android:textSize="14sp" />
@@ -34,6 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/Piel"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
@@ -54,6 +56,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="@string/Numero2"
                 android:textColor="@color/NumberProgressBar"
                 android:textSize="14sp" />
@@ -61,6 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/Horario"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
@@ -81,6 +85,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="@string/Numero3"
                 android:textColor="@color/NumberProgressBar"
                 android:textSize="14sp" />
@@ -88,6 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/Tipo"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
@@ -107,6 +113,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/circle_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="@string/Numero4"
                 android:textColor="@color/NumberProgressBar"
                 android:textSize="14sp" />
@@ -114,6 +121,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/Presupuesto"
                 android:textSize="12sp"
                 android:textColor="@android:color/black"
@@ -131,7 +139,7 @@
         android:layout_height="8dp"
         android:max="100"
         android:progress="0"
-        android:progressTint="#06AB99"
+        android:progressTint="@color/backgroundButtonAccent"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

@@ -19,6 +19,7 @@
             android:id="@+id/tvRoutineTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Rutina ID"
             android:textSize="21sp"
             android:textStyle="bold" />
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipo de rutina"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <!-- Contenedor de los pasos -->
@@ -38,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@color/backgroundButtonAccent"
             android:orientation="horizontal">
 
             <!-- Aquí se agregarán dinámicamente los círculos -->

@@ -6,7 +6,7 @@
     android:id="@+id/skin_care_type"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#B6FFF9">
+    android:background="@color/backgroundApplication">
 
     <TextView
         android:id="@+id/tv_titulo"
@@ -23,12 +23,7 @@
     <include
         android:id="@+id/include_progress"
         layout="@layout/progressbar" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -36,6 +31,12 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/container_background"
             android:padding="16dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_next"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ButtonAvanzar"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorLetterButtons"
             android:background="@drawable/button_background"
             android:enabled="false" />
 

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/basic_economic"
+    android:background="@color/backgroundApplication"
     android:fillViewport="true">
 
     <LinearLayout
@@ -65,7 +66,7 @@
             android:layout_gravity="center"
             android:padding="12dp"
             android:text="@string/ButtonCustomized"
-            android:textColor="#02433D"
+            android:textColor="@color/colorLetterButtons"
             android:textSize="12sp"/>
 
 

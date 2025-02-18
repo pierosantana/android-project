@@ -1,10 +1,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#E5FFF9">
+    android:background="#D9D9D9">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -131,5 +132,6 @@
         app:mbn_rippleColor="#2f424242"
         app:mbn_selectedIconColor="#3c415e"
         app:mbn_shadowColor="#1f212121"
-        app:mbn_hasAnimation="true" />
+        app:mbn_hasAnimation="true"
+        tools:ignore="MissingClass" />
 </androidx.constraintlayout.widget.ConstraintLayout>

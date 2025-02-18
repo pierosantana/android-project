@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backgroundApplication"
     android:padding="1dp">
 
     <androidx.cardview.widget.CardView
@@ -31,7 +32,7 @@
                 android:alpha="0.07"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_rutina_noche"
-                app:tint="#009688"/>
+                app:tint="@color/backgroundButtonAccent"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

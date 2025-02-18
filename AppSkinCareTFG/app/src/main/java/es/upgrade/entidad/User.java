@@ -77,6 +77,13 @@ public class User {
         this.routineList.add(routine);
     }
 
+    /**
+     * The toString method in the User class returns a string representation of the User object's
+     * attributes.
+     * 
+     * @return A string representation of a User object is being returned. It includes the user's name,
+     * email, password, skin type, and a list of routines.
+     */
     @Override
     public String toString() {
         return "User{" +
@@ -87,7 +94,10 @@ public class User {
                 ", routineList=" + routineList +
                 '}';
     }
-    // Método para reinicializar la instancia
+    
+    /**
+     * The `resetInstance` function creates a new instance of the `User` class.
+     */
     public static void resetInstance() {
         instance = new User();
     }

@@ -12,6 +12,15 @@ import es.upgrade.R;
 
 public class FinalActivity extends AppCompatActivity {
 
+   /**
+    * The `onCreate` method in the Java code snippet enables edge-to-edge display and adjusts padding
+    * based on system bars for the `activity_final` layout.
+    * 
+    * @param savedInstanceState The `savedInstanceState` parameter in the `onCreate` method of an
+    * Android activity is a Bundle object that provides the activity with previously saved state
+    * information, if available. This bundle contains key-value pairs that represent the state of the
+    * activity when it was last stopped or destroyed. It can be used to
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

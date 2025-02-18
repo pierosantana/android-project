@@ -21,20 +21,21 @@ public class AuthenticatorManager {
         return firebaseAuth.getCurrentUser();
     }
 
-    /**
-     * El método `register` crea una nueva cuenta de usuario con el correo electrónico y la
-     * contraseña proporcionados mediante la autenticación de Firebase.
-     *
-     * @param email es un `String` que representa la dirección de correo electrónico del usuario
-     * que se está registrando para una cuenta.
-     * @param password es un `String` que representa la contraseña que el usuario desea usar
-     * para su cuenta. Estavse usará durante el proceso de registro para crear una nueva cuenta
-     *vcon Firebase Authentication mediante el método `createUserWithEmailAndPassword`.
-     * @param onCompleteListener es una instancia de la interfaz `OnCompleteListener` que define
-     * un método de devolución de llamada `onComplete` que se llamará cuando se complete la tarea.
-     * Este método de devolución de llamada recibirá el resultado de la operación de autenticación
-     * (éxito o fracaso) como parámetro.
-     */
+    
+   /**
+    * The `register` function creates a new user account using the provided email and password in
+    * Firebase Authentication and invokes the `onCompleteListener` when the operation is complete.
+    * 
+    * @param email The `email` parameter in the `register` method is a `String` that represents the
+    * email address of the user who is registering for an account.
+    * @param password The `password` parameter in the `register` method is a string that represents the
+    * password that the user wants to use for their account. This password will be used during the
+    * registration process to create a new user account with Firebase Authentication.
+    * @param onCompleteListener The `onCompleteListener` parameter is an instance of the
+    * `OnCompleteListener` interface that defines a callback method `onComplete` which will be called
+    * when the task is complete. In this case, it is used to handle the result of creating a user with
+    * the provided email and password in Firebase authentication.
+    */
     public void register(String email, String password, OnCompleteListener<AuthResult> onCompleteListener) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(onCompleteListener)
@@ -42,20 +43,21 @@ public class AuthenticatorManager {
                     e.printStackTrace();
                 });
     }
+    
     /**
-     * El método `login` inicia la sesión de un usuario con el correo electrónico y la contraseña
-     * mediante la autenticación de Firebase e invoca `onCompleteListener` al finalizar.
-     *
-     * @param email representa la dirección de correo electrónico ingresada por el usuario para
-     * la autenticación.Se usará junto con la contraseña para iniciar la sesión del usuario
-     * mediante la autenticación de Firebase.
-     * @param password representa la contraseña ingresada por el usuario para la autenticación.
-     * Se usará junto con el email para iniciar la sesión del usuario mediante la autenticación
-     * de Firebase.
-     * @param onCompleteListener es una instancia de la interfaz `OnCompleteListener` que define
-     * un método de devolución de llamada `onComplete` que se llamará cuando se complete la tarea.
-     * Este método de devolución de llamada recibirá el resultado de la operación de autenticación
-     * (éxito o fracaso) como parámetro.
+     * The `login` function in Java signs in a user with the provided email and password using Firebase
+     * authentication and invokes the `onCompleteListener` upon completion.
+     * 
+     * @param email The `email` parameter in the `login` method represents the email address entered by
+     * the user for authentication. This email will be used along with the password to sign in to the
+     * Firebase authentication system.
+     * @param password The `password` parameter in the `login` method is a `String` type variable that
+     * represents the password input provided by the user for authentication. It is used along with the
+     * `email` parameter to sign in a user using Firebase Authentication.
+     * @param onCompleteListener The `onCompleteListener` parameter is an instance of the
+     * `OnCompleteListener` interface that defines a callback method `onComplete` which will be called
+     * when the login operation is complete. This callback method will receive an `AuthResult` object
+     * as a parameter, which represents the result of the authentication process.
      */
     public void login(String email, String password, OnCompleteListener<AuthResult> onCompleteListener) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -64,22 +66,25 @@ public class AuthenticatorManager {
                     e.printStackTrace();
                 });;
     }
+    
     /**
-     * El método `logout` cierra la sesión del usuario de la autenticación de Firebase.
+     * The `logout()` function signs the user out of Firebase authentication.
      */
     public void logout() {
         firebaseAuth.signOut();
     }
 
 
-    /**
-     * El método hashPassword toma una contraseña como entrada, la convierte en hash
-     * utilizando el algoritmo SHA-256 y devuelve la contraseña en hash codificada
-     * en formato Base64.
-     *
-     * @param password contraseña tomada por el metodo.
-     * @return devuelve la contraseña en hash como una cadena codificada en Base64.
-     */
+   
+   /**
+    * The hashPassword function takes a password as input, hashes it using SHA-256 algorithm, and
+    * returns the hashed password encoded in Base64 format.
+    * 
+    * @param password The `hashPassword` method you provided takes a password as input, hashes it using
+    * the SHA-256 algorithm, and returns the hashed password encoded in Base64 format.
+    * @return The method `hashPassword` is returning the hashed password as a Base64 encoded string
+    * with no line breaks.
+    */
     public String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

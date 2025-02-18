@@ -134,7 +134,7 @@ public class UserRegistration extends AppCompatActivity {
         String passwordHash = authenticatorManager.hashPassword(password);
         if (passwordHash == null) {
             progressDialog.dismiss();
-            showMessage("Error al generar el hash de la contraseña");
+            showMessage("Error generating password hash");
             return;
         }
         // Reinicializar las instancias de User y Routine
@@ -152,10 +152,10 @@ public class UserRegistration extends AppCompatActivity {
         userDao.saveUser(user, task -> {
             progressDialog.dismiss();
             if (task.isSuccessful()) {
-                showMessage("Cuenta creada con éxito");
+                showMessage("Account successfully created");
                 startSession(mail, password);
             } else {
-                showMessage("Error al guardar la información del usuario");
+                showMessage("Error saving user information");
             }
         });
     }

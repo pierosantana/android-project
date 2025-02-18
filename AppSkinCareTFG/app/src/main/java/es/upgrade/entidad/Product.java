@@ -3,6 +3,7 @@ package es.upgrade.entidad;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Product implements Serializable {
@@ -48,11 +49,11 @@ public class Product implements Serializable {
     }
 
     public Double getPrice() {
-        return price;
+        return Double.parseDouble(String.format("%.2f", price));
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+        this.price = Double.parseDouble(String.format("%.2f", price));
     }
 
     public String getBrand() {

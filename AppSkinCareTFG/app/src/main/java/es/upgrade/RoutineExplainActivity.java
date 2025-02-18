@@ -66,6 +66,17 @@ public class RoutineExplainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Carga los pasos de la rutina desde la API y los configura en el RecyclerView.
+     * Este metodo realiza una llamada a la API para obtener los pasos de la rutina, limita la cantidad de pasos
+     * según el número definido en la rutina y guarda los pasos obtenidos en un objeto de tipo StepDao.
+     * Si la llamada a la API es exitosa, los pasos se cargan en el RecyclerView de la actividad,
+     * de lo contrario, se muestra un mensaje de error al usuario.
+     *
+     * @see RetrofitClient
+     * @see StepDao
+     * @see RoutineExplainActivity
+     */
     private void cargarStepsFromApi() {
         Call<List<Step>> call = RetrofitClient.getApiService().getSteps(); // Llamada al endpoint
         call.enqueue(new Callback<List<Step>>() {

@@ -1,7 +1,10 @@
 package es.upgrade;
 
+import static android.app.ProgressDialog.show;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,9 +45,9 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         Bundle args = new Bundle();
         args.putInt("num_options", 3); // Número de opciones
         args.putStringArray("options_texts", new String[]{
-                "Piel seca", // Opción 1
-                "Piel grasa", // Opción 2
-                "Piel mixta"  // Opción 3
+                "Dry skin", // Option 1
+                "Normal skin", // Option 2
+                "Combination skin" // Option 3
         });
         questionnaireFragment.setArguments(args);
 
@@ -76,7 +79,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         btnNext.setEnabled(true);
 
         // Puedes mostrar un Toast para feedback del usuario
-        Toast.makeText(this, "Opción seleccionada: " + selectedOption, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected option: " + selectedOption, Toast.LENGTH_SHORT).show();
     }
 
     private void selectSkinType(SkinType type) {
@@ -88,6 +91,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
     }
 
     private void nextActivity() {
+        Log.d("TAG", "nextActivity: "  + routine);
         Intent intent = new Intent(this, HourActivity.class);
         intent.putExtra("progress", progress);
         intent.putExtra("routine", routine); // Pasar la rutina a la siguiente actividad

@@ -50,8 +50,8 @@ public class HourActivity extends AppCompatActivity implements
         Bundle args = new Bundle();
         args.putInt("num_options", 2);// Número de opciones que quieres mostrar
         args.putStringArray("options_texts", new String[]{
-                "Mañana y Noche", // Opción 1
-                "Noche"   // Opción 2
+                "Complete", // Option 1
+                "Night" // Option 2
         });
         questionnaireFragment.setArguments(args);
 
@@ -114,6 +114,6 @@ public class HourActivity extends AppCompatActivity implements
         btnNext.setEnabled(true);
 
         // Mostrar la opción seleccionada (opcional)
-        Toast.makeText(this, "Opción seleccionada: " + (selectedOption == 0 ? "Mañana" : "Noche"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected option: " + (selectedOption == 0 ? "Complete" : "Night"), Toast.LENGTH_SHORT).show();
     }
 }

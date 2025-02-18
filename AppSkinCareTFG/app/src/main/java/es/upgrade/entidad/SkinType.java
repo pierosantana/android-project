@@ -4,27 +4,29 @@ import es.upgrade.R;
 
 public enum SkinType {
     DRY(R.drawable.ic_piel_seca,
-            "Si tu piel se siente tirante, áspera o con tendencia a descamarse, " +
-                    "especialmente después de lavarla, es probable que tengas piel seca. " +
-                    "Este tipo de piel produce menos grasa natural de lo necesario para mantener " +
-                    "la hidratación, lo que la hace más propensa a la irritación, enrojecimiento y " +
-                    "la aparición temprana de líneas de expresión. Puede presentar zonas con textura rugosa, " +
-                    "falta de luminosidad y una sensación constante de sequedad. Si notas que tu piel se agrieta " +
-                    "fácilmente en invierno o que necesita hidratación constante para sentirse cómoda, " +
-                    "entonces tienes piel seca."),
-    NORMAL(R.drawable.ic_piel_normal, "Si tu piel no suele sentirse ni demasiado grasosa ni demasiado seca, " +
-            "no presentas descamación ni zonas con exceso de brillo y rara vez tienes imperfecciones, probablemente " +
-            "tengas piel normal. Este tipo de piel tiene un equilibrio adecuado de grasa e hidratación, " +
-            "lo que le da una apariencia suave, uniforme y con un brillo saludable. Los poros son pequeños o medianos " +
-            "y no se obstruyen con facilidad. Aunque este tipo de piel no suele presentar problemas específicos, " +
-            "mantener una rutina básica de limpieza, hidratación y protección solar es clave para conservar su equilibrio natural."),
-    COMBINATION(R.drawable.ic_piel_mixta, "Si notas que tu frente, nariz y mentón tienden a ser más grasosos " +
-            "y brillantes, mientras que tus mejillas y otras áreas del rostro son más secas o normales, entonces " +
-            "tienes piel mixta. Este tipo de piel es muy común y puede presentar poros dilatados y propensión " +
-            "a puntos negros o espinillas en la zona T, mientras que las mejillas pueden sentirse más " +
-            "tirantes o incluso descamarse en algunas épocas del año. Identificar qué partes de tu rostro " +
-            "son más grasas y cuáles más secas te ayudará a elegir productos específicos para equilibrar " +
-            "tu piel sin deshidratarla ni aumentar la producción de grasa.");
+            "If your skin feels tight, rough, or tends to peel, especially " +
+                    "after washing it, you probably have dry skin. This type of skin " +
+                    "produces less natural oil than needed to maintain hydration, making " +
+                    "it more prone to irritation, redness, and early signs of fine lines. " +
+                    "It may have areas with rough texture, lack of radiance, and a " +
+                    "constant feeling of dryness. If you notice your skin cracking easily " +
+                    "in winter or that it needs constant hydration to feel comfortable, " +
+                    "then you have dry skin."),
+    NORMAL(R.drawable.ic_piel_normal, "If your skin doesn’t usually feel too oily " +
+            "or too dry, you don’t experience peeling or areas with excess shine, and you " +
+            "rarely have imperfections, you probably have normal skin. This type of skin has " +
+            "a proper balance of oil and hydration, giving it a smooth, even appearance with " +
+            "a healthy glow. The pores are small or medium-sized and don’t get clogged easily. " +
+            "Although this skin type doesn’t typically present specific issues, maintaining a " +
+            "basic routine of cleansing, moisturizing, and sun protection is key to keeping its " +
+            "natural balance.."),
+    COMBINATION(R.drawable.ic_piel_mixta, "If you notice that your forehead, nose, and " +
+            "chin tend to be oilier and shinier, while your cheeks and other areas of your face " +
+            "are drier or normal, then you have combination skin. This skin type is very common " +
+            "and may have enlarged pores and a tendency to blackheads or pimples in the T-zone, " +
+            "while the cheeks may feel tighter or even peel in certain seasons. Identifying which " +
+            "parts of your face are oilier and which are drier will help you choose specific " +
+            "products to balance your skin without dehydrating it or increasing oil production.");
 
 
     private final int iconResId;

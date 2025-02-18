@@ -148,10 +148,10 @@ public class LobbyActivity extends AppCompatActivity {
                         if (selectedImageUri != null) {
                             profileImage.setImageURI(selectedImageUri);
                         } else {
-                            showToast("Error al seleccionar la imagen.");
+                            showToast("Error selecting image.");
                         }
                     } else {
-                        showToast("No se seleccionó ninguna imagen.");
+                        showToast("No image selected.");
                     }
                 });
 
@@ -159,7 +159,7 @@ public class LobbyActivity extends AppCompatActivity {
         editImageButton.setOnClickListener(v -> openGallery());
 
         // Configuración de los botones de acción del menú
-        findViewById(R.id.btnProfile).setOnClickListener(v -> showToast("Mi Perfil"));
+        findViewById(R.id.btnProfile).setOnClickListener(v -> showToast("My Profile"));
         findViewById(R.id.btnNewRoutine).setOnClickListener(v -> {
             if (user.getSkinType() == null) {
                 startActivity(new Intent(LobbyActivity.this, SkinTypeActivity.class));
@@ -176,7 +176,7 @@ public class LobbyActivity extends AppCompatActivity {
         });
         findViewById(R.id.btnMyRoutines).setOnClickListener(v -> {
             if (user.getRoutineList() == null) {
-                showToast("No hay rutinas creadas aún");
+                showToast("No routines created yet");
             }
             Intent intent = new Intent(LobbyActivity.this, MyRoutinesActivity.class);
             startActivity(intent);
@@ -191,7 +191,7 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     private void logOut() {
-        Toast.makeText(this, "Bye " + User.getInstance().getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Logging out, bye " + User.getInstance().getName(), Toast.LENGTH_SHORT).show();
         authenticatorManager.logout();
         finish();
     }

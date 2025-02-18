@@ -45,8 +45,8 @@ public class BudgetActivity extends AppCompatActivity implements
         Bundle args = new Bundle();
         args.putInt("num_options", 2); // Número de opciones que quieres mostrar
         args.putStringArray("options_texts", new String[]{
-                "Presupuesto Económico", // Opción 1
-                "Presupuesto Personalizado" // Opción 2
+                "Economic Budget", // Opción 1
+                "Customized Budget" // Opción 2
         });
         questionnaireFragment.setArguments(args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -94,6 +94,6 @@ public class BudgetActivity extends AppCompatActivity implements
         btnNext.setEnabled(true);
 
         // Mostrar un mensaje de feedback (opcional)
-        Toast.makeText(this, "Opción seleccionada: " + (selectedOption == 0 ? "Presupuesto Económico" : "Presupuesto Personalizado"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected option: " + (selectedOption == 0 ? "Economic Budget" : "Customized Budget"), Toast.LENGTH_SHORT).show();
     }
 }

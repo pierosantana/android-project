@@ -4,13 +4,14 @@ import es.upgrade.R;
 
 public enum Schedule {
     COMPLETE(R.drawable.ic_dia_y_noche,
-            "El objetivo principal es proteger tu piel. Durante la noche, tu piel se recupera y produce células nuevas. " +
-                    "Por la mañana, necesitas limpiar la piel para eliminar los residuos de esa renovación nocturna y aplicar " +
-                    "protector solar para evitar los daños del sol. Asegúrate de usar productos ligeros y hidratantes."),
-    NIGHT(R.drawable.ic_rutina_noche,"Es el momento ideal para enfocarte en la reparación de la piel. La noche es cuando la " +
-            "piel se regenera, por lo que los tratamientos más intensivos como sueros, cremas " +
-            "antiarrugas o productos con ácidos son más efectivos. La limpieza profunda también es clave para eliminar el maquillaje, " +
-            "el polvo y las impurezas acumuladas durante el día.");
+            "The main goal is to protect your skin. During the night, your skin recovers " +
+                    "and produces new cells. In the morning, you need to cleanse your skin to " +
+                    "remove the residue from that overnight renewal and apply sunscreen to prevent " +
+                    "sun damage. Make sure to use light, moisturizing products."),
+    NIGHT(R.drawable.ic_rutina_noche,"It’s the perfect time to focus on skin repair. " +
+            "Nighttime is when the skin regenerates, so more intensive treatments like serums, " +
+            "anti-wrinkle creams, or products with acids are more effective. Deep cleansing is " +
+            "also key to remove makeup, dust, and impurities accumulated throughout the day.");
 
     private final int iconResId;
     private final String description;

@@ -56,7 +56,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
 
         }
 
-        titulo.setText("Has elegido las siguientes cosas: ¿Deseas modificar algo?");
+        titulo.setText("Selected items: \n Do you want to modify anything?");
 
         continuar.setOnClickListener(view -> {
             Intent intent = null;
@@ -85,9 +85,9 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         edit.setOnClickListener(v -> {
             AlertDialogCustom.showCustomAlertDialog(
                     this,
-                    "Confirmación",
-                    "¿Está seguro que quiere editar la rutina?",
-                    "Sí",
+                    "Confirmation",
+                    "¿Are you sure you want to edit the routine?",
+                    "Yes",
                     (dialog, which) -> {
                         startActivity(new Intent(ReviewAndEditActivity.this, SkinTypeActivity.class));
                         dialog.dismiss();
@@ -119,42 +119,41 @@ public class ReviewAndEditActivity extends AppCompatActivity {
             return "Tipo de piel no definido";  // O cualquier texto por defecto
         }
         switch (skinType) {
-            case DRY: return "Piel seca";
-            case NORMAL: return "Piel normal";
-            case COMBINATION: return "Piel mixta";
-            default: return "Tipo de piel desconocido";
+            case DRY: return "Dry skin";
+            case NORMAL: return "Normal skin";
+            case COMBINATION: return "Combination skin";
+            default: return "Unknown skin type";
         }
     }
 
     private String formatSchedule(Schedule schedule) {
-        return (schedule == Schedule.NIGHT) ? "Noche" : "Mañana y Noche";
+        return (schedule == Schedule.NIGHT) ? "Night" : "Complete";
     }
 
     private String formatRoutineType(RoutineType routineType) {
-        return (routineType == RoutineType.BASIC) ? "Básica" : "Completa";
+        return (routineType == RoutineType.BASIC) ? "Basic" : "Complete";
     }
 
     private String formatBudget(Budget budget) {
-        return (budget == Budget.ECONOMIC) ? "Económico" : "Personalizado";
+        return (budget == Budget.ECONOMIC) ? "Economic" : "Customized";
     }
 
     private int getIconForOption(String title, String description) {
         switch (title) {
-            case "Tipo de piel":
-                if (description.equals("Piel seca")) return R.drawable.ic_piel_seca;
-                if (description.equals("Piel normal")) return R.drawable.ic_piel_normal;
-                if (description.equals("Piel mixta")) return R.drawable.ic_piel_mixta;
+            case "Skin type":
+                if (description.equals("Dry skin")) return R.drawable.ic_piel_seca;
+                if (description.equals("Normal skin")) return R.drawable.ic_piel_normal;
+                if (description.equals("Combination skin")) return R.drawable.ic_piel_mixta;
                 return R.drawable.ic_piel_normal; // Icono por defecto en caso de error
 
-            case "Momento del día":
-                return description.equals("Noche") ? R.drawable.ic_rutina_noche : R.drawable.ic_dia_y_noche;
+            case "Time of day":
+                return description.equals("Night") ? R.drawable.ic_rutina_noche : R.drawable.ic_dia_y_noche;
 
-            case "Tipo de rutina":
-                return description.equals("Básica") ? R.drawable.ic_routine_basic_complete : R.drawable.ic_routine_basic_complete;
+            case "Routine type":
+                return description.equals("Basic") ? R.drawable.ic_routine_basic_complete : R.drawable.ic_routine_basic_complete;
 
-            case "Presupuesto":
-                return description.equals("Económico") ? R.drawable.ic_economic : R.drawable.ic_budget_rich;
-
+            case "Budget":
+                return description.equals("Economic") ? R.drawable.ic_economic : R.drawable.ic_budget_rich;
             default:
                 return R.drawable.ic_settings; // Icono genérico en caso de error
         }
@@ -175,9 +174,9 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         // Limpia el contenedor y vuelve a agregar las vistas actualizadas
         optionsContainer.removeAllViews();
 
-        addCustomOptionView("Tipo de piel:", skinTypeDesc, getIconForOption("Tipo de piel", skinTypeDesc));
-        addCustomOptionView("Momento del día:", scheduleDesc, getIconForOption("Momento del día", scheduleDesc));
-        addCustomOptionView("Tipo de rutina:", routineTypeDesc, getIconForOption("Tipo de rutina", routineTypeDesc));
-        addCustomOptionView("Presupuesto:", budgetDesc, getIconForOption("Presupuesto", budgetDesc));
+        addCustomOptionView("Skin type:", skinTypeDesc, getIconForOption("Skin type", skinTypeDesc));
+        addCustomOptionView("Time of day:", scheduleDesc, getIconForOption("Time of day", scheduleDesc));
+        addCustomOptionView("Routine type:", routineTypeDesc, getIconForOption("Routine type", routineTypeDesc));
+        addCustomOptionView("Budget:", budgetDesc, getIconForOption("Budget", budgetDesc));
     }
 }

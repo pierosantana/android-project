@@ -48,39 +48,39 @@ public class ResumenFinal extends AppCompatActivity {
         Product selectedTratamiento = (Product) getIntent().getSerializableExtra("selectedTratamiento");
         Product selectedProtector = (Product) getIntent().getSerializableExtra("selectedProtector");
 
-        // Crear el resumen de la rutina
-        StringBuilder resumen = new StringBuilder("Resumen de tu rutina:");
-        resumen.append("\n\nTipo de piel: ").append(skinType);
-        resumen.append("\nMomento del día: ").append(schedule);
-        resumen.append("\nTipo de rutina: ").append(routineType);
-        resumen.append("\nPresupuesto: ").append(budget);
-        resumen.append("\n\nProductos seleccionados:\n\n");
+        // Create the routine summary
+        StringBuilder resumen = new StringBuilder("Your routine summary:");
+        resumen.append("\n\nSkin type: ").append(skinType);
+        resumen.append("\nTime of day: ").append(schedule);
+        resumen.append("\nRoutine type: ").append(routineType);
+        resumen.append("\nBudget: ").append(budget);
+        resumen.append("\n\nSelected products:\n\n");
 
         double totalPrecio = 0.0;
 
         if (selectedLimpieza != null) {
-            resumen.append("Producto de Limpieza: ").append(selectedLimpieza.getName())
-                    .append(" - Precio: ").append(selectedLimpieza.getPrice()).append("€\n");
+            resumen.append("Cleansing product: ").append(selectedLimpieza.getName())
+                    .append(" - Price: ").append(selectedLimpieza.getPrice()).append("€\n");
             totalPrecio += selectedLimpieza.getPrice();
         }
         if (selectedHidratacion != null) {
-            resumen.append("Producto de Hidratación: ").append(selectedHidratacion.getName())
-                    .append(" - Precio: ").append(selectedHidratacion.getPrice()).append("€\n");
+            resumen.append("Moisturizing product: ").append(selectedHidratacion.getName())
+                    .append(" - Price: ").append(selectedHidratacion.getPrice()).append("€\n");
             totalPrecio += selectedHidratacion.getPrice();
         }
         if (selectedTonificacion != null) {
-            resumen.append("Producto de Tonificación: ").append(selectedTonificacion.getName())
-                    .append(" - Precio: ").append(selectedTonificacion.getPrice()).append("€\n");
+            resumen.append("Toning product: ").append(selectedTonificacion.getName())
+                    .append(" - Price: ").append(selectedTonificacion.getPrice()).append("€\n");
             totalPrecio += selectedTonificacion.getPrice();
         }
         if (selectedTratamiento != null) {
-            resumen.append("Producto de Tratamiento: ").append(selectedTratamiento.getName())
-                    .append(" - Precio: ").append(selectedTratamiento.getPrice()).append("€\n");
+            resumen.append("Treatment product: ").append(selectedTratamiento.getName())
+                    .append(" - Price: ").append(selectedTratamiento.getPrice()).append("€\n");
             totalPrecio += selectedTratamiento.getPrice();
         }
         if (selectedProtector != null) {
-            resumen.append("Producto de Protector Solar: ").append(selectedProtector.getName())
-                    .append(" - Precio: ").append(selectedProtector.getPrice()).append("€\n");
+            resumen.append("Sunscreen product: ").append(selectedProtector.getName())
+                    .append(" - Price: ").append(selectedProtector.getPrice()).append("€\n");
             totalPrecio += selectedProtector.getPrice();
         }
 
@@ -92,7 +92,7 @@ public class ResumenFinal extends AppCompatActivity {
         // Si algún producto no fue seleccionado, mostrar un mensaje
         if (selectedLimpieza == null || selectedHidratacion == null || selectedTonificacion == null
                 || selectedTratamiento == null || selectedProtector == null) {
-            Toast.makeText(this, "Faltan productos por seleccionar.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Products still to be selected.", Toast.LENGTH_SHORT).show();
         }
 
         Routine routine = new Routine();

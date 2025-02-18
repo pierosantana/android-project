@@ -42,7 +42,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         holder.stepProTip.setText(String.join("\n", step.getProTips()));
 
         // Actualiza el contador de paso
-        holder.tvStepCounter.setText("Paso " + (position + 1));
+        holder.tvStepCounter.setText("Step " + (position + 1));
 
 
 

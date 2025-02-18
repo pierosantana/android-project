@@ -39,18 +39,18 @@ public class SkinDescriptionActivity extends AppCompatActivity {
         });
         viewPager = findViewById(R.id.viewPager);
         btnBack = findViewById(R.id.btnBack);
-        // Lista de tipos de piel con imagen y descripción
+        // List of skin types with image and description
         dotsIndicator = findViewById(R.id.dotsIndicator);
 
-        // Configurar el adaptador y ViewPager
+        //Configure the adapter and the viewpager
         adapter = new SkinTypeAdapter();
         viewPager.setAdapter(adapter);
 
-        // Conectar el indicador de páginas
+        // “Connect the page indicator”
         dotsIndicator.attachTo(viewPager);
 
 
-        // Botón de Confirmación
+        // Confirmation button
         btnBack.setOnClickListener(view -> {
             Intent intent = new Intent(SkinDescriptionActivity.this, SkinTypeActivity.class);
             startActivity(intent);

@@ -82,9 +82,9 @@ public class UserLogin extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
-            showToast("Correo inválido");
+            showToast("Invalid email.");
         } else if (TextUtils.isEmpty(password)) {
-            showToast("Ingrese contraseña");
+            showToast("Enter password.");
         } else {
             loginUser(mail, password);
         }
@@ -107,14 +107,14 @@ public class UserLogin extends AppCompatActivity {
                     UserDao userDao = UserDao.getInstance();
                     userDao.recoveryUser(userR -> {
                         Log.d("UserLogin_loginUser", "Usuario recuperado: " + userR);
-                        showToast("Welcome " + userR.getEmail() + ", Name " + userR.getName());
+                        showToast("Welcome " +  userR.getName());
                     });
 
                     startActivity(new Intent(UserLogin.this, LobbyActivity.class));
                     finish();
                 }
             }else{
-                showToast("Error al iniciar session");
+                showToast("Login error");
             }
         });
     }

@@ -43,8 +43,8 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
         Bundle args = new Bundle();
         args.putInt("num_options", 2); // Número de opciones que quieres mostrar
         args.putStringArray("options_texts", new String[]{
-                "Rutina Completa", // Opción 1
-                "Rutina Básica"    // Opción 2
+                "Complete routine", // Opción 1
+                "Basic routine"    // Opción 2
         });
         questionnaireFragment.setArguments(args);
 
@@ -104,6 +104,6 @@ public class SkinCareTypeActivity extends AppCompatActivity implements
         btnNext.setEnabled(true);
 
         // Mostrar un mensaje de feedback (opcional)
-        Toast.makeText(this, "Opción seleccionada: " + (selectedOption == 0 ? "Rutina Completa" : "Rutina Básica"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected option: " + (selectedOption == 0 ? "Complete routine" : "Basic routine"), Toast.LENGTH_SHORT).show();
     }
 }

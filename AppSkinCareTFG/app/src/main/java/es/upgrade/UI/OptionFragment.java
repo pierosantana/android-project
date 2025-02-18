@@ -23,6 +23,14 @@ public class OptionFragment extends Fragment {
     private static final String ARG_IMAGEN = "imagen";
     private static final String ARG_DESC = "descripcion";
 
+    /**
+     * The `newInstance` function creates a new instance of `OptionFragment` with arguments based on
+     * the provided `SkinType`.
+     * 
+     * @param tipoPiel `tipoPiel` is an enum type variable representing the type of skin.
+     * @return An instance of the OptionFragment class with arguments set based on the SkinType
+     * provided.
+     */
     public static OptionFragment newInstance(SkinType tipoPiel) {
         OptionFragment fragment = new OptionFragment();
         Bundle args = new Bundle();
@@ -32,6 +40,22 @@ public class OptionFragment extends Fragment {
         return fragment;
     }
 
+   /**
+    * The onCreateView function inflates the layout for the OptionFragment.
+    * 
+    * @param inflater The `inflater` parameter in the `onCreateView` method is used to inflate a layout
+    * resource file into a View object that represents the layout. It is responsible for converting the
+    * XML layout file into corresponding View objects that can be displayed on the screen.
+    * @param container The `container` parameter in the `onCreateView` method represents the parent
+    * view that the fragment's UI will be attached to. It is the ViewGroup in which the fragment's
+    * layout will be inflated and displayed. If the fragment is not being attached to any parent view,
+    * this parameter will be null
+    * @param savedInstanceState The `savedInstanceState` parameter in the `onCreateView` method is a
+    * Bundle object that provides data about the previous state of the fragment. It allows you to
+    * restore the fragment to its previous state if needed. You can use this parameter to retrieve any
+    * previously saved data or configuration information.
+    * @return A View object is being returned.
+    */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

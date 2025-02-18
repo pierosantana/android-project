@@ -91,16 +91,33 @@ public class Routine implements Serializable {
         return isNightRoutine;
     }
 
-    // Método para obtener la cantidad de pasos de la rutina
+    
+   /**
+    * The function `getStepCount` returns the number of steps based on the routine type and whether it
+    * is a night routine.
+    * 
+    * @return The `getStepCount` method returns the number of steps based on the `routineType` and
+    * `isNightRoutine` conditions. If `routineType` is `BASIC`, it returns 2. If `routineType` is
+    * `COMPLETE` and `isNightRoutine` is true, it returns 4. If `routineType` is `COMPLETE` and
+    * `isNightRoutine`
+    */
     public int getStepCount(){
         if (routineType == RoutineType.BASIC) {
             return 2;
         } else if (routineType == RoutineType.COMPLETE) {
             return isNightRoutine ? 4 : 5;
         }
-        return -1; // Si el tipo de rutina no es válido
+        return -1; 
     }
 
+   /**
+    * The toString method is overridden to provide a string representation of a Routine object's
+    * attributes.
+    * 
+    * @return A string representation of a Routine object is being returned. It includes the values of
+    * the schedule, routineType, budget, budgetProducts, productList, and skinType properties of the
+    * Routine object.
+    */
     @Override
     public String toString() {
         return "Routine{" +

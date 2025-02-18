@@ -46,12 +46,22 @@ public class LobbyActivity extends AppCompatActivity {
     private Routine routine;
 
 
+    /**
+     * The `onCreate` method in this Java code initializes the activity layout, sets up system bar
+     * margins, checks user authentication, configures a bottom navigation menu, and loads different
+     * fragments based on user selection.
+     * 
+     * @param savedInstanceState The `savedInstanceState` parameter in the `onCreate` method is a
+     * Bundle object that provides data about the previous state of the activity if it was previously
+     * destroyed and recreated. This bundle allows you to restore the activity to its previous state,
+     * such as restoring user interface data or other information. You can
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);  // Cargar layout de Lobby
 
-        // Configurar márgenes para las barras del sistema (si es necesario)
+        // Configurate the system bar margins
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -61,7 +71,7 @@ public class LobbyActivity extends AppCompatActivity {
         authenticatorManager = new AuthenticatorManager();
 
 
-        // Verificar si el usuario está logueado
+        // Verify if the user is authenticated
         if (authenticatorManager.getCurrentUser() == null) {
             startActivity(new Intent(this, LobbyActivity.class));
             finish();
@@ -69,7 +79,7 @@ public class LobbyActivity extends AppCompatActivity {
         }
 
 
-        // Inicializar el BottomNavigation
+        // Initialize the bottom navigation menu
         bottomNavigation = findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new NafisBottomNavigation.Model(1, R.drawable.ic_calendar));
         bottomNavigation.add(new NafisBottomNavigation.Model(2, R.drawable.ic_home));
@@ -80,30 +90,34 @@ public class LobbyActivity extends AppCompatActivity {
             public Unit invoke(NafisBottomNavigation.Model model) {
                 switch (model.getId()) {
                     case ID_HOME:
-                        // Si selecciona Home, se mantiene en LobbyActivity sin fragmentos
+                        // If Home is selected, load the HomeFragment
                         loadHomeFragment();
                         break;
 
                     case ID_CALENDAR:
-                        // Si selecciona Calendar, mostrar el fragmento CalendarFragment
+                        // If Calendar is selected, load the CalendarFragment
                         loadFragment(new CalendarFragment());
                         break;
 
                     case ID_PRODUCTS:
-                        // Si selecciona Products, mostrar el fragmento ProductsFragment
+                        // If Products is selected, load the ProductsFragment
                         loadFragment(new ProductsFragment());
                         break;
                 }
                 return null;
             }
         });
-        // Cargar el fragmento inicial si es necesario, por ejemplo, HomeFragment
+        // Load the HomeFragment
         loadHomeFragment();
 
-        // Configuración de los elementos del UserMenu directamente en la Activity
+        // Configure the user menu
         configureUserMenu();
     }
-    // Función para cargar el fragmento de Home (vacío o con la interfaz de Lobby)
+    
+   /**
+    * The function `loadHomeFragment` sets the visibility of a view and replaces a fragment with an
+    * empty fragment to display the Lobby.
+    */
     private void loadHomeFragment() {
         findViewById(R.id.mainUser).setVisibility(View.VISIBLE);
         // Aquí no se necesita ningún fragmento, ya que solo se debe mostrar el Lobby sin fragmentos
@@ -112,7 +126,16 @@ public class LobbyActivity extends AppCompatActivity {
                 .commit();
     }
 
-    // Función para cargar los fragmentos (Calendar, Products)
+    
+    /**
+     * The `loadFragment` function hides a specific view and replaces its content with a given fragment
+     * in an Android application.
+     * 
+     * @param fragment The `fragment` parameter in the `loadFragment` method is an instance of the
+     * `Fragment` class that you want to load and display within the specified container in your
+     * Android application. When this method is called, the content of the container specified by the
+     * `R.id.barCustomMenu` resource ID
+     */
     private void loadFragment(Fragment fragment) {
         findViewById(R.id.mainUser).setVisibility(View.GONE);
         // Reemplazar el contenido del contenedor con el fragmento adecuado
@@ -121,6 +144,11 @@ public class LobbyActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * The `configureUserMenu` function sets up the user menu interface, including displaying user
+     * information, handling image selection, and configuring action buttons for profile, routine
+     * creation, viewing routines, and logging out.
+     */
     private void configureUserMenu() {
         // Configurar elementos del menú de usuario
         CircleImageView profileImage = findViewById(R.id.profileImage);
@@ -130,7 +158,7 @@ public class LobbyActivity extends AppCompatActivity {
 
         User user = User.getInstance();
 
-        // Establecer nombre del usuario
+        
         tvName.setText(user.getName());
         // Verificar y mostrar el tipo de piel
 
@@ -155,11 +183,12 @@ public class LobbyActivity extends AppCompatActivity {
                     }
                 });
 
-        // Establecer listener para cambiar la imagen de perfil
+        // Confirgure the editImageButton to open the gallery
         editImageButton.setOnClickListener(v -> openGallery());
 
         // Configuración de los botones de acción del menú
         findViewById(R.id.btnProfile).setOnClickListener(v -> showToast("My Profile"));
+
         findViewById(R.id.btnNewRoutine).setOnClickListener(v -> {
             if (user.getSkinType() == null) {
                 startActivity(new Intent(LobbyActivity.this, SkinTypeActivity.class));
@@ -170,7 +199,7 @@ public class LobbyActivity extends AppCompatActivity {
                     Log.e("LobbyActivity","SkinType es nulo");
                 }
                 Intent intent = new Intent(this, HourActivity.class);
-                intent.putExtra("routine", routine); // Pasar la rutina a la siguiente actividad
+                intent.putExtra("routine", routine); 
                 startActivity(intent);
             }
         });
@@ -184,18 +213,32 @@ public class LobbyActivity extends AppCompatActivity {
         findViewById(R.id.btnLogout).setOnClickListener(v -> logOut());
     }
 
+    /**
+     * The `openGallery()` function launches an intent to pick an image from the device's external
+     * storage using the system's gallery application.
+     */
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         galleryLauncher.launch(intent);
     }
 
+    /**
+     * The `logOut()` function logs out the current user, displays a farewell message using a Toast,
+     * and finishes the current activity.
+     */
     private void logOut() {
         Toast.makeText(this, "Logging out, bye " + User.getInstance().getName(), Toast.LENGTH_SHORT).show();
         authenticatorManager.logout();
         finish();
     }
 
+    /**
+     * The function `showToast` displays a short-duration toast message in an Android application.
+     * 
+     * @param message The `message` parameter in the `showToast` method is a string that represents the
+     * text message you want to display in the toast notification.
+     */
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

@@ -32,16 +32,6 @@
 
         </LinearLayout>
 
-        <!-- Nombre del paso -->
-        <TextView
-            android:id="@+id/tvStepName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/black"
-            android:text="Título del Paso"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
         <!-- Descripción del paso -->
         <TextView

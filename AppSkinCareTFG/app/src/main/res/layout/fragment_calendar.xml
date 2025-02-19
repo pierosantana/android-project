@@ -3,13 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.fragments.CalendarFragment">
 
 
-    <TextView
-        android:id="@+id/textView"
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/materialCalendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="AQUI IRA EL CALENDARIO" />
+        android:layout_height="wrap_content"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="#44BBA4"
+        app:mcv_arrowColor="@color/black"
+        app:mcv_headerTextAppearance="@style/TextAppearance.AppCompat.Large"
+        app:mcv_weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 </FrameLayout>

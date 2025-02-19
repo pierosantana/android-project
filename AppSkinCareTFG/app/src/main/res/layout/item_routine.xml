@@ -39,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@color/backgroundButtonAccent"
             android:orientation="horizontal">
 
             <!-- Aquí se agregarán dinámicamente los círculos -->

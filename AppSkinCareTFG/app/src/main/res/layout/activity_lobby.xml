@@ -1,137 +1,174 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/main"
-    android:background="#D9D9D9">
+    android:layout_height="match_parent">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainUser">
+        android:id="@+id/main"
+        android:background="#D9D9D9">
 
-        <!-- Contenedor para la imagen y el botón de editar -->
-        <FrameLayout
-            android:id="@+id/profileContainer"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/avatar"
-                android:scaleType="centerCrop" />
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainUser">
+            <!-- Icon Burguer Menu -->
             <ImageButton
-                android:id="@+id/editImagebutton"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="4dp"
-                android:background="@drawable/circle_background"
-                android:src="@drawable/ic_edit"
-                android:contentDescription="Editar foto"
-                app:tint="@color/white" />
-        </FrameLayout>
+                android:id="@+id/btnMenu"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_menu_burguer"
+                android:contentDescription="@string/BurguerMenu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
 
-        <TextView
-            android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TVNombre"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/profileContainer"
+            <!-- Contenedor para la imagen y el botón de editar -->
+            <FrameLayout
+                android:id="@+id/profileContainer"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/avatar"
+                    android:scaleType="centerCrop" />
+
+                <ImageButton
+                    android:id="@+id/editImagebutton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_edit"
+                    android:contentDescription="@string/EditPhoto"
+                    app:tint="@color/white" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TVNombre"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/profileContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/skinType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/userName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:id="@+id/menuContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/skinType">
+
+                <es.upgrade.UI.CustomViewMenu
+                    android:id="@+id/btnProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonIcon="@drawable/ic_face"
+                    app:buttonText="@string/ButtonTextPerfil" />
+
+                <es.upgrade.UI.CustomViewMenu
+                    android:id="@+id/btnNewRoutine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonIcon="@drawable/ic_plus"
+                    app:buttonText="@string/ButtonTextRoutine" />
+
+                <es.upgrade.UI.CustomViewMenu
+                    android:id="@+id/btnMyRoutines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonIcon="@drawable/products_svgrepo_com"
+                    app:buttonText="@string/ButtonTextRoutines" />
+
+                <es.upgrade.UI.CustomViewMenu
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonIcon="@drawable/logout_rounded_left"
+                    app:buttonText="@string/ButtonSalir" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <FrameLayout
+            android:id="@+id/barCustomMenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/skinType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/userName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp" />
-
-        <LinearLayout
-            android:id="@+id/menuContainer"
+        <!-- Barra de navegación inferior -->
+        <com.nafis.bottomnavigation.NafisBottomNavigation
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/skinType">
-
-            <es.upgrade.UI.CustomViewMenu
-                android:id="@+id/btnProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:buttonIcon="@drawable/ic_face"
-                app:buttonText="@string/ButtonTextPerfil" />
-
-            <es.upgrade.UI.CustomViewMenu
-                android:id="@+id/btnNewRoutine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:buttonIcon="@drawable/ic_plus"
-                app:buttonText="@string/ButtonTextRoutine" />
-
-            <es.upgrade.UI.CustomViewMenu
-                android:id="@+id/btnMyRoutines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:buttonIcon="@drawable/products_svgrepo_com"
-                app:buttonText="@string/ButtonTextRoutines" />
-
-            <es.upgrade.UI.CustomViewMenu
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:buttonIcon="@drawable/logout_rounded_left"
-                app:buttonText="@string/ButtonSalir" />
-        </LinearLayout>
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:mbn_circleColor="#44BBA4"
+            app:mbn_backgroundBottomColor="#ffffff"
+            app:mbn_countBackgroundColor="#ff6f00"
+            app:mbn_countTextColor="#ffffff"
+            app:mbn_countTypeface="fonts/SourceSansPro-Regular.ttf"
+            app:mbn_defaultIconColor="#90a4ae"
+            app:mbn_rippleColor="#2f424242"
+            app:mbn_selectedIconColor="#FFFFFF"
+            app:mbn_shadowColor="#1f212121"
+            app:mbn_hasAnimation="true"
+            tools:ignore="MissingClass" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Menú lateral -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
-    <FrameLayout
-        android:id="@+id/barCustomMenu"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.drawerlayout.widget.DrawerLayout>
 
-    <!-- Barra de navegación inferior -->
-    <com.nafis.bottomnavigation.NafisBottomNavigation
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:mbn_circleColor="#ffffff"
-        app:mbn_backgroundBottomColor="#ffffff"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_countTextColor="#ffffff"
-        app:mbn_countTypeface="fonts/SourceSansPro-Regular.ttf"
-        app:mbn_defaultIconColor="#90a4ae"
-        app:mbn_rippleColor="#2f424242"
-        app:mbn_selectedIconColor="#3c415e"
-        app:mbn_shadowColor="#1f212121"
-        app:mbn_hasAnimation="true"
-        tools:ignore="MissingClass" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -69,7 +69,7 @@
     <!--SKIN TYPE-->
     <string name="TVConfiguracion">Skin type settings</string>
 
-    <!--USER MENU-->
+    <!--LOBBY ACTIVITY-->
     <string name="TVNombre">San Felix de Pablo</string>
     <string name="TVTipoPielUserMenu">Normal skin</string>
     <string name="ButtonTextPerfil">My profile</string>
@@ -77,6 +77,9 @@
     <string name="ButtonTextRoutines">My routines</string>
     <string name="ButtonTextCalendar">Calendar</string>
     <string name="ButtonSalir">Log out</string>
+    <string name="BurguerMenu">Burguer Menu</string>
+    <string name="EditPhoto">Edit photo</string>
+
 
     <!--CUSTOM ALERT-->
     <string name="TituloTx">Title</string>

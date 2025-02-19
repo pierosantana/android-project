@@ -69,19 +69,16 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
         //Create circles for each step in the routine
         int stepCount = routine.getStepCount();
         for (int i = 0; i < stepCount; i++) {
-            TextView stepCircle = new TextView(holder.itemView.getContext());
-            stepCircle.setWidth(60);
-            stepCircle.setHeight(60);
-            stepCircle.setText("");
-            stepCircle.setBackgroundResource(R.drawable.rounded_image); 
+            View stepCircle = new View(holder.itemView.getContext());
+            stepCircle.setBackgroundResource(R.drawable.rounded_image);
 
-            // Set the margins for the circle
+            // Definir dimensiones correctas
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
+                    60, 60  // Ancho y alto en píxeles
             );
             layoutParams.setMargins(8, 0, 8, 0);
             stepCircle.setLayoutParams(layoutParams);
+
             holder.stepsContainer.addView(stepCircle);
         }
 

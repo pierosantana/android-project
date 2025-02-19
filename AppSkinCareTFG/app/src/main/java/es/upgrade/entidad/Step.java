@@ -41,6 +41,14 @@ public class Step implements Serializable {
         return proTips;
     }
 
+    /**
+     * The toString method is overridden to provide a string representation of a Step object's
+     * attributes.
+     * 
+     * @return The `toString()` method is being overridden to return a string representation of the
+     * `Step` object, including its `id`, `title`, `description`, `duration`, `product`, and `proTips`
+     * properties.
+     */
     @Override
     public String toString() {
         return "Step{" +

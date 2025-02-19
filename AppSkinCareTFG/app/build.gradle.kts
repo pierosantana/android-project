@@ -88,6 +88,13 @@ dependencies {
     //Dependencias para la barra del menu
     implementation ("com.github.Foysalofficial:NafisBottomNav:5.0")
 
+    //Dependecias de calendario
+    implementation ("com.prolificinteractive:material-calendarview:1.4.3")
+
+    //Dependencias para menu hamburguesa
+    implementation  ("androidx.drawerlayout:drawerlayout:1.1.1")
+
+
 
 
 

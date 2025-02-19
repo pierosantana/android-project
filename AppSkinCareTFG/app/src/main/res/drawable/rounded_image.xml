@@ -1,3 +1,5 @@
-<shape android:shape="oval" xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
     <solid android:color="@color/backgroundButtonAccent" />
+    <size android:width="60dp" android:height="60dp" />
 </shape>

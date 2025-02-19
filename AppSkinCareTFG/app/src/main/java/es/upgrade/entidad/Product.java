@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Product implements Serializable {
-    //Esto es para poder identificar cada producto
+    
     private int id;
     private String name;
     private Double price;
@@ -100,6 +100,13 @@ public class Product implements Serializable {
 
 
 
+   /**
+    * The toString method is overridden to provide a string representation of a Product object's
+    * attributes.
+    * 
+    * @return A string representation of a Product object is being returned. It includes the values of
+    * the categoryProduct, id, name, price, brand, and skinType fields of the Product object.
+    */
     @Override
     public String toString() {
         return "Product{" +
@@ -111,6 +118,18 @@ public class Product implements Serializable {
                 ", skinType=" + skinType +
                 '}';
     }
+   /**
+    * The equals method compares two Product objects based on their IDs.
+    * 
+    * @param obj The `obj` parameter in the `equals` method represents the object to be compared with
+    * the current object for equality. In the provided code snippet, the method is overriding the
+    * `equals` method of the Object class to compare two `Product` objects based on their `id`
+    * attribute. The method
+    * @return The `equals` method is being overridden to compare two `Product` objects based on their
+    * `id` attribute. It first checks if the two objects are the same reference, then checks if the
+    * object is null or not an instance of the `Product` class. If these conditions are not met, it
+    * compares the `id` attribute of the two `Product` objects and returns `true` if
+    */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -119,6 +138,15 @@ public class Product implements Serializable {
         Log.d("Product", "Comparing this product " + this.getName() + " with " + product.getName());
         return id == product.id;  // Compara los IDs de los productos
     }
+    /**
+     * The `hashCode` function in Java uses the `id` field to ensure correct comparisons when
+     * generating hash codes.
+     * 
+     * @return The `hashCode()` method is returning the hash code value calculated using the `id`
+     * field. This is done to ensure that objects with the same `id` value will have the same hash
+     * code, which is important for correct comparisons and usage in hash-based collections like
+     * HashMap or HashTable.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);  // Usa el mismo campo para asegurar que las comparaciones sean correctas

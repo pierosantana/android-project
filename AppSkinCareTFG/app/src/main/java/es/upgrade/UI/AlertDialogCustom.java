@@ -12,6 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import es.upgrade.R;
 
 public class AlertDialogCustom {
+    // This method `showCustomAlertDialog` is responsible for displaying a custom alert dialog in an
+    // Android application. Here's a breakdown of what it does:
     public static void showCustomAlertDialog(
             Context context,
             String title,
@@ -20,29 +22,29 @@ public class AlertDialogCustom {
             DialogInterface.OnClickListener positiveAction,
             String negativeButtonText,
             DialogInterface.OnClickListener negativeAction
-    ) {
-        // Inflar el layout personalizado
+    ){
+        //Inflate the layout
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.custom_alert_dialog, null);
 
-        // Referenciar los elementos del layout
+        // Reference views
         TextView tvTitle = dialogView.findViewById(R.id.tv_title);
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
         Button btnPositive = dialogView.findViewById(R.id.btn_positive);
         Button btnNegative = dialogView.findViewById(R.id.btn_negative);
 
-        // Asignar textos
+        // ASsign values to views
         tvTitle.setText(title);
         tvMessage.setText(message);
         btnPositive.setText(positiveButtonText);
         btnNegative.setText(negativeButtonText);
 
-        // Crear el diálogo
+        // Create the dialog
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setView(dialogView)
                 .create();
 
-        // Asignar acciones a los botones
+        // Set the click listeners
         btnPositive.setOnClickListener(v -> {
             positiveAction.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
             dialog.dismiss();

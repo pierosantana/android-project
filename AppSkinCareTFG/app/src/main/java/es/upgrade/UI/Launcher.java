@@ -19,6 +19,15 @@ import es.upgrade.entidad.User;
 
 public class Launcher extends AppCompatActivity {
 
+    /**
+     * The `onCreate` method in this Java code snippet sets up the layout for an activity, adjusts
+     * window insets, simulates a loading time, and schedules a task to verify the user after a delay.
+     * 
+     * @param savedInstanceState The `savedInstanceState` parameter in the `onCreate` method of an
+     * Android activity is a Bundle object that provides the activity with previously saved state
+     * information, if available. This bundle is used to restore the activity to its previous state if
+     * it was destroyed and recreated by the system, such as during a
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,20 +39,24 @@ public class Launcher extends AppCompatActivity {
             return insets;
         });
 
-        // Simulamos el tiempo de carga, pero la lógica de verificación se ejecuta de inmediato
+        // Simulate a loading time
         int TimeLoading = 5000; // 
 
-        //Programa una tarea para que se ejecute después del retraso especificado en 'TimeLoading'
+        //postDelayed method schedules a task to verify the user after a delay
         new Handler().postDelayed(this::verifyUser, TimeLoading);
 
 
     }
 
+    /**
+     * The `verifyUser` method checks if a user is authenticated and redirects them to the appropriate
+     * activity based on the authentication status.
+     */
     private void verifyUser() {
         UserDao uDao = UserDao.getInstance();
 
         boolean UserExist = uDao.verifyFirebaseUser();
-        // Si no hay un usuario autenticado, lo redirigimos al MainActivity
+        // If the user is not authenticated, redirect to MainActivity
         if (!UserExist) {
             Log.d("Launcher_verifyUser", "Usuario no autenticado. Redirigiendo a MainActivity.");
             startActivity(new Intent(Launcher.this, MainActivity.class));
@@ -59,7 +72,7 @@ public class Launcher extends AppCompatActivity {
                     user.setSkinType(userR.getSkinType());
                     user.setRoutineList(userR.getRoutineList());
                 }
-                // Si el usuario está autenticado, lo redirigimos al LobbyActivity
+                // If the user is authenticated, redirect to LobbyActivity
                 Log.d("Launcher_verifyUser", "Usuario autenticado. Redirigiendo a LobbyActivity.");
                 startActivity(new Intent(Launcher.this, LobbyActivity.class));
                 finish();

@@ -137,6 +137,7 @@ public class LobbyActivity extends AppCompatActivity {
      * `R.id.barCustomMenu` resource ID
      */
     private void loadFragment(Fragment fragment) {
+        Log.d("LobbyActivity","Intentando cargar los fragementos" + fragment.getClass().getSimpleName());
         findViewById(R.id.mainUser).setVisibility(View.GONE);
         // Reemplazar el contenido del contenedor con el fragmento adecuado
         getSupportFragmentManager().beginTransaction()

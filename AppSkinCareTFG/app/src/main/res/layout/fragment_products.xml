@@ -8,7 +8,13 @@
     
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/textProducts"
         android:layout_height="match_parent"
         android:text="AQUI IRA UNA LISTA DE PRODUCTOS" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProductos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

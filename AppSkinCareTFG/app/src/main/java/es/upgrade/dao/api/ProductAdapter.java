@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import es.upgrade.R;
+import es.upgrade.UI.fragments.ProductsFragment;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
 
@@ -28,6 +29,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private OnProductClickListener onProductClickListener;
     private int selectedPosition = -1;
     private Routine routine;// No producto seleccionado al inicio
+
+    public ProductAdapter(List<Product> listaProductos ,Context context) {
+        this.productList = listaProductos;
+        this.context = context;
+    }
+
+
 
     // The `OnProductClickListener` interface in the `ProductAdapter` class is defining a contract for
     // classes that want to listen for click events on products within the RecyclerView.

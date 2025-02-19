@@ -50,10 +50,10 @@ public class RoutineExplainActivity extends AppCompatActivity {
 
         if (routine != null) {
             // Mostrar información de la rutina
-            tvRoutineTitle.setText("Rutina: " + routine.getRoutineType());
-            tvRoutineType.setText(routine.isNightRoutine() ? "Rutina Nocturna" : "Rutina Completa");
+            tvRoutineTitle.setText("Routine: " + routine.getRoutineType());
+            tvRoutineType.setText(routine.isNightRoutine() ? "Nocturnal Routine”" : "Complete Routine");
         } else {
-            Toast.makeText(this, "No se encontró información de la rutina", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Routine information not found", Toast.LENGTH_SHORT).show();
         }
 
         // Cargar los pasos desde la API
@@ -94,14 +94,14 @@ public class RoutineExplainActivity extends AppCompatActivity {
                     StepDao.getInstance().setSteps(stepsApi); // Guardamos los pasos en StepDao
                     setupRecyclerView(stepsApi, routine.getProductList());
                 } else {
-                    Toast.makeText(RoutineExplainActivity.this, "Error al obtener los pasos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoutineExplainActivity.this, "Error retrieving steps", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Step>> call, Throwable throwable) {
                 Log.e("API_ERROR", "Fallo en la conexión", throwable);
-                Toast.makeText(RoutineExplainActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoutineExplainActivity.this, "Connection failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

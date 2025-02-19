@@ -108,7 +108,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         btnContinuar.setOnClickListener(v -> {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null || selectedTonificacionProduct == null
                     || selectedTratamientoProduct == null && selectedProtectorProduct == null) {
-                Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You must select a product from each category.", Toast.LENGTH_SHORT).show();
             } else {
 
                 routine.addProduct(selectedLimpiezaProduct);

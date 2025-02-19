@@ -108,7 +108,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         btnContinuar.setOnClickListener(v -> {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null || selectedTonificacionProduct == null
                     || selectedTratamientoProduct == null && selectedProtectorProduct == null) {
-                Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You must select a product from each category.", Toast.LENGTH_SHORT).show();
             } else {
 
                 routine.addProduct(selectedLimpiezaProduct);
@@ -159,13 +159,13 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                     ProductDao.getInstance().setProductos(productosApi); // Guardamos los productos en ProductDao
                     cargarProductos();
                 } else {
-                    Toast.makeText(CompleteCustomizedActivity.this, "Error al obtener productos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CompleteCustomizedActivity.this, "Error retrieving products", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable throwable) {
-                Toast.makeText(CompleteCustomizedActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CompleteCustomizedActivity.this, "Connection failure", Toast.LENGTH_SHORT).show();
 
             }
         });

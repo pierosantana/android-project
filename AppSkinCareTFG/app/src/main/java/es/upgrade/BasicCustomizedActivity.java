@@ -131,13 +131,13 @@ public class BasicCustomizedActivity extends AppCompatActivity {
                     ProductDao.getInstance().setProductos(productosApi);
                     cargarProductos();
                 } else {
-                    Toast.makeText(BasicCustomizedActivity.this, "Error al obtener productos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BasicCustomizedActivity.this, "Error retrieving products", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable throwable) {
-                Toast.makeText(BasicCustomizedActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BasicCustomizedActivity.this, "Connection failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

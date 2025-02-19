@@ -79,7 +79,7 @@ public class BasicEconomicActivity extends AppCompatActivity {
 
         btnContinuar.setOnClickListener(v -> {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null) {
-                Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You must select a product from each category", Toast.LENGTH_SHORT).show();
             } else {
 
                 routine.addProduct(selectedLimpiezaProduct);
@@ -108,7 +108,7 @@ public class BasicEconomicActivity extends AppCompatActivity {
                 intent.putExtra("budget", budget);
 
                 startActivity(intent);
-                Toast.makeText(this, "Producto de Limpieza: " + selectedLimpiezaProduct.getName() + "\nProducto de Hidratación: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cleansing Product: " + selectedLimpiezaProduct.getName() + "\nMoisturizing Product: " + selectedHidratacionProduct.getName(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -124,13 +124,13 @@ public class BasicEconomicActivity extends AppCompatActivity {
                     ProductDao.getInstance().setProductos(response.body());
                     cargarProductos();
                 } else {
-                    Toast.makeText(BasicEconomicActivity.this, "Error al obtener productos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BasicEconomicActivity.this, "Error retrieving products", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(BasicEconomicActivity.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BasicEconomicActivity.this, "Connection failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

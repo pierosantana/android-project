@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,16 +14,20 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.nafis.bottomnavigation.NafisBottomNavigation;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
 import es.upgrade.R;
+import es.upgrade.SettingsActivity;
 import es.upgrade.SkinTypeActivity;
 import es.upgrade.MyRoutinesActivity;
 import es.upgrade.UI.fragments.CalendarFragment;
@@ -39,6 +44,9 @@ public class LobbyActivity extends AppCompatActivity {
     private static final int ID_HOME = 2;
     private static final int ID_PRODUCTS = 3;
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ImageButton btnBurguerMenu;
 
     NafisBottomNavigation bottomNavigation;
     private AuthenticatorManager authenticatorManager;
@@ -59,24 +67,41 @@ public class LobbyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lobby);  // Cargar layout de Lobby
-
-        // Configurate the system bar margins
+        setContentView(R.layout.activity_lobby);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navigation_view);
+        btnBurguerMenu = findViewById(R.id.btnMenu);
+
+        // Listener para abrir el menú lateral
+        btnBurguerMenu.setOnClickListener(v -> {
+            Log.d("LobbyActivity", "Abriendo menú lateral");
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
         authenticatorManager = new AuthenticatorManager();
 
+        // Manejar clics en el NavigationView
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            Log.d("LobbyActivity", "Elemento del menú seleccionado: " + id);
 
-        // Verify if the user is authenticated
-        if (authenticatorManager.getCurrentUser() == null) {
-            startActivity(new Intent(this, LobbyActivity.class));
-            finish();
-            return;
-        }
+            if (id == R.id.action_settings) {
+                Log.d("LobbyActivity", "Se seleccionó Settings");
+                Intent intent = new Intent(LobbyActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            } else {
+                Log.d("LobbyActivity", "Otro ítem seleccionado");
+            }
+
+            drawerLayout.closeDrawers();
+            return true;
+        });
 
 
         // Initialize the bottom navigation menu

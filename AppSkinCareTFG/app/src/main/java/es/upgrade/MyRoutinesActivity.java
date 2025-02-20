@@ -39,7 +39,6 @@ public class MyRoutinesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewMisRutinas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Obtener la lista de rutinas guardadas en el Singleton User
         routineList = User.getInstance().getRoutineList();
 
         if (routineList == null || routineList.isEmpty()) {
@@ -50,6 +49,11 @@ public class MyRoutinesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Opens the RoutineExplainActivity to display the details of the specified routine.
+     *
+     * @param routine The Routine object containing the details to be displayed.
+     */
     private void openRoutineDetail(Routine routine) {
         Intent intent = new Intent(this, RoutineExplainActivity.class);
         intent.putExtra("routine", routine);

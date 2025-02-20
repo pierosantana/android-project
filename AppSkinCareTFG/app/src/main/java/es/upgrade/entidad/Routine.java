@@ -16,7 +16,7 @@ public class Routine implements Serializable {
     private Double budgetProducts;
     private List<Product> productList;
     private SkinType skinType;
-    private boolean isNightRoutine; // Indicador para rutina de noche
+    private boolean isNightRoutine;
 
     // Constructor público para crear nuevas instancias
     public Routine() {

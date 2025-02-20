@@ -25,23 +25,27 @@ public class ResumenFinal extends AppCompatActivity {
 
     private TextView txtResumen, txtTotalPrecio;
     private Button btnContinuar;
+    private Routine routine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumen_final);
 
+        routine = (Routine) getIntent().getSerializableExtra("routine");
+
         txtResumen = findViewById(R.id.txtResumen);
         txtTotalPrecio = findViewById(R.id.txtTotalPrecio);
         btnContinuar = findViewById(R.id.btn_continuar);
 
-        // Obtener los datos de la rutina
+        // Get the routine data
+
         String skinType = getIntent().getStringExtra("skinType");
         String schedule = getIntent().getStringExtra("schedule");
         String routineType = getIntent().getStringExtra("routineType");
         String budget = getIntent().getStringExtra("budget");
 
-        // Obtener los productos seleccionados desde el Intent
+        
         Product selectedLimpieza = (Product) getIntent().getSerializableExtra("selectedLimpieza");
         Product selectedHidratacion = (Product) getIntent().getSerializableExtra("selectedHidratacion");
         Product selectedTonificacion = (Product) getIntent().getSerializableExtra("selectedTonificacion");
@@ -84,18 +88,17 @@ public class ResumenFinal extends AppCompatActivity {
             totalPrecio += selectedProtector.getPrice();
         }
 
-        // Mostrar el resumen y el total
+        
         txtResumen.setText(resumen.toString());
         String totalFormatted = String.format("%.2f", totalPrecio);
         txtTotalPrecio.setText("Total: " + totalFormatted + "€");
 
-        // Si algún producto no fue seleccionado, mostrar un mensaje
+       
         if (selectedLimpieza == null || selectedHidratacion == null || selectedTonificacion == null
                 || selectedTratamiento == null || selectedProtector == null) {
             Toast.makeText(this, "Products still to be selected.", Toast.LENGTH_SHORT).show();
         }
 
-        Routine routine = new Routine();
         routine.setSkinType(SkinType.valueOf(skinType));
         routine.setSchedule(Schedule.valueOf(schedule));
         routine.setRoutineType(RoutineType.valueOf(routineType));
@@ -109,14 +112,13 @@ public class ResumenFinal extends AppCompatActivity {
         if (selectedProtector != null) routine.getProductList().add(selectedProtector);
 
         User user = User.getInstance();
-        // Evento para el botón continuar
+        
         btnContinuar.setOnClickListener(v -> {
-            //Persistir la informacion
+            //Persist the routine
             UserDao userDao = UserDao.getInstance();
             user.addRoutine(routine);
             userDao.updateUser();
 
-            //Volver al lobby
             Intent intent = new Intent(ResumenFinal.this, LobbyActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

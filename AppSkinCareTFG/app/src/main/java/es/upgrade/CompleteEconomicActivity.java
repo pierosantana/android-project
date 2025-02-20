@@ -117,13 +117,12 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                 routine.addProduct(selectedTratamientoProduct);
                 routine.addProduct(selectedProtectorProduct);
 
-                // Recibir datos de la Intent anterior
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
                 String budget = getIntent().getStringExtra("budget");
                 
-                // Verificar que los valores no sean null antes de convertirlos
+                
                 if (skinType != null && schedule != null && routineType != null && budget != null) {
                     routine.setSkinType(SkinType.valueOf(skinType));
                     routine.setSchedule(Schedule.valueOf(schedule));
@@ -133,8 +132,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                     Toast.makeText(this, "Error: Datos incompletos", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                // Crear Intent para pasar los datos a ResumenFinal
+// Crear Intent para pasar los datos a ResumenFinal
                 Intent intent = new Intent(this, ResumenFinal.class);
                 intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
                 intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
@@ -142,7 +140,7 @@ public class CompleteEconomicActivity extends AppCompatActivity {
                 intent.putExtra("selectedTratamiento", selectedTratamientoProduct);
                 intent.putExtra("selectedProtector", selectedProtectorProduct);
 
-                // Pasar también los valores de skinType, schedule, routineType y budget
+                intent.putExtra("routine", routine);
                 intent.putExtra("skinType", skinType);
                 intent.putExtra("schedule", schedule);
                 intent.putExtra("routineType", routineType);
@@ -156,6 +154,11 @@ public class CompleteEconomicActivity extends AppCompatActivity {
 
 
     }
+     /**
+    * Fetches the products from the API using Retrofit and updates the ProductDao.
+    * If the API call is successful, it stores the products in the ProductDao and calls cargarProductos() to update the UI.
+    * If the API call fails, it shows a Toast message indicating the error.
+    */
     private void obtenerProductosDesdeApi(){
         Call<List<Product>> call = RetrofitClient.getApiService().getProducts();
         call.enqueue(new Callback<List<Product>>() {
@@ -178,6 +181,13 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Loads the products and updates the visibility and adapters of the RecyclerViews based on the product categories.
+     * If no products are available, it shows an empty view and hides all RecyclerViews.
+     * Otherwise, it filters the products by category and price, and sets up the adapters for each category's RecyclerView.
+     * 
+     * The method also checks if the routine is a night routine and hides the sunscreen RecyclerView if it is.
+     */
     private void cargarProductos() {
         List<Product> products = ProductDao.getInstance().getProductos();
 
@@ -244,14 +254,21 @@ public class CompleteEconomicActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Obtains a list of products filtered by category and low price.
+     * The products are also filtered by the skin type specified in the routine.
+     *
+     * @param category The category of the product (e.g., Cleaning, Hydration).
+     * @param routine The routine which contains the skin type to filter the products.
+     * @return A list of products that match the specified category, have a price lower than the maximum price,
+     *         and are suitable for the specified skin type.
+     */
     public List<Product> obtenerProductosFilradosPorCategoriaYPrecioBajo(CategoryProduct category,Routine routine){
         List<Product>productosGuardados = ProductDao.getInstance().getProductos();
         // Establecemos el precio maximo bajo
         double precioMaximo = 15.0;
         SkinType tipoPiel = routine.getSkinType();
 
-        // Filtramos por categoría(Limpieza e Hidratacion) y precio bajo
-        // Luego mas tarde habra que filtrar el producto por el tipo de piel
 
         return productosGuardados.stream()
                 .filter(product -> product.getPrice()<precioMaximo && product.getSkinType() ==tipoPiel

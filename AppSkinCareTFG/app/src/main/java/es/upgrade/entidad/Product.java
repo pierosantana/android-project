@@ -68,9 +68,6 @@ public class Product implements Serializable {
         return categoryProduct;
     }
 
-    public void setCategory(CategoryProduct categoryProduct) {
-        this.categoryProduct = categoryProduct;
-    }
 
     public int getId() {
         return id;
@@ -149,6 +146,6 @@ public class Product implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id);  // Usa el mismo campo para asegurar que las comparaciones sean correctas
+        return Objects.hash(id);
     }
 }

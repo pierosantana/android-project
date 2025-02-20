@@ -51,7 +51,6 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         routine = (Routine) getIntent().getSerializableExtra("routine");
 
         if (routine == null) {
-                Log.e("ReviewAndEditActivity", "La rutina es null");
                 return;
 
         }
@@ -72,7 +71,6 @@ public class ReviewAndEditActivity extends AppCompatActivity {
             }
 
             if (intent != null) {
-                // Pasar los datos al siguiente Activity
                 intent.putExtra("skinType", routine.getSkinType().name());
                 intent.putExtra("schedule", routine.getSchedule().name());
                 intent.putExtra("routineType", routine.getRoutineType().name());
@@ -98,22 +96,32 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         });
     }
 
-    // Función para agregar una vista personalizada al contenedor
+    
+    /**
+     * Adds a custom option view to the options container.
+     *
+     * @param title       The title of the custom option.
+     * @param description The description or answer text chosen by the user.
+     * @param iconResId   The resource ID of the icon to be displayed.
+     */
     private void addCustomOptionView(String title, String description, int iconResId) {
-        // Crear el CustomViewOptionsRoutine
         CustomViewOptionsRoutine customView = new CustomViewOptionsRoutine(this, null);
 
-        // Establecer el texto y el ícono según la elección del usuario
+        // Stablish the title and icon
         customView.setOptionContent(title, iconResId);
-
-        // Aquí, description será la respuesta que el usuario ha elegido
-        customView.setAnswerText(description);  // Establecer la respuesta seleccionada
-
-        // Agregar la vista al contenedor
+        customView.setAnswerText(description);  // Set the description text
         optionsContainer.addView(customView);
     }
 
-    // Métodos de formateo de las respuestas
+    
+    /**
+     * Formats the given SkinType into a user-friendly string representation.
+     *
+     * @param skinType the SkinType to format; can be null.
+     * @return a string representing the skin type. If the skin type is null, 
+     *         returns "Skin type not defined". If the skin type is not recognized,
+     *         returns "Unknown skin type".
+     */
     private String formatSkinType(SkinType skinType) {
         if (skinType == null) {
             return "Skin type not defined";  // O cualquier texto por defecto
@@ -126,18 +134,44 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Formats the given Schedule object into a string representation.
+     *
+     * @param schedule the Schedule object to be formatted
+     * @return "Night" if the schedule is NIGHT, otherwise "Complete"
+     */
     private String formatSchedule(Schedule schedule) {
         return (schedule == Schedule.NIGHT) ? "Night" : "Complete";
     }
 
+    /**
+     * Formats the given RoutineType into a string representation.
+     *
+     * @param routineType the RoutineType to format
+     * @return "Basic" if the routineType is BASIC, otherwise "Complete"
+     */
     private String formatRoutineType(RoutineType routineType) {
         return (routineType == RoutineType.BASIC) ? "Basic" : "Complete";
     }
 
+    /**
+     * Formats the given Budget object into a string representation.
+     *
+     * @param budget the Budget object to format
+     * @return "Economic" if the budget is Budget.ECONOMIC, otherwise "Customized"
+     */
     private String formatBudget(Budget budget) {
         return (budget == Budget.ECONOMIC) ? "Economic" : "Customized";
     }
 
+    /**
+     * Returns the appropriate icon resource ID based on the provided option title and description.
+     *
+     * @param title       The title of the option (e.g., "Skin type", "Time of day", "Routine type", "Budget").
+     * @param description The description of the option, which further specifies the choice within the title category.
+     * @return The resource ID of the drawable icon corresponding to the given title and description.
+     *         If the title or description does not match any predefined cases, a default icon is returned.
+     */
     private int getIconForOption(String title, String description) {
         switch (title) {
             case "Skin type":
@@ -159,19 +193,28 @@ public class ReviewAndEditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when the activity will start interacting with the user.
+     * In this implementation, it calls the updateCustomOptions() method to refresh custom options.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         updateCustomOptions();
     }
 
+    /**
+     * Updates the custom options displayed in the UI by formatting and setting the descriptions
+     * for skin type, schedule, routine type, and budget. It clears the current views in the 
+     * options container and adds the updated views with corresponding icons.
+     */
     private void updateCustomOptions() {
         String skinTypeDesc = formatSkinType(routine.getSkinType());
         String scheduleDesc = formatSchedule(routine.getSchedule());
         String routineTypeDesc = formatRoutineType(routine.getRoutineType());
         String budgetDesc = formatBudget(routine.getBudget());
 
-        // Limpia el contenedor y vuelve a agregar las vistas actualizadas
+        // Clean the current views in the options container
         optionsContainer.removeAllViews();
 
         addCustomOptionView("Skin type:", skinTypeDesc, getIconForOption("Skin type", skinTypeDesc));

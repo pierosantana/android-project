@@ -5,19 +5,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:id="@+id/activityHour"
     android:background="@color/backgroundApplication">
+
+    <TextView
+        android:id="@+id/tvTittle"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/selectYourSchedule"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <include
         android:id="@+id/include_progress"
         layout="@layout/progressbar" />
 
+    <!-- Questionnarie Fragment -->
         <FrameLayout
-            android:id="@+id/fragment_container"
+            android:id="@+id/fragment_Container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/container_background"
+            android:visibility="visible"
             android:padding="16dp"/>
+    <FrameLayout
+        android:id="@+id/hour_description_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,7 +45,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <Button
-            android:id="@+id/btn_next"
+            android:id="@+id/btnNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/TextButton"

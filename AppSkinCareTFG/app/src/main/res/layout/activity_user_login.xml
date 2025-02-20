@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundApplication"
     tools:context=".UI.UserLogin">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -26,7 +27,7 @@
             android:layout_height="200dp"
             app:lottie_imageAssetsFolder="assets"
             app:lottie_fileName="face.json"
-            app:lottie_loop="true"
+            app:lottie_loop="false"
             app:lottie_autoPlay="true"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,10 +66,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/Btn_Log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Btn_Login"
-            android:id="@+id/Btn_Log"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
             android:layout_marginTop="10dp"/>
 
         <TextView
@@ -76,6 +80,7 @@
             android:layout_height="wrap_content"
             android:text="@string/NewUserTxt"
             android:id="@+id/NewUserTxt"
+            android:textColor="#232323"
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:textSize="15sp"/>

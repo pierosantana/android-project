@@ -3,6 +3,7 @@ package es.upgrade;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,7 +13,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import es.upgrade.UI.fragments.HourDescriptionFragment;
 import es.upgrade.UI.fragments.QuestionnaireFragment;
+import es.upgrade.UI.fragments.SkinDescriptionFragment;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.Schedule;
 import es.upgrade.entidad.User;
@@ -23,7 +26,7 @@ public class HourActivity extends AppCompatActivity implements
     private Button btnNext;
     private int selectedOption = -1;
     private Routine routine;
-    private TextView tvDontKnow;
+    private TextView tvDontKnow,tvTittle;
     private ProgressBar progressBar;
     private int progress = 0;
     private User user;
@@ -34,10 +37,11 @@ public class HourActivity extends AppCompatActivity implements
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_hour);
 
-        btnNext = findViewById(R.id.btn_next);
+        btnNext = findViewById(R.id.btnNext);
         progressBar = findViewById(R.id.progressBar);
-
+        tvTittle = findViewById(R.id.tvTittle);
         routine = (Routine) getIntent().getSerializableExtra("routine");
+        tvDontKnow = findViewById(R.id.NoIdeaChoose);
 
 
         if (routine == null) {
@@ -57,7 +61,7 @@ public class HourActivity extends AppCompatActivity implements
 
         // Agregar el fragmento al contenedor
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, questionnaireFragment);
+        transaction.replace(R.id.fragment_Container, questionnaireFragment);
         transaction.commit();
 
         btnNext.setEnabled(false);
@@ -71,19 +75,33 @@ public class HourActivity extends AppCompatActivity implements
                 } else if (selectedOption == 1) {
                     routine.setSchedule(Schedule.NIGHT);
                 }
-
-                Log.d("Routine", "El Schedule actual es: " + routine.getSchedule());
                 nextActivity(33);
             }
         });
-        tvDontKnow = findViewById(R.id.NoIdeaChoose);
 
         // Tomamos el progreso de la actividad anterior
         progress = getIntent().getIntExtra("progress", 0);
         updateProgressBar(progress);
 
+        tvDontKnow.setOnClickListener(v -> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.hour_description_fragment, new HourDescriptionFragment())
+                    .addToBackStack(null)
+                    .commit();
 
-        tvDontKnow.setOnClickListener(v -> startActivity(new Intent(this, HourDescriptionActivity.class)));
+            // Ocultar los elementos que no queremos ver
+            findViewById(R.id.tvTittle).setVisibility(View.GONE);
+            findViewById(R.id.btnNext).setVisibility(View.GONE);
+            findViewById(R.id.NoIdeaChoose).setVisibility(View.GONE);
+            findViewById(R.id.include_progress).setVisibility(View.GONE);
+            findViewById(R.id.fragment_Container).setVisibility(View.GONE);
+
+            // Mostrar el contenedor del fragmento de descripción
+            findViewById(R.id.hour_description_fragment).setVisibility(View.VISIBLE);
+        });
+
+
     }
 
     private void nextActivity(int progress) {

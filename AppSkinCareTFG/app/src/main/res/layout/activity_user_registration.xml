@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundApplication"
     tools:context=".UI.UserRegistration">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -26,7 +27,7 @@
             app:lottie_imageAssetsFolder="assets"
             app:lottie_fileName="registration.json"
             android:layout_gravity="center"
-            app:lottie_loop="true"
+            app:lottie_loop="false"
             app:lottie_autoPlay="true"
             android:layout_marginTop="10dp" />
 
@@ -102,16 +103,17 @@
         <Button
             android:id="@+id/BtnRegisterUser"
             android:layout_marginTop="15dp"
-            android:textSize="10sp"
             android:text="@string/RegisterUser"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/AlreadyAccount"
             android:text="@string/AlreadyAccount"
-            android:textSize="10sp"
             android:textStyle="bold"
+            android:textColor="#232323"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

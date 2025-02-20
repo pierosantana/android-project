@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/skinDescription"
+    android:id="@+id/scheduleSelection"
     android:background="@color/backgroundApplication">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:dotsColor="#077A70"
+        app:dotsColor="@color/backgroundButtonAccent"
         app:dotsCornerRadius="8dp"
         app:dotsSize="8dp"
         app:dotsSpacing="4dp"
@@ -40,7 +40,7 @@
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/ButtonText"
-        android:textColor="#02433D"
+        android:textColor="@color/colorLetterButtons"
         android:textSize="12sp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"

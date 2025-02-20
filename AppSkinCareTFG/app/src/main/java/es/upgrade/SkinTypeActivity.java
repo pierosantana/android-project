@@ -5,6 +5,7 @@ import static android.app.ProgressDialog.show;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import es.upgrade.UI.fragments.QuestionnaireFragment;
+import es.upgrade.UI.fragments.SkinDescriptionFragment;
 import es.upgrade.entidad.SkinType;
 import es.upgrade.entidad.User;
 import es.upgrade.entidad.Routine;
@@ -67,8 +69,23 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
             }
         });
 
-        // Click en el texto para la descripción de la piel
-        whichIsMySkin.setOnClickListener(v -> startActivity(new Intent(this, SkinDescriptionActivity.class)));
+        whichIsMySkin.setOnClickListener(v -> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.skin_description_fragment_container, new SkinDescriptionFragment())
+                    .addToBackStack(null)
+                    .commit();
+
+            // Ocultar los elementos que no queremos ver
+            findViewById(R.id.tv_configuracion).setVisibility(View.GONE);
+            findViewById(R.id.btn_next).setVisibility(View.GONE);
+            findViewById(R.id.NoIdeaSkin).setVisibility(View.GONE);
+            findViewById(R.id.include_progress).setVisibility(View.GONE);
+            findViewById(R.id.fragment_container).setVisibility(View.GONE);
+
+            // Mostrar el contenedor del fragmento de descripción
+            findViewById(R.id.skin_description_fragment_container).setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
@@ -109,4 +126,5 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         findViewById(R.id.step3).setBackgroundResource(progress >= 66 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step4).setBackgroundResource(progress >= 100 ? R.drawable.circle_filled : R.drawable.circle_empty);
     }
+
 }

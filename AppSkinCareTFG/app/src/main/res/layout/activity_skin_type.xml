@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:id="@+id/skinTypeActivity"
     android:background="@color/backgroundApplication"
     xmlns:android="http://schemas.android.com/apk/res/android">
     
@@ -26,7 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/container_background"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:visibility="visible"/>
+    <FrameLayout
+        android:id="@+id/skin_description_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"

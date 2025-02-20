@@ -215,6 +215,8 @@ public class UserDao {
                 productMap.put("id", p.getId());
                 productMap.put("name", p.getName());
                 productMap.put("price", p.getPrice());
+                productMap.put("url", p.getUrl());
+                productMap.put("brand", p.getBrand());
 
                 productList.add(productMap);
             }

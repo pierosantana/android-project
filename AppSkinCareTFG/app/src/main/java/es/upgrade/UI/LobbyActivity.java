@@ -256,7 +256,10 @@ public class LobbyActivity extends AppCompatActivity {
     private void logOut() {
         Toast.makeText(this, "Logging out, bye " + User.getInstance().getName(), Toast.LENGTH_SHORT).show();
         authenticatorManager.logout();
-        finish();
+
+        Intent intent = new Intent(LobbyActivity.this, MainActivity.class);
+        startActivity(intent);
+
     }
 
     /**

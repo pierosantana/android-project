@@ -18,6 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
+            <RadioButton
+                android:id="@+id/radioProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:elevation="10dp"
+                android:buttonTint="@color/black"/>
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/productImage"
                 android:layout_width="match_parent"
@@ -29,12 +38,7 @@
                 app:shapeAppearanceOverlay="@style/RoundedImage"
                 />
 
-            <RadioButton
-                android:id="@+id/radioProducto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:buttonTint="@color/white"/>
+
         </RelativeLayout>
 
         <!-- Nombre del producto -->

@@ -145,4 +145,37 @@
     <!-- ROUTINE EXPLAIN -->
 
 
+    <!-- TYPE SKIN EXPLAIN -->
+    <!-- Hay que ver como usar esto para que no este hardcode -->
+    <string-array name="skin_type_description">
+        <item>If your skin feels tight, rough, or tends to peel, especially " +
+                    "after washing it, you probably have dry skin. This type of skin " +
+                    "produces less natural oil than needed to maintain hydration, making " +
+                    "it more prone to irritation, redness, and early signs of fine lines. " +
+                    "It may have areas with rough texture, lack of radiance, and a " +
+                    "constant feeling of dryness. If you notice your skin cracking easily " +
+                    "in winter or that it needs constant hydration to feel comfortable, " +
+                    "then you have dry skin.
+        </item>
+        <item>If your skin doesn’t usually feel too oily " +
+            "or too dry, you don’t experience peeling or areas with excess shine, and you " +
+            "rarely have imperfections, you probably have normal skin. This type of skin has " +
+            "a proper balance of oil and hydration, giving it a smooth, even appearance with " +
+            "a healthy glow. The pores are small or medium-sized and don’t get clogged easily. " +
+            "Although this skin type doesn’t typically present specific issues, maintaining a " +
+            "basic routine of cleansing, moisturizing, and sun protection is key to keeping its " +
+            "natural balance..
+        </item>
+        <item>If you notice that your forehead, nose, and " +
+            "chin tend to be oilier and shinier, while your cheeks and other areas of your face " +
+            "are drier or normal, then you have combination skin. This skin type is very common " +
+            "and may have enlarged pores and a tendency to blackheads or pimples in the T-zone, " +
+            "while the cheeks may feel tighter or even peel in certain seasons. Identifying which " +
+            "parts of your face are oilier and which are drier will help you choose specific " +
+            "products to balance your skin without dehydrating it or increasing oil production.
+        </item>
+
+    </string-array>
+
+
 </resources>

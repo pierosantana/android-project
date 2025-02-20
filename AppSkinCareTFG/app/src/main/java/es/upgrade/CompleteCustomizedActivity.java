@@ -194,7 +194,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
             boolean esRutinaDeNoche= routine.getSchedule() == Schedule.NIGHT;
 
             if (!productosLimpieza.isEmpty()) {
-                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product,routine);
+                limpiezaAdapter = new ProductAdapter( productosLimpieza,this,false, product -> selectedLimpiezaProduct = product,routine);
                 recyclerViewLimpieza.setAdapter(limpiezaAdapter);
                 recyclerViewLimpieza.setVisibility(View.VISIBLE);
             } else {
@@ -202,28 +202,28 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
             }
 
             if (!productosHidratacion.isEmpty()) {
-                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product,routine);
+                hidratacionAdapter = new ProductAdapter(productosHidratacion,this,false, product -> selectedHidratacionProduct = product,routine);
                 recyclerViewHidratacion.setAdapter(hidratacionAdapter);
                 recyclerViewHidratacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewHidratacion.setVisibility(View.GONE);
             }
             if (!productosTonificacion.isEmpty()) {
-                tonificacionAdapter = new ProductAdapter(this, productosTonificacion, product -> selectedTonificacionProduct = product,routine);
+                tonificacionAdapter = new ProductAdapter(productosTonificacion,this,false, product -> selectedTonificacionProduct = product,routine);
                 recyclerViewTonificacion.setAdapter(tonificacionAdapter);
                 recyclerViewTonificacion.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTonificacion.setVisibility(View.GONE);
             }
             if (!productosTratamiento.isEmpty()) {
-                tratamientoAdapter = new ProductAdapter(this, productosTratamiento, product -> selectedTratamientoProduct = product,routine);
+                tratamientoAdapter = new ProductAdapter(productosTratamiento,this,false, product -> selectedTratamientoProduct = product,routine);
                 recyclerViewTratamiento.setAdapter(tratamientoAdapter);
                 recyclerViewTratamiento.setVisibility(View.VISIBLE);
             } else {
                 recyclerViewTratamiento.setVisibility(View.GONE);
             }
             if (!productosProtector.isEmpty() && !esRutinaDeNoche) {
-                protectorAdapter = new ProductAdapter(this, productosProtector, product -> selectedProtectorProduct = product,routine);
+                protectorAdapter = new ProductAdapter(productosProtector,this,false, product -> selectedProtectorProduct = product,routine);
                 recyclerViewProtectorSolar.setAdapter(protectorAdapter);
                 recyclerViewProtectorSolar.setVisibility(View.VISIBLE);
                 txtProtector.setVisibility(View.VISIBLE);

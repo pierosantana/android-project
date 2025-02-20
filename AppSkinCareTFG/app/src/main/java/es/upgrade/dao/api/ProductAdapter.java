@@ -18,7 +18,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import es.upgrade.R;
-import es.upgrade.UI.fragments.ProductsFragment;
 import es.upgrade.entidad.Product;
 import es.upgrade.entidad.Routine;
 
@@ -29,12 +28,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private OnProductClickListener onProductClickListener;
     private int selectedPosition = -1;
     private Routine routine;// No producto seleccionado al inicio
+    private boolean isLobbyView;
 
     public ProductAdapter(List<Product> listaProductos ,Context context) {
         this.productList = listaProductos;
         this.context = context;
     }
 
+    public ProductAdapter(List<Product> productList, Context context, boolean isLobbyView, OnProductClickListener listener, Routine routine) {
+        this.productList = productList;
+        this.context = context;
+        this.isLobbyView = isLobbyView;
+        this.onProductClickListener = listener;
+        this.routine = routine;
+    }
+
+    public ProductAdapter(List<Product> listaProductos, Context context, boolean b) {
+        this.productList = listaProductos;
+        this.context = context;
+        this.isLobbyView = b;
+    }
 
 
     // The `OnProductClickListener` interface in the `ProductAdapter` class is defining a contract for
@@ -66,8 +79,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false);
-        return new ProductViewHolder(view);
+        // Escoge el layout correcto dependiendo si es la vista del lobby o no
+        int layoutId = isLobbyView ? R.layout.item_product_lobby : R.layout.item_product;
+        View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        return new ProductViewHolder(view, isLobbyView);
     }
 
     /**
@@ -96,28 +111,32 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.productImage);
 
-        //  Check if the current product is selected
-        holder.radioButton.setChecked(position == selectedPosition);
 
-        //  Set the click listener for the item view
-        holder.itemView.setOnClickListener(v -> {
+
+        // We only handle the radioButton if the view is not the Lobby.
+        if (!isLobbyView) {
             //  Check if the current product is selected
-            if (selectedPosition != position) {
-                int previousPosition = selectedPosition;
-                selectedPosition = position;
+            holder.radioButton.setChecked(position == selectedPosition);
+            //  Set the click listener for the item view
+            holder.itemView.setOnClickListener(v -> {
+                //  Check if the current product is selected
+                if (selectedPosition != position) {
+                    int previousPosition = selectedPosition;
+                    selectedPosition = position;
 
-                // Notify the adapter that the item has changed
-                notifyItemChanged(previousPosition);
-                notifyItemChanged(selectedPosition);
+                    // Notify the adapter that the item has changed
+                    notifyItemChanged(previousPosition);
+                    notifyItemChanged(selectedPosition);
 
-                // Notify the listener that the product has been clicked
-                onProductClickListener.onProductClick(product);
-                routine.addProduct(product);
-            }
-        });
+                    // Notify the listener that the product has been clicked
+                    onProductClickListener.onProductClick(product);
+                    routine.addProduct(product);
+                }
+            });
 
-        //  Set the click listener for the radio button
-        holder.radioButton.setOnClickListener(v -> holder.itemView.performClick());
+            //  Set the click listener for the radio button
+            holder.radioButton.setOnClickListener(v -> holder.itemView.performClick());
+        }
     }
 
     // The code snippet you provided is part of a Java class named `ProductAdapter` which extends
@@ -132,12 +151,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             ImageView productImage;
             RadioButton radioButton;
 
-            public ProductViewHolder(View itemView) {
+            public ProductViewHolder(View itemView, boolean isLobbyView) {
                 super(itemView);
                 productName = itemView.findViewById(R.id.productName);
                 productPrice = itemView.findViewById(R.id.productPrice);
                 productImage = itemView.findViewById(R.id.productImage);
-                radioButton = itemView.findViewById(R.id.radioProducto);
+
+                // This is only done if it is not in the Lobby view
+                if(!isLobbyView) {
+                    radioButton = itemView.findViewById(R.id.radioProducto);
+                }
             }
         }
 

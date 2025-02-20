@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:id="@+id/textProducts"
         android:layout_height="match_parent"
-        android:text="AQUI IRA UNA LISTA DE PRODUCTOS" />
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="No tienes productos " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProductos"

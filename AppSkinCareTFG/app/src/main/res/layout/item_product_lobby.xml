@@ -27,14 +27,10 @@
                 app:strokeWidth="2dp"
                 app:strokeColor="@color/backgroundButtonAccent"
                 app:shapeAppearanceOverlay="@style/RoundedImage"
+
                 />
 
-            <RadioButton
-                android:id="@+id/radioProducto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:buttonTint="@color/white"/>
+
         </RelativeLayout>
 
         <!-- Nombre del producto -->

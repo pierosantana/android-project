@@ -62,6 +62,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
 
+
     //Dependecies UI
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
     implementation ("com.tbuonomo:dotsindicator:5.1.0")
@@ -93,6 +94,9 @@ dependencies {
 
     //Dependencias para menu hamburguesa
     implementation  ("androidx.drawerlayout:drawerlayout:1.1.1")
+
+    //Depedencia para redondear las imagenes de los productos
+    implementation ("com.google.android.material:material:1.9.0")
 
 
 

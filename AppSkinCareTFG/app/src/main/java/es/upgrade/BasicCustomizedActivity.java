@@ -156,7 +156,7 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             List<Product> productosHidratacion = obtenerProductosPorCategoria(CategoryProduct.MOISTURIZER, routine);
 
             if (!productosLimpieza.isEmpty()) {
-                limpiezaAdapter = new ProductAdapter(this, productosLimpieza, product -> selectedLimpiezaProduct = product, routine);
+                limpiezaAdapter = new ProductAdapter( productosLimpieza,this,false, product -> selectedLimpiezaProduct = product, routine);
                 recyclerViewLimpieza.setAdapter(limpiezaAdapter);
                 recyclerViewLimpieza.setVisibility(View.VISIBLE);
             } else {
@@ -164,7 +164,7 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             }
 
             if (!productosHidratacion.isEmpty()) {
-                hidratacionAdapter = new ProductAdapter(this, productosHidratacion, product -> selectedHidratacionProduct = product, routine);
+                hidratacionAdapter = new ProductAdapter( productosHidratacion,this,false, product -> selectedHidratacionProduct = product, routine);
                 recyclerViewHidratacion.setAdapter(hidratacionAdapter);
                 recyclerViewHidratacion.setVisibility(View.VISIBLE);
             } else {

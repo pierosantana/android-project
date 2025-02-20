@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -28,7 +29,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
     /**
      * The function onCreateViewHolder creates and returns a RoutineViewHolder object for displaying
      * items in a RecyclerView.
-     * 
+     *
      * @param parent The `parent` parameter in the `onCreateViewHolder` method represents the ViewGroup
      * into which the new View will be added after it is bound to an adapter position. In the context
      * of a RecyclerView, the `parent` is typically the RecyclerView itself or one of its direct parent
@@ -46,24 +47,24 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
         return new RoutineViewHolder(view);
     }
 
-   /**
-    * This function populates a RecyclerView item with data from a Routine object and dynamically
-    * creates circles based on the number of steps in the routine.
-    * 
-    * @param holder The `holder` parameter in the `onBindViewHolder` method is a reference to the
-    * `ViewHolder` object which holds the views for a single item in the RecyclerView. It is used to
-    * access and update the views within that item.
-    * @param position The `position` parameter in the `onBindViewHolder` method represents the position
-    * of the item within the RecyclerView. It indicates the position of the item within the data set
-    * that the RecyclerView Adapter is currently binding to the ViewHolder.
-    */
+    /**
+     * This function populates a RecyclerView item with data from a Routine object and dynamically
+     * creates circles based on the number of steps in the routine.
+     *
+     * @param holder The `holder` parameter in the `onBindViewHolder` method is a reference to the
+     * `ViewHolder` object which holds the views for a single item in the RecyclerView. It is used to
+     * access and update the views within that item.
+     * @param position The `position` parameter in the `onBindViewHolder` method represents the position
+     * of the item within the RecyclerView. It indicates the position of the item within the data set
+     * that the RecyclerView Adapter is currently binding to the ViewHolder.
+     */
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
         Routine routine = routineList.get(position);
 
         holder.tvTitle.setText(routine.getRoutineType().toString());
         holder.tvType.setText(routine.getSchedule().toString());
-        holder.tvBudget.setText("Precio: $" + routine.getBudget());
+        holder.tvBudget.setText("Budget: " + routine.getBudget());
         holder.stepsContainer.removeAllViews();
 
         //Create circles for each step in the routine
@@ -93,7 +94,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
 
     /**
      * This function returns the number of items in a list called routineList.
-     * 
+     *
      * @return The method `getItemCount()` is returning the size of the `routineList`, which represents
      * the number of items in the list.
      */
@@ -109,6 +110,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
     public static class RoutineViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvType, tvBudget;
         LinearLayout stepsContainer;
+        ImageView ivProductIcon;
 
         // In the `RoutineViewHolder` constructor, the code is initializing the views for displaying
         // routine information. Here's a breakdown of what each line is doing:
@@ -118,6 +120,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
             tvType = itemView.findViewById(R.id.tvRoutineType);
             tvBudget = itemView.findViewById(R.id.tvBudget);
             stepsContainer = itemView.findViewById(R.id.stepsContainer);
+
         }
     }
 }

@@ -40,10 +40,10 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         btnNext = findViewById(R.id.btn_next);
         routine = new Routine();
 
-        // Crear una instancia del fragmento
+        // Create a new instance of QuestionnaireFragment
         QuestionnaireFragment questionnaireFragment = new QuestionnaireFragment();
 
-        // Pasar argumentos al fragmento
+        
         Bundle args = new Bundle();
         args.putInt("num_options", 3); // Número de opciones
         args.putStringArray("options_texts", new String[]{
@@ -53,18 +53,18 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         });
         questionnaireFragment.setArguments(args);
 
-        // Agregar el fragmento al contenedor
+        
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, questionnaireFragment);
         transaction.commit();
 
-        // Configurar el botón de avanzar (inicialmente deshabilitado)
+        
         btnNext.setEnabled(false);
 
-        // Al hacer clic en el botón de avanzar, pasa a la siguiente actividad
+        
         btnNext.setOnClickListener(v -> {
             if (selectedOption != -1) {
-                SkinType selectedSkinType = SkinType.values()[selectedOption]; // Suponiendo que SkinType es un enum
+                SkinType selectedSkinType = SkinType.values()[selectedOption]; 
                 selectSkinType(selectedSkinType);
             }
         });
@@ -76,37 +76,51 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
                     .addToBackStack(null)
                     .commit();
 
-            // Ocultar los elementos que no queremos ver
+            
             findViewById(R.id.tv_configuracion).setVisibility(View.GONE);
             findViewById(R.id.btn_next).setVisibility(View.GONE);
             findViewById(R.id.NoIdeaSkin).setVisibility(View.GONE);
             findViewById(R.id.include_progress).setVisibility(View.GONE);
             findViewById(R.id.fragment_container).setVisibility(View.GONE);
 
-            // Mostrar el contenedor del fragmento de descripción
+            
             findViewById(R.id.skin_description_fragment_container).setVisibility(View.VISIBLE);
         });
     }
 
+    /**
+     * Callback method invoked when the questionnaire is completed.
+     *
+     * @param selectedOption The option selected by the user in the questionnaire.
+     */
     @Override
     public void onQuestionnaireCompleted(int selectedOption) {
-        this.selectedOption = selectedOption; // Guarda la opción seleccionada
+        this.selectedOption = selectedOption; 
 
-        // Habilitamos el botón de confirmación
+        
         btnNext.setEnabled(true);
 
-        // Puedes mostrar un Toast para feedback del usuario
+        
         Toast.makeText(this, "Selected option: " + selectedOption, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Selects the skin type for the user and updates the routine accordingly.
+     *
+     * @param type the skin type to be selected
+     */
     private void selectSkinType(SkinType type) {
         User user = User.getInstance();
         routine.setSkinType(type);
         user.setSkinType(type);
-        progress = 1; // Puedes ajustar el progreso según lo que necesites
+        progress = 1; 
         nextActivity();
     }
 
+    /**
+     * Navigates to the HourActivity, passing the current progress and routine as extras in the intent.
+     * Logs the routine for debugging purposes.
+     */
     private void nextActivity() {
         Log.d("TAG", "nextActivity: "  + routine);
         Intent intent = new Intent(this, HourActivity.class);
@@ -115,11 +129,28 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         startActivity(intent);
     }
 
+    /**
+     * Updates the progress bar and step circles based on the given progress value.
+     *
+     * @param progress the current progress value to set on the progress bar
+     */
     private void updateProgressBar(int progress) {
         progressBar.setProgress(progress);
         updateStepCircles(progress);
     }
 
+    /**
+     * Updates the background resource of step circles based on the given progress.
+     * 
+     * This method sets the background resource of four step circles (step1, step2, step3, step4)
+     * to either a filled circle or an empty circle depending on the progress value.
+     * 
+     * @param progress an integer representing the current progress, where:
+     *                 - step1 is filled if progress is greater than or equal to 1
+     *                 - step2 is filled if progress is greater than or equal to 33
+     *                 - step3 is filled if progress is greater than or equal to 66
+     *                 - step4 is filled if progress is greater than or equal to 100
+     */
     private void updateStepCircles(int progress) {
         findViewById(R.id.step1).setBackgroundResource(progress >= 1 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step2).setBackgroundResource(progress >= 33 ? R.drawable.circle_filled : R.drawable.circle_empty);

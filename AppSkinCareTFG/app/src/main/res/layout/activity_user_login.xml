@@ -36,14 +36,14 @@
             android:layout_marginTop="15dp">
 
             <EditText
+                android:id="@+id/MailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/MailLogin"
-                android:hint="@string/MailLogin"
                 android:drawableStart="@drawable/ic_mail"
                 android:drawablePadding="10dp"
-                android:padding="20dp"
-                android:inputType="textEmailAddress"/>
+                android:hint="@string/MailLogin"
+                android:inputType="textEmailAddress"
+                android:padding="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class User {
 
-    private static User instance; // Instancia única
+    private static User instance;
     private String name;
     private String email;
     private String password;
@@ -16,12 +16,11 @@ public class User {
     private List<Routine> routineList;
 
 
-    // Constructor privado para evitar instanciación externa
     private User() {
         routineList = new ArrayList<>();
     }
 
-    // Método para obtener la única instancia (Singleton)
+
     public static User getInstance() {
         if (instance == null) {
             instance = new User();

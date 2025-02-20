@@ -45,31 +45,30 @@ public class HourActivity extends AppCompatActivity implements
 
 
         if (routine == null) {
-            routine = new Routine();  // Si es null, crea una nueva instancia
+            routine = new Routine();  
         }
-        // Crear una instancia del fragmento
+        // Create a new instance of the QuestionnaireFragment
         QuestionnaireFragment questionnaireFragment = new QuestionnaireFragment();
 
-        // Pasar argumentos al fragmento (opcional)
+        // Set the arguments
         Bundle args = new Bundle();
-        args.putInt("num_options", 2);// Número de opciones que quieres mostrar
+        args.putInt("num_options", 2);// Numbre of options
         args.putStringArray("options_texts", new String[]{
                 "Complete", // Option 1
                 "Night" // Option 2
         });
         questionnaireFragment.setArguments(args);
 
-        // Agregar el fragmento al contenedor
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_Container, questionnaireFragment);
         transaction.commit();
 
         btnNext.setEnabled(false);
 
-        // Al hacer clic en el botón de avanzar, pasar al siguiente paso
+        
         btnNext.setOnClickListener(v -> {
             if (selectedOption != -1) {
-                // Asignar el valor a routine según la opción seleccionada
+                
                 if (selectedOption == 0) {
                     routine.setSchedule(Schedule.COMPLETE);
                 } else if (selectedOption == 1) {
@@ -79,7 +78,7 @@ public class HourActivity extends AppCompatActivity implements
             }
         });
 
-        // Tomamos el progreso de la actividad anterior
+        // Get the progress from the previous activity
         progress = getIntent().getIntExtra("progress", 0);
         updateProgressBar(progress);
 
@@ -90,48 +89,69 @@ public class HourActivity extends AppCompatActivity implements
                     .addToBackStack(null)
                     .commit();
 
-            // Ocultar los elementos que no queremos ver
+            
             findViewById(R.id.tvTittle).setVisibility(View.GONE);
             findViewById(R.id.btnNext).setVisibility(View.GONE);
             findViewById(R.id.NoIdeaChoose).setVisibility(View.GONE);
             findViewById(R.id.include_progress).setVisibility(View.GONE);
             findViewById(R.id.fragment_Container).setVisibility(View.GONE);
 
-            // Mostrar el contenedor del fragmento de descripción
+            
             findViewById(R.id.hour_description_fragment).setVisibility(View.VISIBLE);
         });
 
 
     }
 
+    /**
+     * Starts the SkinCareTypeActivity and passes the current progress and routine to it.
+     *
+     * @param progress The current progress to be passed to the next activity. 
+     *                 This value will be incremented by 33 before being passed.
+     */
     private void nextActivity(int progress) {
         Intent intent = new Intent(this, SkinCareTypeActivity.class);
-        // Pasamos el progreso a la siguiente actividad
         intent.putExtra("progress", progress + 33);
-        // Pasar la rutina a la siguiente actividad
         intent.putExtra("routine", routine);
         startActivity(intent);
     }
 
+    /**
+     * Updates the progress bar and step circles based on the given progress value.
+     *
+     * @param progress the current progress value to set on the progress bar
+     */
     private void updateProgressBar(int progress) {
         progressBar.setProgress(progress);
         updateStepCircles(progress);
     }
 
+    /**
+     * Updates the background resource of step circles based on the given progress.
+     *
+     * @param progress an integer representing the current progress (0-100).
+     *                 - If progress is greater than or equal to 1, step1 circle is filled.
+     *                 - If progress is greater than 33, step2 circle is filled.
+     *                 - If progress is greater than or equal to 66, step3 circle is filled.
+     *                 - If progress is greater than or equal to 100, step4 circle is filled.
+     *                 Otherwise, the circles are set to empty.
+     */
     private void updateStepCircles(int progress) {
         findViewById(R.id.step1).setBackgroundResource(progress >= 1 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step2).setBackgroundResource(progress > 33 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step3).setBackgroundResource(progress >= 66 ? R.drawable.circle_filled : R.drawable.circle_empty);
         findViewById(R.id.step4).setBackgroundResource(progress >= 100 ? R.drawable.circle_filled : R.drawable.circle_empty);
     }
+    /**
+     * Callback method invoked when the questionnaire is completed.
+     *
+     * @param selectedOption The option selected by the user. 
+     *                       0 indicates "Complete" and any other value indicates "Night".
+     */
     @Override
     public void onQuestionnaireCompleted(int selectedOption) {
         this.selectedOption = selectedOption;
-
-        // Habilitar el botón de "Avanzar"
         btnNext.setEnabled(true);
-
-        // Mostrar la opción seleccionada (opcional)
         Toast.makeText(this, "Selected option: " + (selectedOption == 0 ? "Complete" : "Night"), Toast.LENGTH_SHORT).show();
     }
 }

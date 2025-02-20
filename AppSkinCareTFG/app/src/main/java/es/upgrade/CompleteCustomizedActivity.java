@@ -74,7 +74,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         recyclerViewTratamiento = findViewById(R.id.rvTratamiento);
         recyclerViewProtectorSolar = findViewById(R.id.rvProtectorSolar);
 
-        //Vista del reciclerView
+        
         recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewTonificacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -117,7 +117,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                 routine.addProduct(selectedTratamientoProduct);
                 routine.addProduct(selectedProtectorProduct);
 
-                // Recibir datos de la Intent anterior
+               
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
@@ -128,7 +128,7 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                 routine.setRoutineType(RoutineType.valueOf(routineType));
                 routine.setBudget(Budget.valueOf(budget));
 
-                // Crear Intent para pasar los datos a ResumenFinal
+                
                 Intent intent = new Intent(this, ResumenFinal.class);
                 intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
                 intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
@@ -136,19 +136,24 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
                 intent.putExtra("selectedTratamiento", selectedTratamientoProduct);
                 intent.putExtra("selectedProtector", selectedProtectorProduct);
 
-                // Pasar también los valores de skinType, schedule, routineType y budget
+                intent.putExtra("routine", routine);
                 intent.putExtra("skinType", skinType);
                 intent.putExtra("schedule", schedule);
                 intent.putExtra("routineType", routineType);
                 intent.putExtra("budget", budget);
 
-                // Iniciar ResumenFinal
+                
                 startActivity(intent);
 
             }
         });
 
     }
+     /**
+    * Fetches the products from the API using Retrofit and updates the ProductDao.
+    * If the API call is successful, it stores the products in the ProductDao and calls cargarProductos() to update the UI.
+    * If the API call fails, it shows a Toast message indicating the error.
+    */
     private void obtenerProductosDesdeApi(){
         Call<List<Product>> call = RetrofitClient.getApiService().getProducts();
         call.enqueue(new Callback<List<Product>>() {
@@ -171,6 +176,25 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Loads the products and updates the UI accordingly.
+     * 
+     * This method retrieves the list of products from the ProductDao. If the list is empty or null,
+     * it displays an empty view and hides all the RecyclerViews. Otherwise, it categorizes the products
+     * based on their category and updates the corresponding RecyclerViews with the appropriate adapters.
+     * 
+     * The method also checks the type of routine (day or night) and hides the sunscreen products if the routine
+     * is for the night.
+     * 
+     * The categories handled are:
+     * - Cleaner
+     * - Moisturizer
+     * - Tonic
+     * - Cream Treatment
+     * - Sunscreen
+     * 
+     * The visibility of each RecyclerView is updated based on whether there are products in the respective category.
+     */
     private void cargarProductos() {
         List<Product> products = ProductDao.getInstance().getProductos();
 
@@ -236,6 +260,13 @@ public class CompleteCustomizedActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Obtains all products that match the specified category and skin type from the routine.
+     *
+     * @param category the category of the products to filter by
+     * @param routine the routine containing the skin type to filter by
+     * @return a list of products that match the specified category and skin type
+     */
     private List<Product> obtenerTodosLosProductos(CategoryProduct category,Routine routine) {
         List<Product> productos = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = routine.getSkinType();

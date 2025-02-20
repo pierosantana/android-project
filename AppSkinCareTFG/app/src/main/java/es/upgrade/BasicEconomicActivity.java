@@ -63,7 +63,7 @@ public class BasicEconomicActivity extends AppCompatActivity {
 
         routine = (Routine) getIntent().getSerializableExtra("routine");
 
-        //Vista del reciclerView
+        //View configuration
         recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewLimpieza.setNestedScrollingEnabled(false);
@@ -85,7 +85,7 @@ public class BasicEconomicActivity extends AppCompatActivity {
                 routine.addProduct(selectedLimpiezaProduct);
                 routine.addProduct(selectedHidratacionProduct);
 
-                // Recibir datos de la Intent anterior
+                
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
@@ -95,9 +95,9 @@ public class BasicEconomicActivity extends AppCompatActivity {
                 routine.setSchedule(Schedule.valueOf(schedule));
                 routine.setRoutineType(RoutineType.valueOf(routineType));
                 routine.setBudget(Budget.valueOf(budget));
-                // Crear un Intent para abrir la RutinaActivity
+                
                 Intent intent = new Intent(BasicEconomicActivity.this, ResumenFinal.class);
-                // Pasar los productos seleccionados al Intent
+                intent.putExtra("routine", routine);
                 intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
                 intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
 
@@ -114,7 +114,11 @@ public class BasicEconomicActivity extends AppCompatActivity {
 
         });
     }
-
+     /**
+    * Fetches the products from the API using Retrofit and updates the ProductDao.
+    * If the API call is successful, it stores the products in the ProductDao and calls cargarProductos() to update the UI.
+    * If the API call fails, it shows a Toast message indicating the error.
+    */
     private void obtenerProductosDesdeApi() {
         Call<List<Product>> call = RetrofitClient.getApiService().getProducts();
         call.enqueue(new Callback<List<Product>>() {
@@ -135,6 +139,15 @@ public class BasicEconomicActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Loads the products from the database and updates the UI accordingly.
+     * 
+     * This method retrieves the list of products from the ProductDao. If the list is empty or null,
+     * it displays an empty view and hides the RecyclerViews for cleaning and moisturizing products.
+     * Otherwise, it categorizes the products into cleaning and moisturizing categories, sets up the
+     * adapters for the respective RecyclerViews, and updates their visibility based on the presence
+     * of products in each category.
+     */
     private void cargarProductos() {
         List<Product> products = ProductDao.getInstance().getProductos();
 
@@ -166,12 +179,19 @@ public class BasicEconomicActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Obtains a list of products filtered by category, routine's skin type, and a maximum price.
+     *
+     * @param category the category of the products to filter
+     * @param routine the routine containing the skin type to filter
+     * @return a list of products that match the specified category, skin type, and are below the maximum price
+     */
     private List<Product> obtenerProductosPorCategoria(CategoryProduct category, Routine routine) {
         List<Product> productos = ProductDao.getInstance().getProductos();
-        // Establecemos el precio máximo bajo
+        
         double precioMaximo = 7.0;
 
-        // Obtenemos el tipo de piel seleccionado
+        
         SkinType tipoPiel = routine.getSkinType();
 
         return productos.stream()

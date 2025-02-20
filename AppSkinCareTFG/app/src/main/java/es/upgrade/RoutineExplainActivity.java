@@ -38,28 +38,28 @@ public class RoutineExplainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine_explain);
 
-        // Inicialización de vistas
+        // Initialize views
         backToRoutines = findViewById(R.id.tvBackToRoutines);
         tvRoutineTitle = findViewById(R.id.tvRoutineTitleDetail);
         tvRoutineType = findViewById(R.id.tvRoutineTypeDetail);
-        dotsLayout = findViewById(R.id.dotsLayout); // Inicializa el contenedor de dots
+        dotsLayout = findViewById(R.id.dotsLayout); 
         recyclerViewSteps = findViewById(R.id.rvSteps);
 
-        // Obtener la rutina actual desde el Intent
+        
         routine = (Routine) getIntent().getSerializableExtra("routine");
 
         if (routine != null) {
-            // Mostrar información de la rutina
+            // Show the routine information
             tvRoutineTitle.setText("Routine: " + routine.getRoutineType());
             tvRoutineType.setText(routine.isNightRoutine() ? "Nocturnal Routine”" : "Complete Routine");
         } else {
             Toast.makeText(this, "Routine information not found", Toast.LENGTH_SHORT).show();
         }
 
-        // Cargar los pasos desde la API
+        
         cargarStepsFromApi();
 
-        // Manejar el evento de regreso a las rutinas
+       
         backToRoutines.setOnClickListener(v -> {
             Intent intent = new Intent(RoutineExplainActivity.this, MyRoutinesActivity.class);
             startActivity(intent);
@@ -67,25 +67,25 @@ public class RoutineExplainActivity extends AppCompatActivity {
     }
 
     /**
-     * Carga los pasos de la rutina desde la API y los configura en el RecyclerView.
-     * Este metodo realiza una llamada a la API para obtener los pasos de la rutina, limita la cantidad de pasos
-     * según el número definido en la rutina y guarda los pasos obtenidos en un objeto de tipo StepDao.
-     * Si la llamada a la API es exitosa, los pasos se cargan en el RecyclerView de la actividad,
-     * de lo contrario, se muestra un mensaje de error al usuario.
-     *
-     * @see RetrofitClient
-     * @see StepDao
-     * @see RoutineExplainActivity
-     */
+    * Loads the routine steps from the API and sets them to the RecyclerView.
+    * This method makes an API call to get the routine steps, limits the number of steps
+    * to the number defined in the routine, and saves the obtained steps to an object of type StepDao.
+    * If the API call is successful, the steps are loaded into the activity's RecyclerView,
+    * otherwise, an error message is displayed to the user.
+    *
+    * @see RetrofitClient
+    * @see StepDao
+    * @see RoutineExplainActivity
+    */
     private void cargarStepsFromApi() {
-        Call<List<Step>> call = RetrofitClient.getApiService().getSteps(); // Llamada al endpoint
+        Call<List<Step>> call = RetrofitClient.getApiService().getSteps(); 
         call.enqueue(new Callback<List<Step>>() {
             @Override
             public void onResponse(Call<List<Step>> call, Response<List<Step>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Obtener la lista de pasos desde la API
+                    
                     stepsApi = response.body();
-                    // Limitamos los pasos según el método getStepCount() de la rutina
+                    
                     int stepCount = routine.getStepCount();
                     if (stepCount != -1 && stepsApi.size() > stepCount) {
                         stepsApi = stepsApi.subList(0, stepCount);
@@ -108,21 +108,28 @@ public class RoutineExplainActivity extends AppCompatActivity {
 
     private void setupRecyclerView(List<Step> stepList, List<Product> selectedProducts) {
 
-        // Configura RecyclerView
+        
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewSteps.setLayoutManager(layoutManager);
 
-        // Configurar SnapHelper para deslizar una tarjeta a la vez
+        //Configure the RecyclerView to snap to the nearest item
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerViewSteps);
 
         StepAdapter stepAdapter = new StepAdapter(stepList, selectedProducts);
         recyclerViewSteps.setAdapter(stepAdapter);
 
-        // Inicializa los dots
+        
         initializeDots(stepList.size());
 
         recyclerViewSteps.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            /**
+             * This method is called when the RecyclerView has been scrolled.
+             *
+             * @param recyclerView The RecyclerView which scrolled.
+             * @param dx The amount of horizontal scroll.
+             * @param dy The amount of vertical scroll.
+             */
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -136,30 +143,45 @@ public class RoutineExplainActivity extends AppCompatActivity {
         });
     }
 
-    // Método para inicializar los dots
+    
+    /**
+     * Initializes the dots indicator for a view pager.
+     *
+     * This method clears any existing dots and creates a new set of dots based on the provided count.
+     * Each dot is represented by a TextView with a dot symbol ("●"), a specified text size, and an initial color.
+     * The dots are spaced evenly with padding.
+     * The first dot is activated by default.
+     *
+     * @param count the number of dots to initialize
+     */
     private void initializeDots(int count) {
-        dotsLayout.removeAllViews(); // Limpia cualquier punto previo
+        dotsLayout.removeAllViews(); // Clear any existing dots
         for (int i = 0; i < count; i++) {
             TextView dot = new TextView(this);
-            dot.setText("●"); // Símbolo del dot
+            dot.setText("●"); // Dot symbol
             dot.setTextSize(16);
-            dot.setTextColor(getResources().getColor(android.R.color.darker_gray)); // Color inicial (gris)
-            dot.setPadding(8, 0, 8, 0); // Espaciado entre los dots
+            dot.setTextColor(getResources().getColor(android.R.color.darker_gray)); 
+            dot.setPadding(8, 0, 8, 0); // Spacing between dots
             dotsLayout.addView(dot);
         }
-        // Activa el primer dot
+        
         updateDots(0);
     }
 
-    // Método para actualizar los dots
+    
+    /**
+     * Updates the color of the dots in the dotsLayout to indicate the current position.
+     *
+     * @param currentPosition The index of the currently active dot.
+     */
     private void updateDots(int currentPosition) {
         int count = dotsLayout.getChildCount();
         for (int i = 0; i < count; i++) {
             TextView dot = (TextView) dotsLayout.getChildAt(i);
             if (i == currentPosition) {
-                dot.setTextColor(getResources().getColor(android.R.color.holo_blue_dark)); // Color activo
+                dot.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
             } else {
-                dot.setTextColor(getResources().getColor(android.R.color.darker_gray)); // Color inactivo
+                dot.setTextColor(getResources().getColor(android.R.color.darker_gray));
             }
         }
     }}

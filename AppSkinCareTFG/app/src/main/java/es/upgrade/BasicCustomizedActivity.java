@@ -63,10 +63,10 @@ public class BasicCustomizedActivity extends AppCompatActivity {
         emptyView = findViewById(R.id.emptyView);
         btnContinuar = findViewById(R.id.btnContinuar);
 
-        // Recuperar la instancia de Routine pasada desde la actividad anterior
+        
         routine = (Routine) getIntent().getSerializableExtra("routine");
 
-        //Vista del RecyclerView
+        //View configuration
         recyclerViewLimpieza.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewHidratacion.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewLimpieza.setNestedScrollingEnabled(false);
@@ -78,18 +78,17 @@ public class BasicCustomizedActivity extends AppCompatActivity {
         LinearSnapHelper snapHidratacion = new LinearSnapHelper();
         snapHidratacion.attachToRecyclerView(recyclerViewHidratacion);
 
-        // Aquí llamamos al método para obtener productos desde la API al cargar la actividad
         obtenerProductDesdeApi();
 
         btnContinuar.setOnClickListener(v -> {
             if (selectedLimpiezaProduct == null || selectedHidratacionProduct == null) {
                 Toast.makeText(this, "Debes seleccionar un producto de cada categoría", Toast.LENGTH_SHORT).show();
             } else {
-                // Agregar los productos seleccionados a la rutina
+                // Add the selected products to the routine
                 routine.addProduct(selectedLimpiezaProduct);
                 routine.addProduct(selectedHidratacionProduct);
 
-                // Recibir datos de la Intent anterior
+                // Recive the values of skinType, schedule, routineType and budget
                 String skinType = getIntent().getStringExtra("skinType");
                 String schedule = getIntent().getStringExtra("schedule");
                 String routineType = getIntent().getStringExtra("routineType");
@@ -100,13 +99,13 @@ public class BasicCustomizedActivity extends AppCompatActivity {
                 routine.setRoutineType(RoutineType.valueOf(routineType));
                 routine.setBudget(Budget.valueOf(budget));
 
-                // Crear un Intent para abrir la ResumenFinal Activity
+                // Create the intent to navigate to the next activity
                 Intent intent = new Intent(BasicCustomizedActivity.this, ResumenFinal.class);
-                // Pasar los productos seleccionados al Intent
+                intent.putExtra("routine", routine);
                 intent.putExtra("selectedLimpieza", selectedLimpiezaProduct);
                 intent.putExtra("selectedHidratacion", selectedHidratacionProduct);
 
-                // Pasar también los valores de skinType, schedule, routineType y budget
+                
                 intent.putExtra("skinType", skinType);
                 intent.putExtra("schedule", schedule);
                 intent.putExtra("routineType", routineType);
@@ -117,17 +116,19 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+    * Fetches the products from the API using Retrofit and updates the ProductDao.
+    * If the API call is successful, it stores the products in the ProductDao and calls cargarProductos() to update the UI.
+    * If the API call fails, it shows a Toast message indicating the error.
+    */
     private void obtenerProductDesdeApi(){
-        // Llamamos al Retrofit para obtener los productos desde la API
+        // Call the API to get the products
         Call<List<Product>> call = RetrofitClient.getApiService().getProducts();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if(response.isSuccessful() && response.body() != null){
                     List<Product> productosApi = response.body();
-                    // Aquí guardamos los productos de la API dentro del productDao,
-                    // el cual al ser singleton podemos acceder a él desde cualquier punto
                     ProductDao.getInstance().setProductos(productosApi);
                     cargarProductos();
                 } else {
@@ -141,7 +142,11 @@ public class BasicCustomizedActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+    * Loads the products from the ProductDao and updates the UI accordingly.
+    * If there are no products, it shows an empty view.
+    * Otherwise, it filters the products by category and sets the adapters for the RecyclerViews.
+    */
     private void cargarProductos() {
         List<Product> products = ProductDao.getInstance().getProductos();
 
@@ -173,12 +178,19 @@ public class BasicCustomizedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+    * Obtains a list of products filtered by category and skin type.
+    *
+    * @param category the category of the products to filter.
+    * @param routine the routine containing the skin type to filter by.
+    * @return a list of products that match the specified category and skin type.
+    */
     private List<Product> obtenerProductosPorCategoria(CategoryProduct category, Routine routine) {
         List<Product> productos = ProductDao.getInstance().getProductos();
         SkinType tipoPiel = routine.getSkinType();
         return productos.stream()
-                .filter(product -> product.getSkinType() == tipoPiel // Filtro por tipo de piel
-                        && product.getCategoryProduct() == category) // Filtro por categoría
+                .filter(product -> product.getSkinType() == tipoPiel // Filter by skin type
+                        && product.getCategoryProduct() == category) // Filter by category
                 .collect(Collectors.toList());
     }
 }

@@ -55,7 +55,7 @@ public class UserRegistration extends AppCompatActivity {
         btnRegisterUser = findViewById(R.id.BtnRegisterUser);
         alreadyAccount = findViewById(R.id.AlreadyAccount);
 
-        // Configuración del diálogo de progreso
+        // Configure the progress dialog
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_progress_dialog, null);
         progressDialog = new AlertDialog.Builder(this)
@@ -68,8 +68,18 @@ public class UserRegistration extends AppCompatActivity {
     }
 
     /**
-     * El método `dataValidator` valida la entrada del usuario para los campos de nombre,
-     * correo electrónico, contraseña y confirmación de contraseña antes de crear una cuenta.
+     * Validates the user input data for registration.
+     * <p>
+     * This method checks the following conditions:
+     * <ul>
+     *   <li>If the name field is empty, it shows a message to add a name.</li>
+     *   <li>If the email does not match the standard email pattern, it shows a message to enter a valid email.</li>
+     *   <li>If the password field is empty, it shows a message to add a password.</li>
+     *   <li>If the password is less than 6 characters long, it shows a message that the password must be at least 6 characters long.</li>
+     *   <li>If the confirm password field is empty, it shows a message to confirm the password.</li>
+     *   <li>If the password and confirm password do not match, it shows a message that the passwords must match.</li>
+     * </ul>
+     * If all conditions are met, it proceeds to create an account with the provided email, password, and name.
      */
     private void dataValidator() {
         String name = etName.getText().toString().trim();
@@ -96,13 +106,13 @@ public class UserRegistration extends AppCompatActivity {
 
 
     /**
-     * El método `createAccount` registra una cuenta de usuario con el correo electrónico,
-     * la contraseña y el nombre proporcionados,manejando las excepciones.
-     *
-     * @param mail la dirección de correo electrónico que se usará para crear la cuenta.
-     * @param password la contraseña elegida por el usuario para su cuenta.
-     * @param name el nombre real del usuario para quien se está creando la cuenta.
-     */
+    * The `createAccount` method registers a user account with the provided email,
+    * password, and name, handling exceptions.
+    *
+    * @param mail the email address to use to create the account.
+    * @param password the password chosen by the user for their account.
+    * @param name the real name of the user for whom the account is being created.
+    */
     private void createAccount(String mail, String password, String name) {
         progressDialog.show();
         authenticatorManager.register(mail, password, authResult -> {
@@ -120,24 +130,23 @@ public class UserRegistration extends AppCompatActivity {
     }
 
     /**
-     * El método `saveInformation` guarda la información del usuario mediante el hash de la contraseña,
-     * creando un nuevo objeto Usuario y guardándolo en la base de datos.
+     * The `saveInformation` method saves the user's information to the database.
      *
-     * @param mail la dirección de correo electrónico del usuario.
-     * @param password la contraseña del usuario que ingresó durante el proceso de registro.
-     * @param name el nombre del usuario cuya información se está guardando.
+     * @param mail the email address entered by the user during the registration process.
+     * @param password the user's password entered during the registration process.
+     * @param name the user's name entered during the registration process.
      */
     private void saveInformation(String mail, String password, String name) {
         progressDialog.setMessage("Saving information...");
 
-        // Generar el hash para la contraseña
+        // Generar el hash de la contraseña
         String passwordHash = authenticatorManager.hashPassword(password);
         if (passwordHash == null) {
             progressDialog.dismiss();
             showMessage("Error generating password hash");
             return;
         }
-        // Reinicializar las instancias de User y Routine
+        // Reinicialize the user instance
         User.resetInstance();
 
         User user = User.getInstance();
@@ -145,10 +154,10 @@ public class UserRegistration extends AppCompatActivity {
         user.setEmail(mail);
         user.setPassword(passwordHash);
 
-        // Asegurarse de que la lista de rutinas esté vacía
+       
         user.setRoutineList(new ArrayList<>());
 
-        // Guardar usuario en la base de datos
+        // Save the user information to the database
         userDao.saveUser(user, task -> {
             progressDialog.dismiss();
             if (task.isSuccessful()) {
@@ -160,15 +169,15 @@ public class UserRegistration extends AppCompatActivity {
         });
     }
     /**
-     * El método `startSession` registra los valores de correo electrónico y contraseña,
-     * los envía a la activity UserMenu, y redirecciona a esta.
-     *
-     * @param mail la dirección de correo electrónico ingresada por el usuario durante
-     * el proceso de registro.
-     * @param password la contraseña del usuario que ingresó durante el proceso de registro.
-     */
+    * The `startSession` method takes the email and password values,
+    * sends them to the UserMenu activity, and redirects to it.
+    *
+    * @param mail the email address entered by the user during
+    * the registration process.
+    * @param password the password the user entered during the registration process.
+    */
     private void startSession(String mail, String password) {
-        // Mostrar los valores de correo y contraseña antes de enviar
+        // Show the user's email and password in the log
         Log.d("UserRegistration", "Email: " + mail);
         Log.d("UserRegistration", "Password: " + password);
 
@@ -179,12 +188,12 @@ public class UserRegistration extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    /**
-     * El método `showToast` muestra un mensaje de notificación de corta duración en una
-     * aplicación de Android.
-     *
-     * @param message representa el mensaje de texto que desea mostrar.
-     */
+        /**
+    * The `showToast` method displays a short-duration notification message in an
+    * Android application.
+    *
+    * @param message represents the text message you want to display.
+    */
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

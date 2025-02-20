@@ -20,8 +20,8 @@
             android:layout_height="200dp"
             app:lottie_imageAssetsFolder="assets"
             app:lottie_fileName="face.json"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"/>
+            app:lottie_loop="false"
+            app:lottie_autoPlay="false"/>
 
         <TextView
             android:layout_width="wrap_content"

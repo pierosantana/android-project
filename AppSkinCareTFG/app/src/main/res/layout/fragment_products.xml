@@ -13,7 +13,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="No tienes productos " />
+        android:text="@string/fragment_product_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProductos"

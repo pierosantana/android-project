@@ -107,14 +107,14 @@
                     android:id="@+id/btnNewRoutine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:buttonIcon="@drawable/ic_plus"
+                    app:buttonIcon="@drawable/ic_glow"
                     app:buttonText="@string/ButtonTextRoutine" />
 
                 <es.upgrade.UI.CustomViewMenu
                     android:id="@+id/btnMyRoutines"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:buttonIcon="@drawable/products_svgrepo_com"
+                    app:buttonIcon="@drawable/ic_my_routines"
                     app:buttonText="@string/ButtonTextRoutines" />
 
                 <es.upgrade.UI.CustomViewMenu

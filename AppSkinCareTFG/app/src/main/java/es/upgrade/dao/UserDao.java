@@ -26,7 +26,7 @@ public class UserDao {
     /**
      * The getInstance method returns a single instance of the UserDao class, creating it if it doesn't
      * already exist.
-     * 
+     *
      * @return An instance of the UserDao class is being returned.
      */
     public static UserDao getInstance() {
@@ -36,7 +36,7 @@ public class UserDao {
         return instance;
     }
 
-    
+
     // The `OnUserRecoveredListener` interface in the `UserDao` class defines a contract for a callback
     // listener that is used to notify when a user has been successfully recovered from Firebase
     // database. It contains a single method `onUserRecovered(User user)` that should be implemented by
@@ -45,7 +45,7 @@ public class UserDao {
         void onUserRecovered(User user);
     }
 
-    
+
     // The line `FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();` is initializing an instance
     // of the `FirebaseAuth` class by calling the static method `getInstance()` from the `FirebaseAuth`
     // class. This instance is used to interact with Firebase Authentication services in the Android
@@ -56,7 +56,7 @@ public class UserDao {
 
     private final DatabaseReference userReference;
 
-    
+
     // The `private UserDao()` constructor in the `UserDao` class is a private constructor that
     // initializes a `FirebaseDatabase` instance and sets the `userReference` field to point to the
     // "Users" node in the Firebase Realtime Database.
@@ -78,16 +78,16 @@ public class UserDao {
     public void saveUser(User user, OnCompleteListener<Void> onCompleteListener) {
         String userId = firebaseAuth.getUid();
         if (user.getRoutineList() == null) {
-            user.setRoutineList(new ArrayList<>()); 
+            user.setRoutineList(new ArrayList<>());
         }
         userReference.child(userId).setValue(user).addOnCompleteListener(onCompleteListener);
     }
 
-    
+
     /**
      * The `verifyFirebaseUser` function checks if a Firebase user is authenticated and logs the user's
      * email if available.
-     * 
+     *
      * @return The method `verifyFirebaseUser` returns a boolean value. If there is a Firebase user
      * authenticated, it returns `true`. If there is no authenticated user, it returns `false`.
      */
@@ -97,8 +97,8 @@ public class UserDao {
         Log.d("UserDao_verifyFirebaseUser", "Usuario autenticado: " + (firebaseUser != null));
 
 
-        
-       // The code snippet you provided is from the `verifyFirebaseUser` method in the `UserDao` class.
+
+        // The code snippet you provided is from the `verifyFirebaseUser` method in the `UserDao` class.
         if (firebaseUser == null) {
             Log.d("UserDao_verifyFirebaseUser", "EMAIL: null");
             return false;
@@ -108,19 +108,19 @@ public class UserDao {
         }
     }
 
-   /**
-    * The `recoveryUser` method retrieves user information from Firebase and notifies a listener with
-    * the retrieved user data or null if the user is not found.
-    * 
-    * @param listener The `listener` parameter in the `recoveryUser` method is an instance of the
-    * `OnUserRecoveredListener` interface. This listener is used to notify the caller when the user
-    * data has been successfully recovered or if an error occurs during the recovery process.
-    */
+    /**
+     * The `recoveryUser` method retrieves user information from Firebase and notifies a listener with
+     * the retrieved user data or null if the user is not found.
+     *
+     * @param listener The `listener` parameter in the `recoveryUser` method is an instance of the
+     * `OnUserRecoveredListener` interface. This listener is used to notify the caller when the user
+     * data has been successfully recovered or if an error occurs during the recovery process.
+     */
     public void recoveryUser(OnUserRecoveredListener listener) {
         User user = User.getInstance();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
         String userId = firebaseAuth.getUid();
-    
+
         userRef.child(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User userInfo = task.getResult().getValue(User.class);
@@ -130,15 +130,18 @@ public class UserDao {
                     user.setPassword(userInfo.getPassword());
                     user.setSkinType((userInfo.getSkinType()));
                     Log.d("UserDao_recoveryUser", "Usuario encontrado: " + user);
-    
+
                     // Recuperar las rutinas del usuario
                     List<Routine> routines = userInfo.getRoutineList();
                     if (routines != null) {
+                        for(Routine r : routines){
+                            for (Product p : r.getProductList()) {}
+                        }
                         user.setRoutineList(routines);
                     } else {
                         user.setRoutineList(new ArrayList<>()); // Inicializar la lista de rutinas vacía si es null
                     }
-    
+
                     // Notificamos que los datos están listos
                     if (listener != null) {
                         listener.onUserRecovered(user);
@@ -164,7 +167,7 @@ public class UserDao {
      */
     public void updateUser() {
         String userId = firebaseAuth.getUid();
-        
+
         if (userId == null) {
             Log.e("UserDao_updateUser", "Error: Usuario no autenticado.");
             return;
@@ -174,7 +177,7 @@ public class UserDao {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference userRef = firebaseDatabase.getReference("Users").child(userId);
 
-        
+
         List<Routine> routines = user.getRoutineList();
         if (routines == null) {
             routines = new ArrayList<>(); // Evitar que sea null
@@ -188,16 +191,16 @@ public class UserDao {
         for (Routine r : routines) {
             if (r == null) {
                 Log.e("UserDao_updateUser", "Una rutina es null.");
-                continue; 
+                continue;
             }
             Map<String, Object> routineMap = new HashMap<>();
-            
+
             routineMap.put("schedule", r.getSchedule() != null ? r.getSchedule().toString() : "null");
-            routineMap.put("routineType", r.getRoutineType() != null ? r.getRoutineType().toString() : "null");         
+            routineMap.put("routineType", r.getRoutineType() != null ? r.getRoutineType().toString() : "null");
             routineMap.put("budget", r.getBudget() != null ? r.getBudget().toString() : "null");
             routineMap.put("skinType", r.getSkinType() != null ? r.getSkinType().toString() : "null");
+            routineMap.put("budgetProducts", r.getBudgetProducts() != null ? r.getBudgetProducts() : new ArrayList<>());
 
-            
             List<Map<String, Object>> productList = new ArrayList<>();
             for (Product p : r.getProductList()) {
                 if (p == null) {
@@ -205,18 +208,15 @@ public class UserDao {
                 }
 
                 Map<String, Object> productMap = new HashMap<>();
-                
 
-                if (p.getCategoryProduct() == null) {
-                    productMap.put("category", "null"); 
-                } else {
-                    productMap.put("category", p.getCategoryProduct().toString());
-                }
+                productMap.put("categoryProduct", p.getCategoryProduct() != null ? 	p.getCategoryProduct().toString() : "DEFAULT_CATEGORY");
                 productMap.put("id", p.getId());
                 productMap.put("name", p.getName());
                 productMap.put("price", p.getPrice());
                 productMap.put("url", p.getUrl());
                 productMap.put("brand", p.getBrand());
+                productMap.put("skinType", p.getSkinType() != null ? p.getSkinType().toString() : "DEFAULT");
+
 
                 productList.add(productMap);
             }
@@ -233,10 +233,10 @@ public class UserDao {
         updates.put("skinType", user.getSkinType());
         updates.put("routineList", routineList);
 
-    
-       // The code snippet `userRef.updateChildren(updates).addOnCompleteListener(task -> { ... });` in
-       // the `updateUser()` method of the `UserDao` class is updating the user data in the Firebase
-       // Realtime Database. Here's a breakdown of what it does:
+
+        // The code snippet `userRef.updateChildren(updates).addOnCompleteListener(task -> { ... });` in
+        // the `updateUser()` method of the `UserDao` class is updating the user data in the Firebase
+        // Realtime Database. Here's a breakdown of what it does:
         userRef.updateChildren(updates).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.d("UserDao_updateUser", "El usuario se ha actualizado en la base de datos.");

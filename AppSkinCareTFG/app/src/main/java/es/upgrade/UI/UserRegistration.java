@@ -159,13 +159,17 @@ public class UserRegistration extends AppCompatActivity {
 
         // Save the user information to the database
         userDao.saveUser(user, task -> {
-            progressDialog.dismiss();
-            if (task.isSuccessful()) {
-                showMessage("Account successfully created");
-                startSession(mail, password);
-            } else {
-                showMessage("Error saving user information");
-            }
+
+            new android.os.Handler().postDelayed(() -> {
+                progressDialog.dismiss();
+
+                if (task.isSuccessful()) {
+                    showMessage("Account successfully created");
+                    startSession(mail, password);
+                } else {
+                    showMessage("Error saving user information");
+                }
+            }, 1100);
         });
     }
     /**

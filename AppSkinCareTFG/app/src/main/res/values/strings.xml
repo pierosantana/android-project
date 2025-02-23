@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppSkinCareTFG</string>
+    <string name="app_name">Glouwup</string>
 
     <!--MAIN ACTIVITY-->
     <string name="BtnLogin">Log in</string>
@@ -142,7 +142,6 @@
     <string name="Valor1ResumenFinal">Total: 0.00€</string>
     <string name="Valor1Boton">Finish</string>
 
-    <!-- ROUTINE EXPLAIN -->
 
 
     <!-- TYPE SKIN EXPLAIN -->

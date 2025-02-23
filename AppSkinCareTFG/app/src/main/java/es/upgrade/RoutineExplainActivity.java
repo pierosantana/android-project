@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class RoutineExplainActivity extends AppCompatActivity {
 
-    private TextView tvRoutineTitle, tvRoutineType, tvStepCounter, backToRoutines;
+    private TextView tvRoutineTitle, tvRoutineType, tvStepCounter;
     private RecyclerView recyclerViewSteps;
     private Routine routine;
     private LinearLayout dotsLayout; // Contenedor de los dots
@@ -39,7 +39,6 @@ public class RoutineExplainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_routine_explain);
 
         // Initialize views
-        backToRoutines = findViewById(R.id.tvBackToRoutines);
         tvRoutineTitle = findViewById(R.id.tvRoutineTitleDetail);
         tvRoutineType = findViewById(R.id.tvRoutineTypeDetail);
         dotsLayout = findViewById(R.id.dotsLayout); 
@@ -59,11 +58,7 @@ public class RoutineExplainActivity extends AppCompatActivity {
         
         cargarStepsFromApi();
 
-       
-        backToRoutines.setOnClickListener(v -> {
-            Intent intent = new Intent(RoutineExplainActivity.this, MyRoutinesActivity.class);
-            startActivity(intent);
-        });
+
     }
 
     /**

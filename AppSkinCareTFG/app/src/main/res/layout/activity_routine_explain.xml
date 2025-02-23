@@ -6,23 +6,12 @@
     android:background="@color/backgroundApplication"
     android:padding="16dp">
 
-    <!-- Botón para volver -->
-    <TextView
-        android:id="@+id/tvBackToRoutines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back to routines"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="8dp"/>
 
     <!-- Título de la Rutina -->
     <TextView
         android:id="@+id/tvRoutineTitleDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rutina"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -34,7 +23,6 @@
         android:id="@+id/tvRoutineTypeDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo de rutina"
         android:textSize="18sp"
         android:gravity="center"
         android:textColor="@color/black"

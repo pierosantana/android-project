@@ -40,7 +40,7 @@ public class Launcher extends AppCompatActivity {
         });
 
         // Simulate a loading time
-        int TimeLoading = 5000; // 
+        int TimeLoading = 3540; //
 
         //postDelayed method schedules a task to verify the user after a delay
         new Handler().postDelayed(this::verifyUser, TimeLoading);

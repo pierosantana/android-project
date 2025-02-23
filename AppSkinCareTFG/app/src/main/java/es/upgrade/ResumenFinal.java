@@ -63,7 +63,7 @@ public class ResumenFinal extends AppCompatActivity {
         double totalPrecio = 0.0;
 
         if (selectedLimpieza != null) {
-            resumen.append("Cleansing product: ").append(selectedLimpieza.getName())
+            resumen.append("Cleaning product: ").append(selectedLimpieza.getName())
                     .append(" - Price: ").append(selectedLimpieza.getPrice()).append("€\n");
             totalPrecio += selectedLimpieza.getPrice();
         }

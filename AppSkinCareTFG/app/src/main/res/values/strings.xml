@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Glouwup</string>
+    <string name="app_name">Glowup</string>
 
     <!--MAIN ACTIVITY-->
     <string name="BtnLogin">Log in</string>

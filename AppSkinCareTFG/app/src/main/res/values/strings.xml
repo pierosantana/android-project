@@ -103,6 +103,7 @@
     <string name="RadioButonOpcion1">Option 1</string>
     <string name="RadioButonOpcion2">Option 2</string>
     <string name="RadioButonOpcion3">Option 3</string>
+    <string name="RadioButonOpcion4">Option 4</string>
 
     <!--ITEM PRODUCT-->
     <string name="NombreProducto">Product name</string>

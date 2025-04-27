@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:strokeWidth="1"
+      android:pathData="M19.878,20.377C17.731,22.397 14.89,23.514 11.943,23.5C8.995,23.485 6.166,22.339 4.038,20.299C1.911,18.258 0.649,15.478 0.512,12.534C0.376,9.589 1.375,6.704 3.303,4.475C5.232,2.246 7.943,0.843 10.877,0.555C13.81,0.267 16.743,1.117 19.068,2.928C21.393,4.74 22.934,7.375 23.372,10.29C23.81,13.205 23.113,16.177 21.423,18.592"
+      android:fillColor="#00000000"
+      android:strokeColor="@color/backgroundButtonAccent"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M9.52,9.695L15.435,15.448"
+      android:fillColor="#00000000"
+      android:strokeColor="@color/backgroundButtonAccent"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M10.316,13.099C10.04,13.105 9.821,13.334 9.827,13.61C9.833,13.886 10.062,14.105 10.338,14.099L10.316,13.099ZM10.327,13.599L10.338,14.099L13.473,14.029L13.462,13.529L13.451,13.029L10.316,13.099L10.327,13.599Z"
+      android:fillColor="@color/backgroundButtonAccent"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M11.873,9.642L11.886,11.996"
+      android:fillColor="#00000000"
+      android:strokeColor="@color/backgroundButtonAccent"
+      android:strokeLineCap="round"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M17.595,13.12C17.711,13.706 17.697,14.295 17.555,14.843C17.412,15.391 17.144,15.885 16.77,16.288L16.292,16.779C15.378,17.697 14.097,18.183 12.713,18.138C6.178,16.946 5.851,6.126 5.851,6.126L12.391,7.714C13.651,8.03 14.83,8.72 15.763,9.69C16.696,10.659 17.337,11.858 17.595,13.12Z"
+      android:fillColor="#00000000"
+      android:strokeColor="@color/backgroundButtonAccent"/>
+</vector>

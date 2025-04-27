@@ -49,7 +49,8 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
         args.putStringArray("options_texts", new String[]{
                 "Dry skin", // Option 1
                 "Normal skin", // Option 2
-                "Combination skin" // Option 3
+                "Combination skin", // Option 3
+                "Sensitive skin" // Option 4
         });
         questionnaireFragment.setArguments(args);
 

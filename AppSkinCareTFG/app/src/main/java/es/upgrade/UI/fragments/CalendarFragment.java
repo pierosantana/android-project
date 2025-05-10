@@ -103,8 +103,8 @@ public class CalendarFragment extends Fragment {
                 String id = eventsRef.child(date).push().getKey();
 
                 Map<String, String> event = new HashMap<>();
-                event.put("titulo", title);
-                event.put("hora", time);
+                event.put("title", title);
+                event.put("hour", time);
 
                 if (id != null) {
                     eventsRef.child(date).child(id).setValue(event);
@@ -130,8 +130,8 @@ public class CalendarFragment extends Fragment {
                     Map<String, String> data = (Map<String, String>) eventSnap.getValue();
 
                     if (data != null) {
-                        String title = data.getOrDefault("titulo", "Untitled");
-                        String time = data.getOrDefault("hora", "No time");
+                        String title = data.getOrDefault("title", "Untitled");
+                        String time = data.getOrDefault("hour", "No time");
 
                         View item = LayoutInflater.from(getContext()).inflate(R.layout.item_evento_inline, eventsContainer, false);
                         TextView infoText = item.findViewById(R.id.txtEventInfo);
@@ -166,19 +166,19 @@ public class CalendarFragment extends Fragment {
         layout.setPadding(16, 16, 16, 16);
 
         EditText titleInput = new EditText(getContext());
-        titleInput.setText(originalData.get("titulo"));
+        titleInput.setText(originalData.get("title"));
         layout.addView(titleInput);
 
         EditText timeInput = new EditText(getContext());
-        timeInput.setText(originalData.get("hora"));
+        timeInput.setText(originalData.get("hour"));
         layout.addView(timeInput);
 
         builder.setView(layout);
 
         builder.setPositiveButton("Save", (dialog, which) -> {
             Map<String, String> updated = new HashMap<>();
-            updated.put("titulo", titleInput.getText().toString().trim());
-            updated.put("hora", timeInput.getText().toString().trim());
+            updated.put("title", titleInput.getText().toString().trim());
+            updated.put("hour", timeInput.getText().toString().trim());
 
             eventsRef.child(date).child(id).setValue(updated);
             Toast.makeText(getContext(), "Event updated", Toast.LENGTH_SHORT).show();

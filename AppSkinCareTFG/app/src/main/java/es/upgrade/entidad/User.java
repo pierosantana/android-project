@@ -14,12 +14,11 @@ public class User {
     @PropertyName("skinType")
     private SkinType skinType;
     private List<Routine> routineList;
-
+    private String imageUri;
 
     private User() {
         routineList = new ArrayList<>();
     }
-
 
     public static User getInstance() {
         if (instance == null) {
@@ -28,7 +27,9 @@ public class User {
         return instance;
     }
 
-   
+    public static void resetInstance() {
+        instance = new User();
+    }
 
     public String getName() {
         return name;
@@ -56,9 +57,9 @@ public class User {
 
     @PropertyName("skinType")
     public SkinType getSkinType() {
-
         return skinType;
     }
+
     @PropertyName("skinType")
     public void setSkinType(SkinType skinType) {
         this.skinType = skinType;
@@ -72,17 +73,18 @@ public class User {
         this.routineList = routineList;
     }
 
-    public void addRoutine(Routine routine){
+    public void addRoutine(Routine routine) {
         this.routineList.add(routine);
     }
 
-    /**
-     * The toString method in the User class returns a string representation of the User object's
-     * attributes.
-     * 
-     * @return A string representation of a User object is being returned. It includes the user's name,
-     * email, password, skin type, and a list of routines.
-     */
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -90,14 +92,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", skinType=" + skinType +
+                ", imageUri=" + imageUri +
                 ", routineList=" + routineList +
                 '}';
-    }
-    
-    /**
-     * The `resetInstance` function creates a new instance of the `User` class.
-     */
-    public static void resetInstance() {
-        instance = new User();
     }
 }

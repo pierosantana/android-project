@@ -26,6 +26,7 @@ import com.nafis.bottomnavigation.NafisBottomNavigation;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.upgrade.HourActivity;
+import es.upgrade.MyProfileActivity;
 import es.upgrade.R;
 import es.upgrade.SettingsActivity;
 import es.upgrade.SkinTypeActivity;
@@ -33,6 +34,7 @@ import es.upgrade.MyRoutinesActivity;
 import es.upgrade.UI.fragments.CalendarFragment;
 import es.upgrade.UI.fragments.EmptyFragment;
 import es.upgrade.UI.fragments.ProductsFragment;
+import es.upgrade.dao.UserDao;
 import es.upgrade.entidad.Routine;
 import es.upgrade.entidad.User;
 import es.upgrade.manager.AuthenticatorManager;
@@ -58,7 +60,7 @@ public class LobbyActivity extends AppCompatActivity {
      * The `onCreate` method in this Java code initializes the activity layout, sets up system bar
      * margins, checks user authentication, configures a bottom navigation menu, and loads different
      * fragments based on user selection.
-     * 
+     *
      * @param savedInstanceState The `savedInstanceState` parameter in the `onCreate` method is a
      * Bundle object that provides data about the previous state of the activity if it was previously
      * destroyed and recreated. This bundle allows you to restore the activity to its previous state,
@@ -138,11 +140,11 @@ public class LobbyActivity extends AppCompatActivity {
         // Configure the user menu
         configureUserMenu();
     }
-    
-   /**
-    * The function `loadHomeFragment` sets the visibility of a view and replaces a fragment with an
-    * empty fragment to display the Lobby.
-    */
+
+    /**
+     * The function `loadHomeFragment` sets the visibility of a view and replaces a fragment with an
+     * empty fragment to display the Lobby.
+     */
     private void loadHomeFragment() {
         findViewById(R.id.mainUser).setVisibility(View.VISIBLE);
         // Aquí no se necesita ningún fragmento, ya que solo se debe mostrar el Lobby sin fragmentos
@@ -151,11 +153,11 @@ public class LobbyActivity extends AppCompatActivity {
                 .commit();
     }
 
-    
+
     /**
      * The `loadFragment` function hides a specific view and replaces its content with a given fragment
      * in an Android application.
-     * 
+     *
      * @param fragment The `fragment` parameter in the `loadFragment` method is an instance of the
      * `Fragment` class that you want to load and display within the specified container in your
      * Android application. When this method is called, the content of the container specified by the
@@ -176,23 +178,30 @@ public class LobbyActivity extends AppCompatActivity {
      * creation, viewing routines, and logging out.
      */
     private void configureUserMenu() {
-        // Configurar elementos del menú de usuario
         CircleImageView profileImage = findViewById(R.id.profileImage);
-        ImageButton editImageButton = findViewById(R.id.editImagebutton);
         TextView tvName = findViewById(R.id.userName);
         TextView tvSkin = findViewById(R.id.skinType);
 
         User user = User.getInstance();
 
-        
-        tvName.setText(user.getName());
-        // Verificar y mostrar el tipo de piel
+        tvName.setText(user.getName() != null ? user.getName() : "Guest");
 
-       // if (user.getSkinType() != null) {
-         //   tvSkin.setText(user.getSkinType().toString());  // Muestra el tipo de piel en el TextView
-        //}
+        // Mostrar tipo de piel si está disponible
+        if (user.getSkinType() != null) {
+            tvSkin.setText(user.getSkinType().toString());
+        } else {
+            tvSkin.setText("No skin type set");
+        }
 
-
+        // Mostrar imagen si existe
+        if (user.getImageUri() != null && !user.getImageUri().isEmpty()) {
+            try {
+                Uri uri = Uri.parse(user.getImageUri());
+                profileImage.setImageURI(uri);
+            } catch (Exception e) {
+                Log.e("LobbyActivity", "Error loading profile image", e);
+            }
+        }
 
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -201,6 +210,8 @@ public class LobbyActivity extends AppCompatActivity {
                         Uri selectedImageUri = result.getData().getData();
                         if (selectedImageUri != null) {
                             profileImage.setImageURI(selectedImageUri);
+                            user.setImageUri(selectedImageUri.toString());
+                            UserDao.getInstance().updateUser();
                         } else {
                             showToast("Error selecting image.");
                         }
@@ -209,33 +220,30 @@ public class LobbyActivity extends AppCompatActivity {
                     }
                 });
 
-        // Confirgure the editImageButton to open the gallery
-        editImageButton.setOnClickListener(v -> openGallery());
-
-        // Configuración de los botones de acción del menú
-        findViewById(R.id.btnProfile).setOnClickListener(v -> showToast("My Profile"));
+        findViewById(R.id.btnProfile).setOnClickListener(v -> {
+            startActivity(new Intent(LobbyActivity.this, MyProfileActivity.class));
+        });
 
         findViewById(R.id.btnNewRoutine).setOnClickListener(v -> {
             if (user.getSkinType() == null) {
                 startActivity(new Intent(LobbyActivity.this, SkinTypeActivity.class));
             } else {
-                if(user.getSkinType() != null){
-                    routine = new Routine();
-                    routine.setSkinType(user.getSkinType());
-                    Log.e("LobbyActivity","SkinType es nulo");
-                }
+                routine = new Routine();
+                routine.setSkinType(user.getSkinType());
                 Intent intent = new Intent(this, HourActivity.class);
-                intent.putExtra("routine", routine); 
+                intent.putExtra("routine", routine);
                 startActivity(intent);
             }
         });
+
         findViewById(R.id.btnMyRoutines).setOnClickListener(v -> {
-            if (user.getRoutineList() == null) {
+            if (user.getRoutineList() == null || user.getRoutineList().isEmpty()) {
                 showToast("No routines created yet");
+                return;
             }
-            Intent intent = new Intent(LobbyActivity.this, MyRoutinesActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LobbyActivity.this, MyRoutinesActivity.class));
         });
+
         findViewById(R.id.btnLogout).setOnClickListener(v -> logOut());
     }
 
@@ -256,15 +264,14 @@ public class LobbyActivity extends AppCompatActivity {
     private void logOut() {
         Toast.makeText(this, "Logging out, bye " + User.getInstance().getName(), Toast.LENGTH_SHORT).show();
         authenticatorManager.logout();
-
         Intent intent = new Intent(LobbyActivity.this, MainActivity.class);
         startActivity(intent);
-
+        finish(); //
     }
 
     /**
      * The function `showToast` displays a short-duration toast message in an Android application.
-     * 
+     *
      * @param message The `message` parameter in the `showToast` method is a string that represents the
      * text message you want to display in the toast notification.
      */

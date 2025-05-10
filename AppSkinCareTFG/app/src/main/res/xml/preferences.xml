@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:key="notifications"
+        android:title="Activate notifications"
+        android:defaultValue="true" />
+
+    <SwitchPreferenceCompat
+        android:key="dark_mode"
+        android:title="Dark mode"
+        android:defaultValue="false" />
+
+    <PreferenceCategory android:title="Account">
+        <Preference
+            android:key="change_password"
+            android:title="Change your password"
+            android:summary="Update your current password"/>
+
+        <Preference
+            android:key="delete_account"
+            android:title="Delete your account"
+            android:summary="Delete your account permanently"
+            android:icon="@android:drawable/ic_menu_delete" />
+    </PreferenceCategory>
+
+    <Preference
+        android:key="app_info"
+        android:title="App information"
+        android:icon="@android:drawable/ic_menu_info_details"/>
+</PreferenceScreen>

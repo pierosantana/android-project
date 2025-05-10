@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import es.upgrade.UI.fragments.SettingsFragment;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

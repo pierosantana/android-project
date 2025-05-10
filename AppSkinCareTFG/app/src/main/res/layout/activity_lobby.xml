@@ -36,7 +36,7 @@
                 android:id="@+id/profileContainer"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="90dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -45,9 +45,9 @@
                     android:id="@+id/profileImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/avatar"
-                    android:scaleType="centerCrop" />
-
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar" />
+                <!--
                 <ImageButton
                     android:id="@+id/editImagebutton"
                     android:layout_width="32dp"
@@ -58,6 +58,7 @@
                     android:src="@drawable/ic_edit"
                     android:contentDescription="@string/EditPhoto"
                     app:tint="@color/white" />
+                    -->
             </FrameLayout>
 
             <TextView
@@ -90,10 +91,11 @@
                 android:layout_marginTop="80dp"
                 android:orientation="vertical"
                 android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/skinType">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <es.upgrade.UI.CustomViewMenu
                     android:id="@+id/btnProfile"

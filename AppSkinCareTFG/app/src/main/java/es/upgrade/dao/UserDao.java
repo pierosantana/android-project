@@ -1,7 +1,5 @@
 package es.upgrade.dao;
 
-import android.util.Log;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,6 +59,7 @@ public class UserDao {
                     user.setEmail(userInfo.getEmail());
                     user.setPassword(userInfo.getPassword());
                     user.setSkinType(userInfo.getSkinType());
+                    user.setImageUri(userInfo.getImageUri());
 
                     List<Routine> routines = userInfo.getRoutineList();
                     user.setRoutineList(routines != null ? routines : new ArrayList<>());
@@ -83,10 +82,7 @@ public class UserDao {
 
     public void updateUser() {
         String userId = firebaseAuth.getUid();
-
-        if (userId == null) {
-            return;
-        }
+        if (userId == null) return;
 
         User user = User.getInstance();
         DatabaseReference userRef = userReference.child(userId);
@@ -131,6 +127,7 @@ public class UserDao {
         updates.put("password", user.getPassword());
         updates.put("skinType", user.getSkinType());
         updates.put("routineList", routineList);
+        updates.put("imageUri", user.getImageUri());
 
         userRef.updateChildren(updates);
     }

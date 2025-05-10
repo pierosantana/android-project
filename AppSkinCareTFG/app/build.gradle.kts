@@ -98,6 +98,11 @@ dependencies {
     //Depedencia para redondear las imagenes de los productos
     implementation ("com.google.android.material:material:1.9.0")
 
+    //Dependecy for settings
+    implementation ("androidx.preference:preference:1.2.1")
+
+
+
 
 
 

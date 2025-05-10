@@ -142,6 +142,12 @@
     <string name="Valor1ResumenFinal">Total: 0.00€</string>
     <string name="Valor1Boton">Finish</string>
 
+    <!-- FRAGMENT CALENDAR -->
+    <string name="CreateEvent">Create event</string>
+    <string name="SeeEvent">See event</string>
+    <string name="EditEvent">Edit</string>
+    <string name="DeleteEvent">Delete</string>
+
 
 
     <!-- TYPE SKIN EXPLAIN -->

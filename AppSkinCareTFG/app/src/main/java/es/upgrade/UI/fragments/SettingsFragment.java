@@ -24,11 +24,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        // Cambiar contraseña
+        // Change Password
         Preference changePassword = findPreference("change_password");
         if (changePassword != null) {
             changePassword.setOnPreferenceClickListener(preference -> {
-                // Crear un LinearLayout para contener ambos campos de texto
                 LinearLayout layout = new LinearLayout(requireContext());
                 layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -54,9 +53,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                                 return;
                             }
 
-                            // Reautenticación utilizando el correo y contraseña actuales
+                            // Authentication using email and password
                             FirebaseAuth auth = FirebaseAuth.getInstance();
-                            String email = auth.getCurrentUser().getEmail(); // Recuperamos el correo del usuario actual
+                            String email = auth.getCurrentUser().getEmail();
                             if (email != null) {
                                 auth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(email, currentPassword))
                                         .addOnCompleteListener(task -> {
@@ -83,11 +82,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        // Eliminar cuenta
+        // Delete account
         Preference deleteAccount = findPreference("delete_account");
         if (deleteAccount != null) {
             deleteAccount.setOnPreferenceClickListener(preference -> {
-                // Pide la contraseña actual del usuario antes de eliminar la cuenta
+                // Current password before delete account
                 final EditText currentPasswordInput = new EditText(requireContext());
                 currentPasswordInput.setHint("Current password");
                 currentPasswordInput.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -101,17 +100,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
                             FirebaseAuth auth = FirebaseAuth.getInstance();
                             String email = auth.getCurrentUser().getEmail();
-                            String uid = auth.getCurrentUser().getUid(); // Obtenemos el UID para borrar datos del usuario
+                            String uid = auth.getCurrentUser().getUid();
 
                             if (email != null) {
                                 auth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(email, currentPassword))
                                         .addOnCompleteListener(task -> {
                                             if (task.isSuccessful()) {
-                                                // Primero borramos el usuario de la auth
+                                                // Delete user from auth
                                                 auth.getCurrentUser().delete()
                                                         .addOnCompleteListener(task1 -> {
                                                             if (task1.isSuccessful()) {
-                                                                // Ahora borramos los datos del Realtime Database
+                                                                // Delete user from Realtime Database
                                                                 FirebaseDatabase.getInstance().getReference("Users")
                                                                         .child(uid)
                                                                         .removeValue()

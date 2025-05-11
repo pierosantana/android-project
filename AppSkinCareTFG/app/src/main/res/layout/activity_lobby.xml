@@ -31,7 +31,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
-            <!-- Contenedor para la imagen y el botón de editar -->
             <FrameLayout
                 android:id="@+id/profileContainer"
                 android:layout_width="120dp"

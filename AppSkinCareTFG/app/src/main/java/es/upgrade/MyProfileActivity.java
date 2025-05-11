@@ -96,7 +96,7 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Configura el selector de imágenes
+        // Configure the selector image
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -109,7 +109,7 @@ public class MyProfileActivity extends AppCompatActivity {
                     }
                 });
 
-        // Abrir galería al hacer clic en el botón de editar imagen
+
         editImageButton.setOnClickListener(v -> openGallery());
     }
 
@@ -117,7 +117,7 @@ public class MyProfileActivity extends AppCompatActivity {
         nameEditText.setText(user.getName() != null ? user.getName() : "");
         emailEditText.setText(user.getEmail() != null ? user.getEmail() : "");
         skinTypeText.setText(user.getSkinType() != null ? user.getSkinType().toString() : "Undefined");
-        // Si tienes una imagen persistida, aquí podrías setearla
+
     }
 
     private void setFieldsEditable(boolean editable) {

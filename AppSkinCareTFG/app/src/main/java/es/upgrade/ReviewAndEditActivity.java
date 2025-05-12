@@ -130,6 +130,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
             case DRY: return "Dry skin";
             case NORMAL: return "Normal skin";
             case COMBINATION: return "Combination skin";
+            case SENSITIVE: return "Sensitive skin";
             default: return "Unknown skin type";
         }
     }
@@ -178,6 +179,7 @@ public class ReviewAndEditActivity extends AppCompatActivity {
                 if (description.equals("Dry skin")) return R.drawable.ic_piel_seca;
                 if (description.equals("Normal skin")) return R.drawable.ic_piel_normal;
                 if (description.equals("Combination skin")) return R.drawable.ic_piel_mixta;
+                if(description.equals("Sensitive skin")) return R.drawable.ic_piel_sensible;
                 return R.drawable.ic_piel_normal; // Icono por defecto en caso de error
 
             case "Time of day":

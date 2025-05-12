@@ -45,7 +45,7 @@ public class SkinTypeActivity extends AppCompatActivity implements Questionnaire
 
         
         Bundle args = new Bundle();
-        args.putInt("num_options", 3); // Número de opciones
+        args.putInt("num_options", 4); // Número de opciones
         args.putStringArray("options_texts", new String[]{
                 "Dry skin", // Option 1
                 "Normal skin", // Option 2

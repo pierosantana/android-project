@@ -14,7 +14,12 @@
         {"category": "CLEANER", "name": "Limpiador piel normal", "id": 10, "brand": "Clarins Espuma Limpiadora piel nueva", "price": 33.50, "skinType": "NORMAL"},
         {"category": "CLEANER", "name": "Limpiador piel normal", "id": 11, "brand": "Deliplus Facial Clean", "price": 2.50, "skinType": "NORMAL"},
         {"category": "CLEANER", "name": "Limpiador piel normal", "id": 12, "brand": "SKIN 1004", "price": 4.40, "skinType": "NORMAL"},
-        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 13, "brand": "CeraVe Gel Limpiador Hidratante", "price": 7.95, "skinType": "NORMAL"}
+
+        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 13, "brand": "SKIN 1004 Aceite limpiador Madagascar Centella Light Cleansing Oil", "price": 11.55, "skinType": "SENSITIVE"},
+        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 14, "brand": "Neutrogena Hydro Boost Gel limpiador facial Aqua con glicerina y hialurón, 200 ml ", "price": 5.90, "skinType": "SENSITIVE"},
+        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 15, "brand": "Cerave Hydrating facial Cleanser for Normal to Dry Skin ", "price": 14.50, "skinType": "SENSITIVE"},
+        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 16, "brand": "Toleriane Crema limpiadora  ", "price": 16.49, "skinType": "SENSITIVE"},
+        {"category": "CLEANER", "name": "Limpiador piel normal", "id": 17, "brand": "Avene Xeracalm A.D aceite Limpiador 400 ml ", "price": 17.80, "skinType": "SENSITIVE"}
       ]
     },
     {
@@ -30,7 +35,12 @@
         {"category": "MOISTURIZER", "name": "crema hidratante", "id": 22, "brand": "Biotherm Crema Hidratante", "price": 57.00, "skinType": "COMBINATION"},
         {"category": "MOISTURIZER", "name": "crema hidratante", "id": 23, "brand": "Nivea Crema de dia refrescante", "price": 5.50, "skinType": "COMBINATION"},
         {"category": "MOISTURIZER", "name": "crema hidratante", "id": 24, "brand": "Ziaja MANUKA crema facial de noche", "price": 4.99, "skinType": "COMBINATION"},
-        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 25, "brand": "Ziaja Pepino crema facial", "price": 2.89, "skinType": "COMBINATION"}
+        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 25, "brand": "Ziaja Pepino crema facial", "price": 2.89, "skinType": "COMBINATION"},
+
+        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 22, "brand": "L'Oréal Paris Crema Hidratante líquida Hydra Genius para piel sensible de 70 ml ", "price": 10.00, "skinType": "SENSITIVE"},
+        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 23, "brand": "TOCOBO Crema con Ceramida Multi Ceramide", "price": 15.99, "skinType": "SENSITIVE"},
+        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 24, "brand": "Clinique Redness Solutions Daily Relief Cream 50 ml ", "price": 44.95, "skinType": "SENSITIVE"},
+        {"category": "MOISTURIZER", "name": "crema hidratante", "id": 25, "brand": "Vichy Aqualia Thermal Crema Gel 50 ml", "price": 40.79, "skinType": "SENSITIVE"}
       ]
     },
     {
@@ -46,7 +56,12 @@
         {"categoryProduct": "TONIC", "name": "tonico", "id": 34, "description": "Ziaja Manuka Tree tonico", "price": 3.49, "skinType": "COMBINATION"},
         {"categoryProduct": "TONIC", "name": "tonico", "id": 35, "description": "Ziaja Cucumber Tónico", "price": 2.90, "skinType": "COMBINATION"},
         {"categoryProduct": "TONIC", "name": "tonico", "id": 36, "description": "Clarins Loción tonificante purificante", "price": 30.25, "skinType": "COMBINATION"},
-        {"categoryProduct": "TONIC", "name": "tonico", "id": 37, "description": "Revuele No problem tonico", "price": 1.99, "skinType": "COMBINATION"}
+        {"categoryProduct": "TONIC", "name": "tonico", "id": 37, "description": "Revuele No problem tonico", "price": 1.99, "skinType": "COMBINATION"},
+
+        {"categoryProduct": "TONIC", "name": "tonico", "id": 34, "description": "Anua - Tónico Heartleaf 77% Soothing Toner", "price": 19.39, "skinType": "SENSITIVE"},
+        {"categoryProduct": "TONIC", "name": "tonico", "id": 35, "description": "Bioderma Sensibio H2O Micelar 100 ml ", "price": 4.50, "skinType": "SENSITIVE"},
+        {"categoryProduct": "TONIC", "name": "tonico", "id": 36, "description": "Avène Gentle Toner 200ml ", "price": 18.10, "skinType": "SENSITIVE"},
+        {"categoryProduct": "TONIC", "name": "tonico", "id": 37, "description": "Crema para Pieles Sensibles Ginkgo Vita - Crema Antioxidante Ginkgo Biloba", "price": 49.60, "skinType": "SENSITIVE"}
       ]
     },
     {
@@ -60,7 +75,12 @@
         {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 44, "description": "Niacinamida The Ordinary", "price": 6.00, "skinType": "COMBINATION"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 45, "description": "Niacinamida de Roche Posai", "price": 33.10, "skinType": "COMBINATION"},
         {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 46, "description": "Ácido salicílico The Ordinary", "price": 7.50, "skinType": "COMBINATION"},
-        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 47, "description": "Ácido salicílico Roche Posai", "price": 27.95, "skinType": "COMBINATION"}
+        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 47, "description": "Ácido salicílico Roche Posai", "price": 27.95, "skinType": "COMBINATION"},
+
+        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 44, "description": "Niacinamida The Ordinary", "price": 6.00, "skinType": "SENSITIVE"},
+        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 45, "description": "Niacinamida de Roche Posai", "price": 33.10, "skinType": "SENSITIVE"},
+        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 46, "description": "Ácido salicílico The Ordinary", "price": 7.50, "skinType": "SENSITIVE"},
+        {"categoryProduct": "CREAM_TREATMENT", "name": "serum", "id": 47, "description": "Ácido salicílico Roche Posai", "price": 27.95, "skinType": "SENSITIVE"}
       ]
     },
     {
@@ -76,7 +96,12 @@
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 56, "description": "Heliocare 360 Gel Oil-Free SPF 50", "price": 25.00, "skinType": "COMBINATION"},
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 57, "description": "SVR Sun Secure Fluid SPF 50+", "price": 20.00, "skinType": "COMBINATION"},
         {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 58, "description": "Vichy Idéal Soleil Tinted Mattifying Face Fluid SPF 50", "price": 25.00, "skinType": "COMBINATION"},
-        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 59, "description": "Avene Cleanance Sunscreen SPF 50+", "price": 20.00, "skinType": "COMBINATION"}
+        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 59, "description": "Avene Cleanance Sunscreen SPF 50+", "price": 20.00, "skinType": "COMBINATION"},
+
+        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 56, "description": "TOCOBO - Protector Solar Cica Calming Sun Serum", "price": 12.10, "skinType": "SENSITIVE"},
+        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 57, "description": "Isdin Fotoprotector Fusion Color Water SPF50 50 ml ", "price": 25.55, "skinType": "SENSITIVE"},
+        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 58, "description": "Beauty of Joseon Relief Sun Rice + Probiotics SPF50+ 50 ml", "price": 16.98, "skinType": "SENSITIVE"},
+        {"categoryProduct": "SUNSCREEN", "name": "protector solar", "id": 59, "description": "Eucerin Sun Sensitive Protect Fluido SPF50+", "price": 13.82, "skinType": "SENSITIVE"}
       ]
     }
   ]

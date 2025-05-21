@@ -50,26 +50,29 @@ public class QuestionnaireFragment extends Fragment {
         radioGroup = view.findViewById(R.id.radioGroup);
 
         // Reference to the layout elements
-        optionsLayouts = new LinearLayout[3];
-        radioButtons = new RadioButton[3];
-        icons = new ImageView[3];
+        optionsLayouts = new LinearLayout[4];
+        radioButtons = new RadioButton[4];
+        icons = new ImageView[4];
 
         optionsLayouts[0] = view.findViewById(R.id.rd1);
         optionsLayouts[1] = view.findViewById(R.id.rd2);
         optionsLayouts[2] = view.findViewById(R.id.rd3);
+        optionsLayouts[3] = view.findViewById(R.id.rd4);
 
         radioButtons[0] = view.findViewById(R.id.radio_option1);
         radioButtons[1] = view.findViewById(R.id.radio_option2);
         radioButtons[2] = view.findViewById(R.id.radio_option3);
+        radioButtons[3] = view.findViewById(R.id.radio_option4);
 
         icons[0] = view.findViewById(R.id.radio_icon1);
         icons[1] = view.findViewById(R.id.radio_icon2);
         icons[2] = view.findViewById(R.id.radio_icon3);
+        icons[3] = view.findViewById(R.id.radio_icon4);
 
         
-        int numOptions = 3; 
+        int numOptions = 4;
         if (getArguments() != null) {
-            numOptions = getArguments().getInt("num_options", 3);
+            numOptions = getArguments().getInt("num_options", 4);
             String[] optionTexts = getArguments().getStringArray("options_texts");
 
             // Set the text for each option

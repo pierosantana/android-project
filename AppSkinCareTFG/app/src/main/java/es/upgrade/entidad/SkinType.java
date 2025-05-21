@@ -26,7 +26,17 @@ public enum SkinType {
             "and may have enlarged pores and a tendency to blackheads or pimples in the T-zone, " +
             "while the cheeks may feel tighter or even peel in certain seasons. Identifying which " +
             "parts of your face are oilier and which are drier will help you choose specific " +
-            "products to balance your skin without dehydrating it or increasing oil production.");
+            "products to balance your skin without dehydrating it or increasing oil production."),
+
+
+    SENSITIVE(R.drawable.ic_piel_sensible,
+    "If you often experience redness, burning, itching, " +
+            "or a feeling of tightness after using certain products, exposing your skin to the sun, wind, or even temperature changes, " +
+            "you likely have sensitive skin. This skin type reacts easily to external factors and may appear dry, " +
+            "irritated, or flushed without much warning. " +
+            "Sensitive skin can be naturally delicate or become sensitized over time due to environmental stressors or harsh skincare routines. " +
+            "Choosing gentle, fragrance-free products and maintaining a soothing routine is key to keeping sensitive skin calm and protected."
+    );
 
 
     private final int iconResId;
